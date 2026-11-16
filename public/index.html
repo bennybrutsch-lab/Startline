@@ -157,19 +157,37 @@
     <section id="ansicht-mentor" hidden>
       <p class="klein">Dein Mentor</p>
       <h1>Dein Mentor</h1>
-      <p>Dein Mentor ist eine KI. Er kennt deine Antworten und deinen Plan, beantwortet Fragen und sagt dir ehrlich, was gut läuft und was nicht.</p>
-      <p id="mentor-stand" class="kasten"></p>
-      <form id="formular-mentor">
-        <fieldset>
-          <legend id="mentor-frage"></legend>
-          <div id="mentor-toene"></div>
-        </fieldset>
-        <p id="mentor-hinweis" class="daten"></p>
-        <p id="mentor-fehler" class="fehler" role="alert" hidden></p>
-        <p id="mentor-gespeichert" class="hinweis" role="status" hidden></p>
-        <button type="submit">Speichern</button>
-      </form>
-      <p class="daten">Das Gespräch mit dem Mentor kommt in der nächsten Fassung.</p>
+      <p id="mentor-intro">Dein Mentor ist eine KI. Er kennt deine Antworten und deinen Plan, beantwortet Fragen und sagt dir ehrlich, was gut läuft und was nicht.</p>
+
+      <!-- Das Gespräch, sobald der Mentor eingerichtet ist -->
+      <div id="mentor-chat" hidden>
+        <p id="mentor-nicht-verbunden" class="hinweis" hidden>Der Mentor ist noch nicht mit der KI verbunden. Du kannst schreiben, bekommst aber noch keine echte Antwort.</p>
+        <div id="chat-verlauf" class="chat" aria-live="polite"></div>
+        <form id="formular-chat">
+          <label for="chat-eingabe">Deine Nachricht</label>
+          <textarea id="chat-eingabe" rows="3" maxlength="2000" placeholder="Zum Beispiel: Ich weiß nicht, wie ich den ersten Laden ansprechen soll."></textarea>
+          <p id="chat-fehler" class="fehler" role="alert" hidden></p>
+          <div class="reihe">
+            <button id="chat-senden" type="submit">Senden</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Einrichten oder Stil ändern -->
+      <details id="mentor-einstellungen">
+        <summary id="mentor-einstellungen-titel">Stil ändern</summary>
+        <p id="mentor-stand" class="kasten"></p>
+        <form id="formular-mentor">
+          <fieldset>
+            <legend id="mentor-frage"></legend>
+            <div id="mentor-toene"></div>
+          </fieldset>
+          <p id="mentor-hinweis" class="daten"></p>
+          <p id="mentor-fehler" class="fehler" role="alert" hidden></p>
+          <p id="mentor-gespeichert" class="hinweis" role="status" hidden></p>
+          <button type="submit">Speichern</button>
+        </form>
+      </details>
     </section>
   </main>
 

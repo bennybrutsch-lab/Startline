@@ -74,3 +74,13 @@ CREATE TABLE IF NOT EXISTS einfuehrung (
   nutzer_id INTEGER PRIMARY KEY REFERENCES nutzer(id) ON DELETE CASCADE,
   gesehen_am TEXT NOT NULL DEFAULT (datetime('now'))
 );
+
+-- Das Gespräch mit dem Mentor. Pro Nachricht eine Zeile.
+CREATE TABLE IF NOT EXISTS mentor_nachrichten (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  nutzer_id INTEGER NOT NULL REFERENCES nutzer(id) ON DELETE CASCADE,
+  rolle TEXT NOT NULL,          -- "user" für den Nutzer, "assistant" für den Mentor
+  text TEXT NOT NULL,
+  erstellt TEXT NOT NULL DEFAULT (datetime('now'))
+);
+CREATE INDEX IF NOT EXISTS mentor_nachrichten_nutzer ON mentor_nachrichten (nutzer_id, id);

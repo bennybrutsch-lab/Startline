@@ -57,3 +57,12 @@ main ol li { margin-bottom: 8px; }
 .auswahl button { text-align: left; padding: 14px 16px; display: flex; flex-direction: column; gap: 3px; }
 .auswahl button strong { font-size: 1.1rem; }
 .auswahl button span { font-size: .93rem; opacity: .85; }
+textarea { width: 100%; padding: 10px; font: inherit; border: 1px solid #777; border-radius: 6px; resize: vertical; }
+textarea:focus-visible { outline: 3px solid #12BFB2; outline-offset: 2px; }
+.chat { display: flex; flex-direction: column; gap: 10px; margin: 16px 0; }
+.blase { max-width: 88%; padding: 10px 14px; border-radius: 14px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.blase.mentor { align-self: flex-start; background: #EEF0F2; border-bottom-left-radius: 4px; }
+.blase.ich { align-self: flex-end; background: #111; color: #fff; border-bottom-right-radius: 4px; }
+.blase.leise { color: #555; font-style: italic; }
+details { margin-top: 22px; border-top: 1px solid #ccc; padding-top: 12px; }
+summary { cursor: pointer; font-weight: 600; margin-bottom: 10px; }

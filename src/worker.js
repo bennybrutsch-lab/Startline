@@ -7,6 +7,7 @@ import mentorDaten from "../daten/mentor.json";
 import einfuehrungDaten from "../daten/einfuehrung.json";
 import { alleFragen, berechne } from "./punkte.js";
 import { erstellePlan } from "./plan.js";
+import { baueKontext, baueVerlauf, frageMentor, MAX_ZEICHEN, MAX_PRO_TAG } from "./mentor.js";
 import {
   pruefeEingabe,
   registriere,
@@ -218,6 +219,58 @@ async function api(request, env, url) {
   if (weg === "/api/mentor" && art === "GET") {
     const mentor = await db.prepare("SELECT ton FROM mentor WHERE nutzer_id = ?").bind(nutzer.id).first();
     return antwort({ ...mentorDaten, ton: mentor ? mentor.ton : null });
+  }
+
+  // Das Gespräch mit dem Mentor: bisherige Nachrichten laden.
+  if (weg === "/api/mentor/gespraech" && art === "GET") {
+    const { results } = await db
+      .prepare("SELECT rolle, text FROM (SELECT id, rolle, text FROM mentor_nachrichten WHERE nutzer_id = ? ORDER BY id DESC LIMIT 100) ORDER BY id")
+      .bind(nutzer.id)
+      .all();
+    return antwort({ nachrichten: results, maxZeichen: MAX_ZEICHEN, verbunden: Boolean(env.ANTHROPIC_API_KEY) });
+  }
+
+  // Eine Nachricht an den Mentor schicken und die Antwort bekommen.
+  if (weg === "/api/mentor/nachricht" && art === "POST") {
+    const eingabe = await leseJson(request);
+    const text = typeof eingabe?.text === "string" ? eingabe.text.trim() : "";
+    if (!text) return antwort({ fehler: "Schreib zuerst eine Nachricht." }, 400);
+    if (text.length > MAX_ZEICHEN) return antwort({ fehler: `Die Nachricht ist zu lang. Höchstens ${MAX_ZEICHEN} Zeichen.` }, 400);
+    const mentor = await db.prepare("SELECT ton FROM mentor WHERE nutzer_id = ?").bind(nutzer.id).first();
+    if (!mentor) return antwort({ fehler: "Richte zuerst deinen Mentor ein." }, 409);
+
+    // Kostenbremse: nur eine bestimmte Zahl Nachrichten pro Tag.
+    const heute = tagInBerlin(new Date());
+    const { results: eigene } = await db
+      .prepare("SELECT erstellt FROM mentor_nachrichten WHERE nutzer_id = ? AND rolle = 'user' ORDER BY id DESC LIMIT ?")
+      .bind(nutzer.id, MAX_PRO_TAG)
+      .all();
+    const heuteGeschrieben = eigene.filter((z) => tagInBerlin(new Date(z.erstellt.replace(" ", "T") + "Z")) === heute).length;
+    if (heuteGeschrieben >= MAX_PRO_TAG) {
+      return antwort({ fehler: `Du hast heute schon ${MAX_PRO_TAG} Nachrichten geschrieben. Morgen geht es weiter.` }, 429);
+    }
+
+    await db.prepare("INSERT INTO mentor_nachrichten (nutzer_id, rolle, text) VALUES (?, 'user', ?)").bind(nutzer.id, text).run();
+    const { results: bisher } = await db
+      .prepare("SELECT rolle, text FROM (SELECT id, rolle, text FROM mentor_nachrichten WHERE nutzer_id = ? ORDER BY id DESC LIMIT 40) ORDER BY id")
+      .bind(nutzer.id)
+      .all();
+    const gewaehlt = await ladeWeg(db, nutzer.id);
+    const kontext = baueKontext({
+      ton: mentor.ton,
+      fragen: alleFragen(fragenDaten),
+      antworten: await ladeAntworten(db, nutzer.id),
+      weg: gewaehlt,
+      vertiefung: await ladeVertiefung(db, nutzer.id),
+      schritte: await ladePlan(db, nutzer.id),
+    });
+    const ergebnis = await frageMentor(env, kontext, baueVerlauf(bisher));
+    if (ergebnis.fehler) return antwort({ fehler: ergebnis.fehler }, 502);
+    // Der Hinweis "nicht verbunden" wird nicht gespeichert, damit er später nicht als Antwort des Mentors gilt.
+    if (!ergebnis.nichtVerbunden) {
+      await db.prepare("INSERT INTO mentor_nachrichten (nutzer_id, rolle, text) VALUES (?, 'assistant', ?)").bind(nutzer.id, ergebnis.text).run();
+    }
+    return antwort({ text: ergebnis.text, nichtVerbunden: Boolean(ergebnis.nichtVerbunden) });
   }
 
   if (weg === "/api/mentor" && art === "POST") {

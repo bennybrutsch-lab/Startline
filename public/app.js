@@ -577,8 +577,14 @@ async function zeigePlan() {
 async function zeigeMentor() {
   const daten = await api("/api/mentor");
   if (!daten.ok) return zeige("ansicht-anmelden");
-  $("mentor-stand").textContent =
-    daten.ton === null ? "Noch nicht eingerichtet. Wähle unten einen Stil." : `Eingerichtet. Aktueller Stil: ${daten.toene[daten.ton].name}.`;
+  const eingerichtet = daten.ton !== null;
+
+  // Einstellungen: vor dem Einrichten offen, danach eingeklappt.
+  $("mentor-einstellungen").open = !eingerichtet;
+  $("mentor-einstellungen-titel").textContent = eingerichtet ? `Stil ändern (gerade: ${daten.toene[daten.ton].name})` : "Mentor einrichten";
+  $("mentor-stand").textContent = eingerichtet
+    ? `Aktueller Stil: ${daten.toene[daten.ton].name}.`
+    : "Bevor ihr loslegt: Wähle, wie dein Mentor mit dir reden soll.";
   $("mentor-frage").textContent = daten.frage;
   $("mentor-hinweis").textContent = daten.hinweis;
   meldung("mentor-fehler", "");
@@ -601,8 +607,59 @@ async function zeigeMentor() {
     zeile.append(wahl, schrift);
     kasten.append(zeile);
   });
+
+  // Das Gespräch gibt es erst, wenn der Mentor eingerichtet ist.
+  $("mentor-chat").hidden = !eingerichtet;
+  if (eingerichtet) await ladeGespraech();
   zeige("ansicht-mentor");
 }
+
+function blase(rolle, text, leise = false) {
+  const element = document.createElement("div");
+  element.className = "blase " + (rolle === "user" ? "ich" : "mentor") + (leise ? " leise" : "");
+  element.textContent = text;
+  $("chat-verlauf").append(element);
+  return element;
+}
+
+async function ladeGespraech() {
+  const daten = await api("/api/mentor/gespraech");
+  $("chat-verlauf").replaceChildren();
+  meldung("chat-fehler", "");
+  $("mentor-nicht-verbunden").hidden = !daten.ok || daten.verbunden;
+  if (!daten.ok) return meldung("chat-fehler", daten.fehler);
+  if (!daten.nachrichten.length) {
+    blase("assistant", "Hi, ich bin dein Mentor. Frag mich, wenn du bei einer Aufgabe festhängst, nicht weißt, wie du anfangen sollst, oder eine ehrliche Meinung willst.", true);
+  }
+  for (const n of daten.nachrichten) blase(n.rolle, n.text);
+}
+
+$("formular-chat").addEventListener("submit", async (ereignis) => {
+  ereignis.preventDefault();
+  const text = $("chat-eingabe").value.trim();
+  if (!text) return meldung("chat-fehler", "Schreib zuerst eine Nachricht.");
+  meldung("chat-fehler", "");
+  $("chat-senden").disabled = true;
+  blase("user", text);
+  $("chat-eingabe").value = "";
+  const warten = blase("assistant", "Dein Mentor schreibt …", true);
+  const ergebnis = await api("/api/mentor/nachricht", { text });
+  warten.remove();
+  $("chat-senden").disabled = false;
+  if (!ergebnis.ok) {
+    // Nicht geschickt: Text zurück ins Feld, damit nichts verloren geht.
+    $("chat-verlauf").lastElementChild?.remove();
+    $("chat-eingabe").value = text;
+    return meldung("chat-fehler", ergebnis.fehler);
+  }
+  blase("assistant", ergebnis.text, ergebnis.nichtVerbunden);
+  $("chat-eingabe").focus();
+});
+
+// Mit Strg+Enter oder Cmd+Enter abschicken.
+$("chat-eingabe").addEventListener("keydown", (ereignis) => {
+  if (ereignis.key === "Enter" && (ereignis.ctrlKey || ereignis.metaKey)) $("formular-chat").requestSubmit();
+});
 
 $("formular-mentor").addEventListener("submit", async (ereignis) => {
   ereignis.preventDefault();
@@ -611,6 +668,7 @@ $("formular-mentor").addEventListener("submit", async (ereignis) => {
   const ergebnis = await api("/api/mentor", { ton: wahl ? Number(wahl.value) : null });
   if (!ergebnis.ok) return meldung("mentor-fehler", ergebnis.fehler);
   await zeigeMentor();
+  $("mentor-einstellungen").open = true;
   meldung("mentor-gespeichert", "Gespeichert.");
 });
 
