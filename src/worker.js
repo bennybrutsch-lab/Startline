@@ -3,6 +3,7 @@
 
 import fragenDaten from "../daten/fragen.json";
 import wegWebsites from "../daten/weg-websites.json";
+import mentorDaten from "../daten/mentor.json";
 import { alleFragen, berechne } from "./punkte.js";
 import { erstellePlan } from "./plan.js";
 import {
@@ -38,6 +39,7 @@ async function leseJson(request) {
 function fragenOhnePunkte() {
   return fragenDaten.bloecke.map((block) => ({
     titel: block.titel,
+    warum: block.warum,
     fragen: block.fragen.map((f) => ({
       nr: f.nr,
       text: f.text,
@@ -179,11 +181,43 @@ async function api(request, env, url) {
   if (weg === "/api/stand" && art === "GET") {
     const antworten = await ladeAntworten(db, nutzer.id);
     const anzahl = alleFragen(fragenDaten).length;
-    if (Object.keys(antworten).length < anzahl) return antwort({ stand: "fragen" });
+    const beantwortet = Object.keys(antworten).length;
     const gewaehlt = await ladeWeg(db, nutzer.id);
-    if (!gewaehlt) return antwort({ stand: "ergebnis" });
-    const plan = await db.prepare("SELECT 1 FROM plan_schritte WHERE nutzer_id = ? LIMIT 1").bind(nutzer.id).first();
-    return antwort({ stand: plan ? "plan" : "vertiefung" });
+    const plan = await db
+      .prepare("SELECT COUNT(*) AS gesamt, COUNT(erledigt_am) AS geschafft FROM plan_schritte WHERE nutzer_id = ?")
+      .bind(nutzer.id)
+      .first();
+    const mentor = await db.prepare("SELECT ton FROM mentor WHERE nutzer_id = ?").bind(nutzer.id).first();
+    // Der nächste Schritt im Bereich Plan.
+    let stand = "neu";
+    if (beantwortet > 0) stand = "fragen";
+    if (beantwortet >= anzahl) stand = "ergebnis";
+    if (beantwortet >= anzahl && gewaehlt) stand = plan.gesamt > 0 ? "plan" : "vertiefung";
+    return antwort({
+      stand,
+      fragen: { beantwortet, anzahl },
+      weg: gewaehlt ? gewaehlt.name : null,
+      plan: plan.gesamt > 0 ? { gesamt: plan.gesamt, geschafft: plan.geschafft } : null,
+      mentor: mentor ? mentorDaten.toene[mentor.ton]?.name || null : null,
+    });
+  }
+
+  // Der Mentor: Auswahl ansehen und Ton festlegen.
+  if (weg === "/api/mentor" && art === "GET") {
+    const mentor = await db.prepare("SELECT ton FROM mentor WHERE nutzer_id = ?").bind(nutzer.id).first();
+    return antwort({ ...mentorDaten, ton: mentor ? mentor.ton : null });
+  }
+
+  if (weg === "/api/mentor" && art === "POST") {
+    const eingabe = await leseJson(request);
+    if (!Number.isInteger(eingabe?.ton) || !mentorDaten.toene[eingabe.ton]) {
+      return antwort({ fehler: "Bitte wähle einen Stil aus." }, 400);
+    }
+    await db
+      .prepare("INSERT INTO mentor (nutzer_id, ton) VALUES (?, ?) ON CONFLICT (nutzer_id) DO UPDATE SET ton = excluded.ton")
+      .bind(nutzer.id, eingabe.ton)
+      .run();
+    return antwort({ ok: true });
   }
 
   // Einen der drei vorgeschlagenen Wege wählen.

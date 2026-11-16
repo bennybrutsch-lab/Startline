@@ -202,7 +202,8 @@
           ],
           "zweck": "Nur Handy sperrt A und T, weil man dafür einen Laptop braucht."
         }
-      ]
+      ],
+      "warum": "Damit der Plan zu deinem Alltag passt: wie alt du bist und wie viel Zeit und Geld du hast."
     },
     {
       "titel": "Was dir liegt",
@@ -482,7 +483,8 @@
           ],
           "zweck": ""
         }
-      ]
+      ],
+      "warum": "Hier geht es darum, was du gern machst und was dir leichtfällt. Es gibt keine falschen Antworten."
     },
     {
       "titel": "Was du willst",
@@ -661,7 +663,8 @@
           ],
           "zweck": ""
         }
-      ]
+      ],
+      "warum": "Was dich antreibt und wie schnell du Ergebnisse sehen willst."
     },
     {
       "titel": "Was du schon gemacht hast",
@@ -795,10 +798,11 @@
           ],
           "zweck": "Wer schon jemanden kennt, hat den ersten Kunden fast."
         }
-      ]
+      ],
+      "warum": "Damit du nicht bei null anfängst, wenn du schon etwas kannst."
     },
     {
-      "titel": "Dein Umfeld und dein Mentor",
+      "titel": "Dein Umfeld",
       "fragen": [
         {
           "nr": 23,
@@ -849,31 +853,9 @@
             }
           ],
           "zweck": "Gutes Englisch öffnet Kunden und Publikum außerhalb von Deutschland."
-        },
-        {
-          "nr": 25,
-          "text": "Wie soll dein Mentor mit dir reden?",
-          "antworten": [
-            {
-              "text": "Locker, wie ein älterer Bruder",
-              "punkte": {}
-            },
-            {
-              "text": "Fordernd, wie ein Coach",
-              "punkte": {}
-            },
-            {
-              "text": "Ruhig und geduldig",
-              "punkte": {}
-            },
-            {
-              "text": "Kurz und direkt",
-              "punkte": {}
-            }
-          ],
-          "zweck": "Keine Punkte. Legt den Ton fest. Ehrlich ist der Mentor in jedem Stil."
         }
-      ]
+      ],
+      "warum": "Zum Schluss: wer hinter dir steht und wie gut dein Englisch ist."
     }
   ]
 }

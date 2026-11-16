@@ -14,8 +14,8 @@ function antworten(abweichungen = {}) {
   return { ...alle, ...abweichungen };
 }
 
-test("es gibt 25 Fragen mit je mindestens zwei Antworten", () => {
-  assert.equal(fragen.length, 25);
+test("es gibt 24 Fragen mit je mindestens zwei Antworten", () => {
+  assert.equal(fragen.length, 24);
   fragen.forEach((f, i) => {
     assert.equal(f.nr, i + 1);
     assert.ok(f.antworten.length >= 2);

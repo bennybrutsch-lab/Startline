@@ -1,9 +1,9 @@
 # Startline
 
 Eine Web-App für junge Leute, die etwas Eigenes aufbauen wollen und nicht wissen, womit.
-25 Fragen, drei Wege, ein Plan, jeden Tag eine Aufgabe.
+24 Fragen, drei Wege, ein Plan, jeden Tag eine Aufgabe.
 
-Stand: MVP, Etappe 3. Es funktionieren Konto, Anmeldung, die 25 Fragen, die drei Vorschläge, die Wahl eines Weges, die Vertiefungsfragen, der persönliche Plan und die Aufgabe von heute mit Abhaken.
+Stand: MVP, Etappe 3 mit neuem Aufbau. Nach dem Anmelden kommt eine Startseite mit den Bereichen Heute, Plan und Mentor. Es funktionieren Konto, die 24 Fragen mit Einleitung, die drei Vorschläge, die Wahl eines Weges, die Vertiefungsfragen, der persönliche Plan, die Aufgabe von heute mit Abhaken und das Einrichten des Mentors.
 Das Aussehen ist bewusst schlicht, das Design kommt später.
 
 ## Was wo liegt
@@ -15,7 +15,8 @@ Das Aussehen ist bewusst schlicht, das Design kommt später.
 | `src/konto.js` | Registrieren, Anmelden, Passwörter sicher speichern |
 | `src/punkte.js` | Rechnet aus den Antworten die drei Vorschläge aus, ohne KI |
 | `src/plan.js` | Passt das Gerüst eines Weges an die Person an, ohne KI |
-| `daten/fragen.json` | Die 25 Fragen, die Punkte und die sechs Richtungen |
+| `daten/fragen.json` | Die 24 Fragen, die Punkte und die sechs Richtungen |
+| `daten/mentor.json` | Die Stile, in denen der Mentor reden kann |
 | `daten/weg-websites.json` | Der 30-Tage-Plan für „Websites für Betriebe vor Ort“ |
 | `schema.sql` | Die Tabellen der Datenbank |
 | `tests/` | Automatische Prüfungen |
@@ -40,6 +41,10 @@ npm run dev
 ```
 
 Danach läuft die App unter http://localhost:8787. Die lokale Datenbank liegt im Ordner `.wrangler` und wird nicht hochgeladen.
+
+Nach jedem `git pull` einmal `npm run db:lokal` ausführen. Der Befehl legt neu hinzugekommene Tabellen an und lässt vorhandene Daten in Ruhe.
+
+Unter Windows kann die PowerShell `npm` sperren. Dann überall `npm.cmd` statt `npm` schreiben.
 
 ## Tests
 
@@ -79,5 +84,5 @@ npm run deploy
 
 ## Noch nicht enthalten
 
-Mentor-Chat, Bezahlung, Altersprüfung, Englisch, Design.
+Gespräch mit dem Mentor, Bezahlung, Altersprüfung, Englisch, Design.
 Vor einem öffentlichen Start fehlen außerdem Impressum, Datenschutzerklärung und eine Begrenzung der Anmeldeversuche.

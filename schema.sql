@@ -61,3 +61,10 @@ CREATE TABLE IF NOT EXISTS plan_info (
   angewendet TEXT NOT NULL,   -- JSON-Liste
   erstellt TEXT NOT NULL DEFAULT (datetime('now'))
 );
+
+-- Wie der Mentor mit dem Nutzer reden soll. Eine Zeile pro Nutzer.
+CREATE TABLE IF NOT EXISTS mentor (
+  nutzer_id INTEGER PRIMARY KEY REFERENCES nutzer(id) ON DELETE CASCADE,
+  ton INTEGER NOT NULL,
+  eingerichtet_am TEXT NOT NULL DEFAULT (datetime('now'))
+);

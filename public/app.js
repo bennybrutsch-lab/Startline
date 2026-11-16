@@ -1,29 +1,60 @@
-// Das Programm im Browser. Es zeigt immer genau eine Ansicht: Anmelden, Fragen oder Ergebnis.
+// Das Programm im Browser. Es zeigt immer genau eine Ansicht.
+// Nach dem Anmelden kommt die Startseite. Von dort geht es in die Bereiche Plan, Heute und Mentor.
 
 const $ = (id) => document.getElementById(id);
-const ANSICHTEN = ["ansicht-anmelden", "ansicht-fragen", "ansicht-ergebnis", "ansicht-vertiefung", "ansicht-plan", "ansicht-heute"];
+const ANSICHTEN = [
+  "ansicht-anmelden",
+  "ansicht-start",
+  "ansicht-einleitung",
+  "ansicht-fragen",
+  "ansicht-ergebnis",
+  "ansicht-vertiefung",
+  "ansicht-heute",
+  "ansicht-plan",
+  "ansicht-mentor",
+];
+// Zu welchem Menüpunkt eine Ansicht gehört.
+const BEREICH = {
+  "ansicht-start": "start",
+  "ansicht-einleitung": "plan",
+  "ansicht-fragen": "plan",
+  "ansicht-ergebnis": "plan",
+  "ansicht-vertiefung": "plan",
+  "ansicht-plan": "plan",
+  "ansicht-heute": "heute",
+  "ansicht-mentor": "mentor",
+};
 
-let fragen = []; // alle 25 Fragen in einer Liste
+let angemeldet = false;
+let hatPlan = false;
+let bloecke = []; // die Abschnitte mit ihren Fragen
+let fragen = []; // alle Fragen in einer Liste
 let antworten = {}; // Nummer der Frage -> Nummer der gewählten Antwort
 let stelle = 0; // welche Frage gerade zu sehen ist
 
 function zeige(ansicht) {
   $("laden").hidden = true;
   for (const id of ANSICHTEN) $(id).hidden = id !== ansicht;
-  // Das Menü gibt es nur, wenn ein Plan da ist.
-  const mitPlan = ansicht === "ansicht-heute" || ansicht === "ansicht-plan";
-  $("menue").hidden = !mitPlan;
-  $("menue-heute").setAttribute("aria-current", ansicht === "ansicht-heute" ? "page" : "false");
-  $("menue-plan").setAttribute("aria-current", ansicht === "ansicht-plan" ? "page" : "false");
+  $("menue").hidden = !angemeldet;
+  $("menue-heute").hidden = !hatPlan;
+  for (const name of ["start", "heute", "plan", "mentor"]) {
+    $("menue-" + name).setAttribute("aria-current", BEREICH[ansicht] === name ? "page" : "false");
+  }
+  window.scrollTo(0, 0);
 }
 
 // Schickt eine Anfrage an den Server und gibt die Antwort zurück.
 async function api(weg, daten) {
-  const antwort = await fetch(weg, {
-    method: daten ? "POST" : "GET",
-    headers: daten ? { "Content-Type": "application/json" } : {},
-    body: daten ? JSON.stringify(daten) : undefined,
-  });
+  let antwort;
+  try {
+    antwort = await fetch(weg, {
+      method: daten ? "POST" : "GET",
+      headers: daten ? { "Content-Type": "application/json" } : {},
+      body: daten ? JSON.stringify(daten) : undefined,
+    });
+  } catch {
+    return { ok: false, status: 0, fehler: "Keine Verbindung zum Server." };
+  }
   let inhalt = {};
   try {
     inhalt = await antwort.json();
@@ -55,19 +86,105 @@ $("formular-konto").addEventListener("submit", async (ereignis) => {
 
 $("abmelden").addEventListener("click", async () => {
   await api("/api/abmelden", {});
+  angemeldet = false;
+  hatPlan = false;
   $("konto").hidden = true;
   zeige("ansicht-anmelden");
-  $("menue").hidden = true;
 });
 
+// ---------- Startseite ----------
+
+async function zeigeStart() {
+  const s = await api("/api/stand");
+  if (!s.ok) return zeige("ansicht-anmelden");
+  hatPlan = Boolean(s.plan);
+
+  // Karte "Heute": nur mit Plan.
+  $("karte-heute").hidden = !hatPlan;
+  if (hatPlan) {
+    const fertig = s.plan.geschafft >= s.plan.gesamt;
+    $("start-heute-titel").textContent = fertig ? "Du hast alle Tage geschafft." : `Tag ${s.plan.geschafft + 1} von ${s.plan.gesamt}`;
+    $("start-heute-text").textContent = fertig
+      ? "Schau dir an, was du alles gemacht hast."
+      : "Deine nächste Aufgabe wartet. Eine am Tag reicht.";
+  }
+
+  // Karte "Dein Plan": je nachdem, wie weit man ist.
+  const texte = {
+    neu: ["Du hast noch keinen Plan.", `In etwa zehn Minuten findest du heraus, welcher Weg zu dir passt. Danach bekommst du einen Plan mit einer Aufgabe für jeden Tag.`, "Plan gestalten"],
+    fragen: [`Du bist bei Frage ${Math.min(s.fragen.beantwortet + 1, s.fragen.anzahl)} von ${s.fragen.anzahl}.`, "Deine bisherigen Antworten sind gespeichert.", "Weitermachen"],
+    ergebnis: ["Deine drei Wege stehen fest.", "Sieh sie dir an und wähle den, mit dem du anfangen willst.", "Wege ansehen"],
+    vertiefung: [`Dein Weg: ${s.weg}`, "Noch sechs kurze Fragen, dann ist dein Plan fertig.", "Plan fertig machen"],
+    plan: [`Dein Weg: ${s.weg}`, s.plan ? `${s.plan.geschafft} von ${s.plan.gesamt} Tagen geschafft.` : "", "Plan ansehen"],
+  }[s.stand];
+  $("start-plan-titel").textContent = texte[0];
+  $("start-plan-text").textContent = texte[1];
+  $("start-plan-knopf").textContent = texte[2];
+  // Solange es keinen Plan gibt, ist "Plan gestalten" der wichtigste Knopf.
+  $("start-plan-knopf").className = hatPlan ? "zweit" : "";
+
+  // Karte "Dein Mentor".
+  $("start-mentor-titel").textContent = s.mentor ? `Dein Mentor redet mit dir: ${s.mentor}` : "Dein Mentor ist noch nicht eingerichtet.";
+  $("start-mentor-text").textContent = s.mentor
+    ? "Du kannst den Stil jederzeit ändern."
+    : "Dein Mentor begleitet dich und kennt deinen Plan. Leg fest, wie er mit dir reden soll.";
+  $("start-mentor-knopf").textContent = s.mentor ? "Mentor ändern" : "Mentor einrichten";
+
+  zeige("ansicht-start");
+}
+
+// Der Bereich "Plan" öffnet immer den Schritt, bei dem man gerade ist.
+async function oeffnePlanBereich() {
+  const s = await api("/api/stand");
+  if (!s.ok) return zeige("ansicht-anmelden");
+  hatPlan = Boolean(s.plan);
+  if (s.stand === "plan") return zeigePlan();
+  if (s.stand === "vertiefung") return zeigeVertiefung();
+  if (s.stand === "ergebnis") return zeigeErgebnis();
+  if (s.stand === "fragen") return oeffneFragen();
+  $("einleitung-anzahl").textContent = s.fragen.anzahl;
+  zeige("ansicht-einleitung");
+}
+
+$("start-plan-knopf").addEventListener("click", oeffnePlanBereich);
+$("start-heute-knopf").addEventListener("click", () => zeigeHeute());
+$("start-mentor-knopf").addEventListener("click", () => zeigeMentor());
+$("menue-start").addEventListener("click", zeigeStart);
+$("menue-plan").addEventListener("click", oeffnePlanBereich);
+$("menue-heute").addEventListener("click", () => zeigeHeute());
+$("menue-mentor").addEventListener("click", () => zeigeMentor());
+$("knopf-los").addEventListener("click", () => oeffneFragen());
+$("knopf-einleitung-zurueck").addEventListener("click", zeigeStart);
+
 // ---------- Fragen ----------
+
+async function ladeFragen() {
+  const daten = await api("/api/fragen");
+  if (!daten.ok) return false;
+  bloecke = daten.bloecke;
+  fragen = bloecke.flatMap((block, nummer) =>
+    block.fragen.map((f) => ({ ...f, block: block.titel, warum: block.warum, blockNr: nummer + 1 }))
+  );
+  antworten = daten.antworten;
+  return true;
+}
+
+// Öffnet die Fragen an der ersten Stelle, die noch offen ist.
+async function oeffneFragen(vonVorn = false) {
+  if (!(await ladeFragen())) return zeige("ansicht-anmelden");
+  const offen = fragen.findIndex((f) => antworten[f.nr] === undefined);
+  stelle = vonVorn || offen === -1 ? 0 : offen;
+  zeigeFrage();
+  zeige("ansicht-fragen");
+}
 
 function zeigeFrage() {
   const frage = fragen[stelle];
   $("fragen-stand").textContent = `Frage ${stelle + 1} von ${fragen.length}`;
   $("fragen-balken").max = fragen.length;
   $("fragen-balken").value = Object.keys(antworten).length;
-  $("fragen-block").textContent = frage.block;
+  $("fragen-block").textContent = `Abschnitt ${frage.blockNr} von ${bloecke.length}: ${frage.block}`;
+  $("fragen-warum").textContent = frage.warum || "";
   $("frage-text").textContent = frage.text;
   meldung("fragen-fehler", "");
 
@@ -82,7 +199,7 @@ function zeigeFrage() {
     kasten.append(knopf);
   });
 
-  $("knopf-zurueck").disabled = stelle === 0;
+  $("knopf-zurueck").textContent = stelle === 0 ? "Zur Übersicht" : "Zurück";
   $("knopf-weiter").disabled = antworten[frage.nr] === undefined;
   $("knopf-weiter").textContent = stelle === fragen.length - 1 ? "Auswerten" : "Weiter";
 }
@@ -102,7 +219,8 @@ async function waehle(frage, nummer) {
 }
 
 $("knopf-zurueck").addEventListener("click", () => {
-  if (stelle > 0) stelle -= 1;
+  if (stelle === 0) return zeigeStart();
+  stelle -= 1;
   zeigeFrage();
 });
 
@@ -110,6 +228,7 @@ $("knopf-weiter").addEventListener("click", async () => {
   if (stelle < fragen.length - 1) {
     stelle += 1;
     zeigeFrage();
+    window.scrollTo(0, 0);
   } else {
     await zeigeErgebnis();
   }
@@ -120,7 +239,7 @@ $("knopf-weiter").addEventListener("click", async () => {
 async function zeigeErgebnis() {
   const ergebnis = await api("/api/ergebnis");
   if (!ergebnis.ok) {
-    zeige("ansicht-fragen");
+    await oeffneFragen();
     return meldung("fragen-fehler", ergebnis.fehler);
   }
   $("ergebnis-hinweis").textContent = ergebnis.knapp
@@ -180,6 +299,8 @@ async function waehleWeg(richtung) {
   await zeigeVertiefung();
 }
 
+$("knopf-nochmal").addEventListener("click", () => oeffneFragen(true));
+
 // ---------- Vertiefung ----------
 
 async function zeigeVertiefung() {
@@ -222,11 +343,13 @@ $("formular-vertiefung").addEventListener("submit", async (ereignis) => {
   }
   const ergebnis = await api("/api/plan/erstellen", { antworten: gewaehlt });
   if (!ergebnis.ok) return meldung("vertiefung-fehler", ergebnis.fehler);
+  hatPlan = true;
   await zeigeHeute();
 });
 
 async function andererWeg() {
   await api("/api/weg/abwaehlen", {});
+  hatPlan = false;
   await zeigeErgebnis();
 }
 $("knopf-anderer-weg").addEventListener("click", andererWeg);
@@ -238,7 +361,8 @@ let vorausArbeiten = false; // true, wenn jemand heute freiwillig noch eine Aufg
 
 async function zeigeHeute() {
   const daten = await api("/api/heute");
-  if (!daten.ok) return zeigeVertiefung();
+  if (!daten.ok) return zeigeStart();
+  hatPlan = true;
   meldung("heute-fehler", "");
   $("heute-stand").textContent = `${daten.geschafft} von ${daten.gesamt} Tagen geschafft`;
   $("heute-balken").max = daten.gesamt;
@@ -297,14 +421,12 @@ $("knopf-rueckgaengig").addEventListener("click", async () => {
   await zeigeHeute();
 });
 
-$("menue-heute").addEventListener("click", zeigeHeute);
-$("menue-plan").addEventListener("click", () => zeigePlan());
-
 // ---------- Plan ----------
 
 async function zeigePlan() {
   const daten = await api("/api/plan");
-  if (!daten.ok) return zeigeVertiefung();
+  if (!daten.ok) return zeigeStart();
+  hatPlan = true;
   const minuten = daten.schritte.reduce((summe, s) => summe + s.min, 0);
   $("plan-weg").textContent = daten.weg.name;
   $("plan-umfang").textContent = `${daten.schritte.length} Tage, im Schnitt ${Math.round(minuten / daten.schritte.length)} Minuten pro Tag.`;
@@ -368,34 +490,57 @@ async function zeigePlan() {
   zeige("ansicht-plan");
 }
 
-$("knopf-nochmal").addEventListener("click", () => {
-  stelle = 0;
-  zeigeFrage();
-  zeige("ansicht-fragen");
+// ---------- Mentor ----------
+
+async function zeigeMentor() {
+  const daten = await api("/api/mentor");
+  if (!daten.ok) return zeige("ansicht-anmelden");
+  $("mentor-stand").textContent =
+    daten.ton === null ? "Noch nicht eingerichtet. Wähle unten einen Stil." : `Eingerichtet. Aktueller Stil: ${daten.toene[daten.ton].name}.`;
+  $("mentor-frage").textContent = daten.frage;
+  $("mentor-hinweis").textContent = daten.hinweis;
+  meldung("mentor-fehler", "");
+  meldung("mentor-gespeichert", "");
+
+  const kasten = $("mentor-toene");
+  kasten.replaceChildren();
+  daten.toene.forEach((ton, nummer) => {
+    const zeile = document.createElement("label");
+    const wahl = document.createElement("input");
+    wahl.type = "radio";
+    wahl.name = "ton";
+    wahl.id = "ton-" + nummer;
+    wahl.value = nummer;
+    wahl.checked = daten.ton === nummer;
+    const schrift = document.createElement("span");
+    const name = document.createElement("strong");
+    name.textContent = ton.name + ". ";
+    schrift.append(name, ton.kurz);
+    zeile.append(wahl, schrift);
+    kasten.append(zeile);
+  });
+  zeige("ansicht-mentor");
+}
+
+$("formular-mentor").addEventListener("submit", async (ereignis) => {
+  ereignis.preventDefault();
+  const wahl = document.querySelector("#mentor-toene input:checked");
+  meldung("mentor-gespeichert", "");
+  const ergebnis = await api("/api/mentor", { ton: wahl ? Number(wahl.value) : null });
+  if (!ergebnis.ok) return meldung("mentor-fehler", ergebnis.fehler);
+  await zeigeMentor();
+  meldung("mentor-gespeichert", "Gespeichert.");
 });
 
 // ---------- Start ----------
 
 async function start() {
   const ich = await api("/api/ich");
+  angemeldet = ich.ok;
   if (!ich.ok) return zeige("ansicht-anmelden");
   $("konto-email").textContent = ich.email;
   $("konto").hidden = false;
-
-  const daten = await api("/api/fragen");
-  if (!daten.ok) return zeige("ansicht-anmelden");
-  fragen = daten.bloecke.flatMap((block) => block.fragen.map((f) => ({ ...f, block: block.titel })));
-  antworten = daten.antworten;
-
-  // Weitermachen, wo man aufgehört hat.
-  const stand = await api("/api/stand");
-  if (stand.stand === "plan") return zeigeHeute();
-  if (stand.stand === "vertiefung") return zeigeVertiefung();
-  if (stand.stand === "ergebnis") return zeigeErgebnis();
-  const offen = fragen.findIndex((f) => antworten[f.nr] === undefined);
-  stelle = offen === -1 ? 0 : offen;
-  zeigeFrage();
-  zeige("ansicht-fragen");
+  await zeigeStart();
 }
 
 start();

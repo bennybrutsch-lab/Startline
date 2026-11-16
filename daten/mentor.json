@@ -1,0 +1,22 @@
+{
+  "frage": "Wie soll dein Mentor mit dir reden?",
+  "hinweis": "Ehrlich ist dein Mentor in jedem Stil. Du kannst das später jederzeit ändern.",
+  "toene": [
+    {
+      "name": "Locker",
+      "kurz": "Wie ein älterer Bruder, der es schon gemacht hat."
+    },
+    {
+      "name": "Fordernd",
+      "kurz": "Wie ein Coach, der dich antreibt."
+    },
+    {
+      "name": "Ruhig",
+      "kurz": "Geduldig, erklärt viel, drängt nicht."
+    },
+    {
+      "name": "Direkt",
+      "kurz": "Kurz und ohne Umschweife."
+    }
+  ]
+}

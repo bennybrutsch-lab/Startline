@@ -1,5 +1,7 @@
 /* Bewusst schlicht. Das Design kommt nach dem MVP. */
 * { box-sizing: border-box; }
+/* Was das Attribut "hidden" trägt, bleibt unsichtbar, egal welche Regel sonst gilt. */
+[hidden] { display: none !important; }
 body { margin: 0; font: 17px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; color: #111; background: #fff; }
 header { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 16px; border-bottom: 1px solid #ccc; }
 main { max-width: 640px; margin: 0 auto; padding: 24px 16px 64px; }
@@ -45,3 +47,9 @@ header { flex-wrap: wrap; }
 .tag.erledigt h3 { text-decoration: line-through; color: #555; }
 .tag.erledigt ol, .tag.erledigt .daten, .tag.erledigt .hinweis { display: none; }
 .tag.naechster { border-left: 4px solid #12BFB2; padding-left: 12px; }
+.karte { border: 1px solid #777; border-radius: 8px; padding: 14px; margin: 14px 0; }
+.karte .klein { margin-bottom: 4px; }
+.karte h2 { margin-bottom: 6px; }
+main ol { padding-left: 1.3em; }
+main ol li { margin-bottom: 8px; }
+.kasten p { margin: 2px 0 0; }

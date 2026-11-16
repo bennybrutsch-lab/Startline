@@ -10,8 +10,10 @@
   <header>
     <strong>STARTLINE</strong>
     <nav id="menue" hidden aria-label="Bereiche">
-      <button id="menue-heute" type="button" class="zweit">Heute</button>
+      <button id="menue-start" type="button" class="zweit">Start</button>
+      <button id="menue-heute" type="button" class="zweit" hidden>Heute</button>
       <button id="menue-plan" type="button" class="zweit">Plan</button>
+      <button id="menue-mentor" type="button" class="zweit">Mentor</button>
     </nav>
     <span id="konto" hidden><span id="konto-email"></span> <button id="abmelden" type="button">Abmelden</button></span>
   </header>
@@ -19,10 +21,10 @@
   <main>
     <p id="laden">Lädt …</p>
 
-    <!-- Ansicht 1: Anmelden oder registrieren -->
+    <!-- Anmelden oder registrieren -->
     <section id="ansicht-anmelden" hidden>
       <h1>Du willst loslegen, weißt aber nicht womit? Fang hier an.</h1>
-      <p>25 Fragen. Drei Wege. Ein Plan, der zu dir passt.</p>
+      <p>Finde heraus, welcher Weg zu dir passt, und bekomm einen Plan mit einer Aufgabe für jeden Tag.</p>
       <form id="formular-konto">
         <label for="email">E-Mail</label>
         <input id="email" type="email" autocomplete="email" required>
@@ -36,11 +38,57 @@
       </form>
     </section>
 
-    <!-- Ansicht 2: Die 25 Fragen, eine nach der anderen -->
+    <!-- Startseite: erst umsehen, dann selbst entscheiden -->
+    <section id="ansicht-start" hidden>
+      <h1>Willkommen bei Startline</h1>
+      <p>Hier findest du heraus, womit du anfangen kannst, und gehst es dann Schritt für Schritt an. Sieh dich in Ruhe um und fang an, wo du willst.</p>
+
+      <div id="karte-heute" class="karte" hidden>
+        <p class="klein">Heute</p>
+        <h2 id="start-heute-titel"></h2>
+        <p id="start-heute-text"></p>
+        <button id="start-heute-knopf" type="button">Zur Aufgabe von heute</button>
+      </div>
+
+      <div class="karte">
+        <p class="klein">Dein Plan</p>
+        <h2 id="start-plan-titel"></h2>
+        <p id="start-plan-text"></p>
+        <button id="start-plan-knopf" type="button"></button>
+      </div>
+
+      <div class="karte">
+        <p class="klein">Dein Mentor</p>
+        <h2 id="start-mentor-titel"></h2>
+        <p id="start-mentor-text"></p>
+        <button id="start-mentor-knopf" type="button" class="zweit"></button>
+      </div>
+    </section>
+
+    <!-- Plan: Einleitung vor den Fragen -->
+    <section id="ansicht-einleitung" hidden>
+      <p class="klein">Dein Plan</p>
+      <h1>So entsteht dein Plan</h1>
+      <ol>
+        <li><strong>Du beantwortest <span id="einleitung-anzahl">24</span> kurze Fragen.</strong> Zum Antippen, etwa zehn Minuten. Es geht um deinen Alltag, was dir liegt und was du willst.</li>
+        <li><strong>Du bekommst drei Wege vorgeschlagen.</strong> Zu jedem steht, warum er zu dir passt und wie schwer er ist.</li>
+        <li><strong>Du wählst einen aus.</strong> Daraus entsteht dein Plan mit einer Aufgabe für jeden Tag.</li>
+      </ol>
+      <p>Es gibt keine falschen Antworten. Du kannst jederzeit aufhören und später weitermachen, deine Antworten bleiben gespeichert.</p>
+      <div class="reihe">
+        <button id="knopf-los" type="button">Los geht's</button>
+        <button id="knopf-einleitung-zurueck" type="button" class="zweit">Zurück zur Übersicht</button>
+      </div>
+    </section>
+
+    <!-- Plan: die Fragen, eine nach der anderen -->
     <section id="ansicht-fragen" hidden>
-      <p id="fragen-stand"></p>
-      <progress id="fragen-balken" max="25" value="0"></progress>
-      <p id="fragen-block" class="klein"></p>
+      <p id="fragen-stand" class="klein"></p>
+      <progress id="fragen-balken" max="24" value="0"></progress>
+      <div class="kasten">
+        <strong id="fragen-block"></strong>
+        <p id="fragen-warum"></p>
+      </div>
       <h1 id="frage-text"></h1>
       <div id="frage-antworten" class="antworten"></div>
       <p id="fragen-fehler" class="fehler" role="alert" hidden></p>
@@ -50,8 +98,9 @@
       </div>
     </section>
 
-    <!-- Ansicht 3: Die drei Vorschläge -->
+    <!-- Plan: die drei Vorschläge -->
     <section id="ansicht-ergebnis" hidden>
+      <p class="klein">Dein Plan</p>
       <h1>Deine drei Wege</h1>
       <p id="ergebnis-hinweis"></p>
       <div id="ergebnis-liste"></div>
@@ -59,7 +108,7 @@
       <button id="knopf-nochmal" type="button" class="zweit">Antworten ändern</button>
     </section>
 
-    <!-- Ansicht 4: Vertiefungsfragen zum gewählten Weg -->
+    <!-- Plan: Vertiefungsfragen zum gewählten Weg -->
     <section id="ansicht-vertiefung" hidden>
       <p class="klein">Dein Weg</p>
       <h1 id="vertiefung-weg"></h1>
@@ -75,7 +124,7 @@
       </form>
     </section>
 
-    <!-- Ansicht 6: Die Aufgabe von heute -->
+    <!-- Die Aufgabe von heute -->
     <section id="ansicht-heute" hidden>
       <p id="heute-stand" class="klein"></p>
       <progress id="heute-balken" max="30" value="0"></progress>
@@ -100,7 +149,7 @@
       </div>
     </section>
 
-    <!-- Ansicht 5: Der persönliche Plan -->
+    <!-- Der ganze Plan -->
     <section id="ansicht-plan" hidden>
       <p class="klein">Dein Plan</p>
       <h1 id="plan-weg"></h1>
@@ -108,6 +157,25 @@
       <div id="plan-angepasst"></div>
       <div id="plan-liste"></div>
       <button id="knopf-plan-neu" type="button" class="zweit">Anderen Weg wählen</button>
+    </section>
+
+    <!-- Mentor einrichten -->
+    <section id="ansicht-mentor" hidden>
+      <p class="klein">Dein Mentor</p>
+      <h1>Dein Mentor</h1>
+      <p>Dein Mentor ist eine KI. Er kennt deine Antworten und deinen Plan, beantwortet Fragen und sagt dir ehrlich, was gut läuft und was nicht.</p>
+      <p id="mentor-stand" class="kasten"></p>
+      <form id="formular-mentor">
+        <fieldset>
+          <legend id="mentor-frage"></legend>
+          <div id="mentor-toene"></div>
+        </fieldset>
+        <p id="mentor-hinweis" class="daten"></p>
+        <p id="mentor-fehler" class="fehler" role="alert" hidden></p>
+        <p id="mentor-gespeichert" class="hinweis" role="status" hidden></p>
+        <button type="submit">Speichern</button>
+      </form>
+      <p class="daten">Das Gespräch mit dem Mentor kommt in der nächsten Fassung.</p>
     </section>
   </main>
 
