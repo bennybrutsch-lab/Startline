@@ -23,3 +23,41 @@ CREATE TABLE IF NOT EXISTS antworten (
   antwort INTEGER NOT NULL,
   PRIMARY KEY (nutzer_id, frage_nr)
 );
+
+-- Welchen Weg jemand gewählt hat.
+CREATE TABLE IF NOT EXISTS wege (
+  nutzer_id INTEGER PRIMARY KEY REFERENCES nutzer(id) ON DELETE CASCADE,
+  richtung TEXT NOT NULL,
+  gewaehlt_am TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
+-- Die Antworten auf die Vertiefungsfragen des gewählten Weges.
+CREATE TABLE IF NOT EXISTS vertiefung (
+  nutzer_id INTEGER NOT NULL REFERENCES nutzer(id) ON DELETE CASCADE,
+  frage_nr INTEGER NOT NULL,
+  antwort INTEGER NOT NULL,
+  PRIMARY KEY (nutzer_id, frage_nr)
+);
+
+-- Der persönliche Plan: pro Nutzer und Tag eine Zeile.
+CREATE TABLE IF NOT EXISTS plan_schritte (
+  nutzer_id INTEGER NOT NULL REFERENCES nutzer(id) ON DELETE CASCADE,
+  nr INTEGER NOT NULL,
+  etappe INTEGER NOT NULL,
+  etappe_name TEXT NOT NULL,
+  ziel TEXT NOT NULL,
+  titel TEXT NOT NULL,
+  min INTEGER NOT NULL,
+  tun TEXT NOT NULL,          -- die einzelnen Schritte als JSON-Liste
+  fertig TEXT NOT NULL,
+  hinweis TEXT NOT NULL DEFAULT '',
+  erledigt_am TEXT,           -- leer, solange der Tag offen ist
+  PRIMARY KEY (nutzer_id, nr)
+);
+
+-- Welche Anpassungen am Plan gemacht wurden, zum Anzeigen.
+CREATE TABLE IF NOT EXISTS plan_info (
+  nutzer_id INTEGER PRIMARY KEY REFERENCES nutzer(id) ON DELETE CASCADE,
+  angewendet TEXT NOT NULL,   -- JSON-Liste
+  erstellt TEXT NOT NULL DEFAULT (datetime('now'))
+);

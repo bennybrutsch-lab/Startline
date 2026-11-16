@@ -51,7 +51,34 @@
       <h1>Deine drei Wege</h1>
       <p id="ergebnis-hinweis"></p>
       <div id="ergebnis-liste"></div>
+      <p id="ergebnis-fehler" class="fehler" role="alert" hidden></p>
       <button id="knopf-nochmal" type="button" class="zweit">Antworten ändern</button>
+    </section>
+
+    <!-- Ansicht 4: Vertiefungsfragen zum gewählten Weg -->
+    <section id="ansicht-vertiefung" hidden>
+      <p class="klein">Dein Weg</p>
+      <h1 id="vertiefung-weg"></h1>
+      <p id="vertiefung-ehrlich"></p>
+      <p>Noch sechs Fragen, damit der Plan zu dir passt.</p>
+      <form id="formular-vertiefung">
+        <div id="vertiefung-fragen"></div>
+        <p id="vertiefung-fehler" class="fehler" role="alert" hidden></p>
+        <div class="reihe">
+          <button type="submit">Plan erstellen</button>
+          <button id="knopf-anderer-weg" type="button" class="zweit">Anderen Weg wählen</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Ansicht 5: Der persönliche Plan -->
+    <section id="ansicht-plan" hidden>
+      <p class="klein">Dein Plan</p>
+      <h1 id="plan-weg"></h1>
+      <p id="plan-umfang"></p>
+      <div id="plan-angepasst"></div>
+      <div id="plan-liste"></div>
+      <button id="knopf-plan-neu" type="button" class="zweit">Anderen Weg wählen</button>
     </section>
   </main>
 

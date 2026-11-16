@@ -1,7 +1,7 @@
 // Das Programm im Browser. Es zeigt immer genau eine Ansicht: Anmelden, Fragen oder Ergebnis.
 
 const $ = (id) => document.getElementById(id);
-const ANSICHTEN = ["ansicht-anmelden", "ansicht-fragen", "ansicht-ergebnis"];
+const ANSICHTEN = ["ansicht-anmelden", "ansicht-fragen", "ansicht-ergebnis", "ansicht-vertiefung", "ansicht-plan"];
 
 let fragen = []; // alle 25 Fragen in einer Liste
 let antworten = {}; // Nummer der Frage -> Nummer der gewählten Antwort
@@ -155,9 +155,142 @@ async function zeigeErgebnis() {
     karte.append(titel, kurz);
     if (v.gruende.length) karte.append(warum, gruende);
     karte.append(daten);
+
+    const knopf = document.createElement("button");
+    knopf.type = "button";
+    knopf.textContent = v.verfuegbar ? "Diesen Weg wählen" : "Plan kommt bald";
+    knopf.disabled = !v.verfuegbar;
+    knopf.addEventListener("click", () => waehleWeg(v.id));
+    karte.append(knopf);
     liste.append(karte);
   });
+  meldung("ergebnis-fehler", "");
   zeige("ansicht-ergebnis");
+}
+
+async function waehleWeg(richtung) {
+  const ergebnis = await api("/api/weg", { richtung });
+  if (!ergebnis.ok) return meldung("ergebnis-fehler", ergebnis.fehler);
+  await zeigeVertiefung();
+}
+
+// ---------- Vertiefung ----------
+
+async function zeigeVertiefung() {
+  const daten = await api("/api/vertiefung");
+  if (!daten.ok) return zeigeErgebnis();
+  $("vertiefung-weg").textContent = daten.weg.name;
+  $("vertiefung-ehrlich").textContent = daten.weg.ehrlich;
+  meldung("vertiefung-fehler", "");
+
+  const kasten = $("vertiefung-fragen");
+  kasten.replaceChildren();
+  for (const frage of daten.fragen) {
+    const gruppe = document.createElement("fieldset");
+    const titel = document.createElement("legend");
+    titel.textContent = `${frage.nr}. ${frage.text}`;
+    gruppe.append(titel);
+    frage.antworten.forEach((text, nummer) => {
+      const zeile = document.createElement("label");
+      const wahl = document.createElement("input");
+      wahl.type = "radio";
+      wahl.name = "v" + frage.nr;
+      wahl.id = `v${frage.nr}-${nummer}`;
+      wahl.value = nummer;
+      wahl.checked = daten.antworten[frage.nr] === nummer;
+      const schrift = document.createElement("span");
+      schrift.textContent = text;
+      zeile.append(wahl, schrift);
+      gruppe.append(zeile);
+    });
+    kasten.append(gruppe);
+  }
+  zeige("ansicht-vertiefung");
+}
+
+$("formular-vertiefung").addEventListener("submit", async (ereignis) => {
+  ereignis.preventDefault();
+  const gewaehlt = {};
+  for (const wahl of document.querySelectorAll("#vertiefung-fragen input:checked")) {
+    gewaehlt[Number(wahl.name.slice(1))] = Number(wahl.value);
+  }
+  const ergebnis = await api("/api/plan/erstellen", { antworten: gewaehlt });
+  if (!ergebnis.ok) return meldung("vertiefung-fehler", ergebnis.fehler);
+  await zeigePlan();
+});
+
+async function andererWeg() {
+  await api("/api/weg/abwaehlen", {});
+  await zeigeErgebnis();
+}
+$("knopf-anderer-weg").addEventListener("click", andererWeg);
+$("knopf-plan-neu").addEventListener("click", andererWeg);
+
+// ---------- Plan ----------
+
+async function zeigePlan() {
+  const daten = await api("/api/plan");
+  if (!daten.ok) return zeigeVertiefung();
+  const minuten = daten.schritte.reduce((summe, s) => summe + s.min, 0);
+  $("plan-weg").textContent = daten.weg.name;
+  $("plan-umfang").textContent = `${daten.schritte.length} Tage, im Schnitt ${Math.round(minuten / daten.schritte.length)} Minuten pro Tag.`;
+
+  const angepasst = $("plan-angepasst");
+  angepasst.replaceChildren();
+  angepasst.className = daten.angewendet.length ? "kasten" : "";
+  if (daten.angewendet.length) {
+    const titel = document.createElement("strong");
+    titel.textContent = "So wurde der Plan an dich angepasst:";
+    const punkte = document.createElement("ul");
+    for (const text of daten.angewendet) {
+      const punkt = document.createElement("li");
+      punkt.textContent = text;
+      punkte.append(punkt);
+    }
+    angepasst.append(titel, punkte);
+  }
+
+  const liste = $("plan-liste");
+  liste.replaceChildren();
+  let etappe = 0;
+  for (const s of daten.schritte) {
+    if (s.etappe !== etappe) {
+      etappe = s.etappe;
+      const kopf = document.createElement("div");
+      kopf.className = "etappe";
+      const titel = document.createElement("h2");
+      titel.textContent = `Etappe ${s.etappe}: ${s.etappeName}`;
+      const ziel = document.createElement("p");
+      ziel.textContent = s.ziel;
+      kopf.append(titel, ziel);
+      liste.append(kopf);
+    }
+    const tag = document.createElement("div");
+    tag.className = "tag";
+    const titel = document.createElement("h3");
+    titel.textContent = `Tag ${s.nr}: ${s.titel}`;
+    const dauer = document.createElement("p");
+    dauer.className = "daten";
+    dauer.textContent = `ca. ${s.min} Minuten`;
+    const schritte = document.createElement("ol");
+    for (const text of s.tun) {
+      const punkt = document.createElement("li");
+      punkt.textContent = text;
+      schritte.append(punkt);
+    }
+    const fertig = document.createElement("p");
+    fertig.className = "daten";
+    fertig.textContent = `Fertig, wenn ${s.fertig}`;
+    tag.append(titel, dauer, schritte, fertig);
+    if (s.hinweis) {
+      const hinweis = document.createElement("p");
+      hinweis.className = "hinweis";
+      hinweis.textContent = s.hinweis;
+      tag.append(hinweis);
+    }
+    liste.append(tag);
+  }
+  zeige("ansicht-plan");
 }
 
 $("knopf-nochmal").addEventListener("click", () => {
@@ -180,9 +313,12 @@ async function start() {
   antworten = daten.antworten;
 
   // Weitermachen, wo man aufgehört hat.
+  const stand = await api("/api/stand");
+  if (stand.stand === "plan") return zeigePlan();
+  if (stand.stand === "vertiefung") return zeigeVertiefung();
+  if (stand.stand === "ergebnis") return zeigeErgebnis();
   const offen = fragen.findIndex((f) => antworten[f.nr] === undefined);
-  if (offen === -1) return zeigeErgebnis();
-  stelle = offen;
+  stelle = offen === -1 ? 0 : offen;
   zeigeFrage();
   zeige("ansicht-fragen");
 }

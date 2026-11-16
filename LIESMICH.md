@@ -3,7 +3,7 @@
 Eine Web-App für junge Leute, die etwas Eigenes aufbauen wollen und nicht wissen, womit.
 25 Fragen, drei Wege, ein Plan, jeden Tag eine Aufgabe.
 
-Stand: MVP, Etappe 1. Es funktionieren Konto, Anmeldung, die 25 Fragen und die drei Vorschläge.
+Stand: MVP, Etappe 2. Es funktionieren Konto, Anmeldung, die 25 Fragen, die drei Vorschläge, die Wahl eines Weges, die Vertiefungsfragen und der persönliche Plan.
 Das Aussehen ist bewusst schlicht, das Design kommt später.
 
 ## Was wo liegt
@@ -14,6 +14,7 @@ Das Aussehen ist bewusst schlicht, das Design kommt später.
 | `src/worker.js` | Der Server. Beantwortet alle Adressen, die mit `/api/` beginnen |
 | `src/konto.js` | Registrieren, Anmelden, Passwörter sicher speichern |
 | `src/punkte.js` | Rechnet aus den Antworten die drei Vorschläge aus, ohne KI |
+| `src/plan.js` | Passt das Gerüst eines Weges an die Person an, ohne KI |
 | `daten/fragen.json` | Die 25 Fragen, die Punkte und die sechs Richtungen |
 | `daten/weg-websites.json` | Der 30-Tage-Plan für „Websites für Betriebe vor Ort“ |
 | `schema.sql` | Die Tabellen der Datenbank |
@@ -78,5 +79,5 @@ npm run deploy
 
 ## Noch nicht enthalten
 
-Vertiefungsfragen und Plan, Aufgabe von heute, Mentor-Chat, Bezahlung, Altersprüfung, Englisch, Design.
+Aufgabe von heute mit Abhaken, Mentor-Chat, Bezahlung, Altersprüfung, Englisch, Design.
 Vor einem öffentlichen Start fehlen außerdem Impressum, Datenschutzerklärung und eine Begrenzung der Anmeldeversuche.

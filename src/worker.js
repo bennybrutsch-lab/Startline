@@ -2,7 +2,9 @@
 // Adressen, die mit /api/ beginnen, beantwortet dieser Code. Alles andere sind Dateien aus "public".
 
 import fragenDaten from "../daten/fragen.json";
+import wegWebsites from "../daten/weg-websites.json";
 import { alleFragen, berechne } from "./punkte.js";
+import { erstellePlan } from "./plan.js";
 import {
   pruefeEingabe,
   registriere,
@@ -13,6 +15,9 @@ import {
   werIstDa,
   beendeSitzung,
 } from "./konto.js";
+
+// Alle Wege, für die es schon einen Plan gibt.
+const WEGE = { [wegWebsites.id]: wegWebsites };
 
 function antwort(daten, status = 200, kopf = {}) {
   return new Response(JSON.stringify(daten), {
@@ -49,6 +54,40 @@ async function ladeAntworten(db, nutzerId) {
   const antworten = {};
   for (const zeile of results) antworten[zeile.frage_nr] = zeile.antwort;
   return antworten;
+}
+
+async function ladeVertiefung(db, nutzerId) {
+  const { results } = await db
+    .prepare("SELECT frage_nr, antwort FROM vertiefung WHERE nutzer_id = ?")
+    .bind(nutzerId)
+    .all();
+  const antworten = {};
+  for (const zeile of results) antworten[zeile.frage_nr] = zeile.antwort;
+  return antworten;
+}
+
+async function ladeWeg(db, nutzerId) {
+  const zeile = await db.prepare("SELECT richtung FROM wege WHERE nutzer_id = ?").bind(nutzerId).first();
+  return zeile ? WEGE[zeile.richtung] || null : null;
+}
+
+async function ladePlan(db, nutzerId) {
+  const { results } = await db
+    .prepare("SELECT nr, etappe, etappe_name, ziel, titel, min, tun, fertig, hinweis, erledigt_am FROM plan_schritte WHERE nutzer_id = ? ORDER BY nr")
+    .bind(nutzerId)
+    .all();
+  return results.map((z) => ({
+    nr: z.nr,
+    etappe: z.etappe,
+    etappeName: z.etappe_name,
+    ziel: z.ziel,
+    titel: z.titel,
+    min: z.min,
+    tun: JSON.parse(z.tun),
+    fertig: z.fertig,
+    hinweis: z.hinweis,
+    erledigt: Boolean(z.erledigt_am),
+  }));
 }
 
 async function api(request, env, url) {
@@ -128,6 +167,105 @@ async function api(request, env, url) {
       vorschlaege: ergebnis.vorschlaege.map(({ punkte, ...rest }) => rest),
       knapp: ergebnis.knapp,
       gesperrt: ergebnis.gesperrt,
+    });
+  }
+
+  // Wo steht der Nutzer gerade? Danach entscheidet der Browser, welche Ansicht er zeigt.
+  if (weg === "/api/stand" && art === "GET") {
+    const antworten = await ladeAntworten(db, nutzer.id);
+    const anzahl = alleFragen(fragenDaten).length;
+    if (Object.keys(antworten).length < anzahl) return antwort({ stand: "fragen" });
+    const gewaehlt = await ladeWeg(db, nutzer.id);
+    if (!gewaehlt) return antwort({ stand: "ergebnis" });
+    const plan = await db.prepare("SELECT 1 FROM plan_schritte WHERE nutzer_id = ? LIMIT 1").bind(nutzer.id).first();
+    return antwort({ stand: plan ? "plan" : "vertiefung" });
+  }
+
+  // Einen der drei vorgeschlagenen Wege wählen.
+  if (weg === "/api/weg" && art === "POST") {
+    const eingabe = await leseJson(request);
+    const antworten = await ladeAntworten(db, nutzer.id);
+    if (Object.keys(antworten).length < alleFragen(fragenDaten).length) {
+      return antwort({ fehler: "Beantworte zuerst alle Fragen." }, 409);
+    }
+    const erlaubt = berechne(fragenDaten, antworten).vorschlaege.map((v) => v.id);
+    if (!erlaubt.includes(eingabe?.richtung)) return antwort({ fehler: "Dieser Weg wurde dir nicht vorgeschlagen." }, 400);
+    if (!WEGE[eingabe.richtung]) return antwort({ fehler: "Für diesen Weg gibt es noch keinen Plan." }, 409);
+    // Ein neuer Weg heißt: alte Vertiefung und alter Plan gelten nicht mehr.
+    await db.batch([
+      db.prepare("DELETE FROM vertiefung WHERE nutzer_id = ?").bind(nutzer.id),
+      db.prepare("DELETE FROM plan_schritte WHERE nutzer_id = ?").bind(nutzer.id),
+      db.prepare("DELETE FROM plan_info WHERE nutzer_id = ?").bind(nutzer.id),
+      db.prepare("INSERT INTO wege (nutzer_id, richtung) VALUES (?, ?) ON CONFLICT (nutzer_id) DO UPDATE SET richtung = excluded.richtung, gewaehlt_am = datetime('now')").bind(nutzer.id, eingabe.richtung),
+    ]);
+    return antwort({ ok: true });
+  }
+
+  // Den gewählten Weg wieder abwählen, zurück zu den drei Vorschlägen.
+  if (weg === "/api/weg/abwaehlen" && art === "POST") {
+    await db.batch([
+      db.prepare("DELETE FROM vertiefung WHERE nutzer_id = ?").bind(nutzer.id),
+      db.prepare("DELETE FROM plan_schritte WHERE nutzer_id = ?").bind(nutzer.id),
+      db.prepare("DELETE FROM plan_info WHERE nutzer_id = ?").bind(nutzer.id),
+      db.prepare("DELETE FROM wege WHERE nutzer_id = ?").bind(nutzer.id),
+    ]);
+    return antwort({ ok: true });
+  }
+
+  if (weg === "/api/vertiefung" && art === "GET") {
+    const gewaehlt = await ladeWeg(db, nutzer.id);
+    if (!gewaehlt) return antwort({ fehler: "Wähle zuerst einen Weg." }, 409);
+    return antwort({
+      weg: { id: gewaehlt.id, name: gewaehlt.name, ehrlich: gewaehlt.ehrlich },
+      fragen: gewaehlt.vertiefung.map((f, i) => ({ nr: i + 1, text: f.frage, antworten: f.antworten })),
+      antworten: await ladeVertiefung(db, nutzer.id),
+    });
+  }
+
+  // Alle Vertiefungsfragen auf einmal speichern und daraus den Plan bauen.
+  if (weg === "/api/plan/erstellen" && art === "POST") {
+    const gewaehlt = await ladeWeg(db, nutzer.id);
+    if (!gewaehlt) return antwort({ fehler: "Wähle zuerst einen Weg." }, 409);
+    const eingabe = await leseJson(request);
+    const vertiefung = {};
+    for (let i = 0; i < gewaehlt.vertiefung.length; i++) {
+      const wert = eingabe?.antworten?.[i + 1];
+      if (!Number.isInteger(wert) || !gewaehlt.vertiefung[i].antworten[wert]) {
+        return antwort({ fehler: `Bitte beantworte Frage ${i + 1}.` }, 400);
+      }
+      vertiefung[i + 1] = wert;
+    }
+    const antworten = await ladeAntworten(db, nutzer.id);
+    const plan = erstellePlan(gewaehlt, antworten, vertiefung);
+    const befehle = [
+      db.prepare("DELETE FROM vertiefung WHERE nutzer_id = ?").bind(nutzer.id),
+      db.prepare("DELETE FROM plan_schritte WHERE nutzer_id = ?").bind(nutzer.id),
+      db.prepare("DELETE FROM plan_info WHERE nutzer_id = ?").bind(nutzer.id),
+    ];
+    for (const [nr, wert] of Object.entries(vertiefung)) {
+      befehle.push(db.prepare("INSERT INTO vertiefung (nutzer_id, frage_nr, antwort) VALUES (?, ?, ?)").bind(nutzer.id, Number(nr), wert));
+    }
+    for (const s of plan.schritte) {
+      befehle.push(
+        db
+          .prepare("INSERT INTO plan_schritte (nutzer_id, nr, etappe, etappe_name, ziel, titel, min, tun, fertig, hinweis) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")
+          .bind(nutzer.id, s.nr, s.etappe, s.etappeName, s.ziel, s.titel, s.min, JSON.stringify(s.tun), s.fertig, s.hinweis)
+      );
+    }
+    befehle.push(db.prepare("INSERT INTO plan_info (nutzer_id, angewendet) VALUES (?, ?)").bind(nutzer.id, JSON.stringify(plan.angewendet)));
+    await db.batch(befehle);
+    return antwort({ ok: true, tage: plan.tage }, 201);
+  }
+
+  if (weg === "/api/plan" && art === "GET") {
+    const gewaehlt = await ladeWeg(db, nutzer.id);
+    const schritte = await ladePlan(db, nutzer.id);
+    if (!gewaehlt || !schritte.length) return antwort({ fehler: "Du hast noch keinen Plan." }, 404);
+    const info = await db.prepare("SELECT angewendet FROM plan_info WHERE nutzer_id = ?").bind(nutzer.id).first();
+    return antwort({
+      weg: { id: gewaehlt.id, name: gewaehlt.name, ehrlich: gewaehlt.ehrlich },
+      angewendet: info ? JSON.parse(info.angewendet) : [],
+      schritte,
     });
   }
 
