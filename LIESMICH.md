@@ -70,6 +70,8 @@ npx wrangler secret put ANTHROPIC_API_KEY
 
 Ohne Schlüssel läuft die App trotzdem. Der Mentor sagt dann, dass er noch nicht verbunden ist.
 
+Mit Schlüssel schreibt die KI außerdem die Aufgabe jedes Tages persönlich um, sobald sie dran ist. Grundlage ist immer die geprüfte Vorlage aus `daten/`. Die angepasste Fassung wird gespeichert und trägt in der App die Marke „Für dich angepasst“. Klappt das Anpassen nicht, erscheint einfach die Vorlage.
+
 Kostenbremse: höchstens 30 Nachrichten pro Nutzer und Tag (`MAX_PRO_TAG` in `src/mentor.js`).
 
 ## Tests

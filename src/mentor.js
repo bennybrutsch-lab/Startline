@@ -94,6 +94,103 @@ export function baueKontext({ ton, fragen, antworten, weg, vertiefung, schritte 
   return teile.filter(Boolean).join("\n\n");
 }
 
+// ---------- Tagesaufgabe persönlich anpassen ----------
+
+const ANPASSEN = `Du passt in der App Startline die Aufgabe eines Tages an eine bestimmte Person an. Die Person ist zwischen 14 und 25 und will etwas Eigenes aufbauen.
+
+Du bekommst eine geprüfte Vorlage für die Aufgabe und alles, was über die Person bekannt ist. Schreib die Aufgabe so um, dass sie sich anfühlt, als wäre sie nur für diese Person geschrieben.
+
+So passt du an:
+- Nutze, was du über die Person weißt: Branche, Kontakte, Zeit, Vorwissen, Alter, und vor allem Namen, Orte und Details, die sie im Gespräch mit dem Mentor erwähnt hat.
+- Mach die Schritte konkreter als die Vorlage, aber nicht länger. Zwei bis vier Schritte, jeder ein klarer Satz.
+- Schreib auf Deutsch, mit du, in einfacher Sprache.
+
+Was gleich bleiben muss:
+- Das Ziel der Aufgabe und woran man merkt, dass sie fertig ist. Du darfst es nur konkreter formulieren.
+- Die ungefähre Dauer. Mach die Aufgabe nicht deutlich größer.
+- Hinweise zu Eltern, Gewerbe, Rechnungen und rechtlichen Dingen. Die bleiben inhaltlich erhalten und werden nie weggelassen.
+
+Was du nie tust:
+- Nichts über die Person erfinden. Wenn du etwas nicht weißt, bleib allgemein.
+- Keine Einkommen versprechen, nichts Riskantes vorschlagen, nicht zum Abbruch von Schule oder Ausbildung raten.
+- Keine Schritte aus späteren Tagen vorziehen.
+
+Gib das Ergebnis im vorgegebenen Format zurück. "hinweis" ist ein leerer Text, wenn es keinen Hinweis braucht.`;
+
+const AUFGABE_FORMAT = {
+  type: "json_schema",
+  schema: {
+    type: "object",
+    properties: {
+      titel: { type: "string" },
+      tun: { type: "array", items: { type: "string" } },
+      fertig: { type: "string" },
+      hinweis: { type: "string" },
+    },
+    required: ["titel", "tun", "fertig", "hinweis"],
+    additionalProperties: false,
+  },
+};
+
+// Prüft, ob die angepasste Aufgabe brauchbar ist. Sonst gilt die Vorlage.
+export function pruefeAngepasst(daten, vorlage) {
+  if (!daten || typeof daten !== "object") return null;
+  const { titel, tun, fertig, hinweis } = daten;
+  if (typeof titel !== "string" || !titel.trim() || titel.length > 120) return null;
+  if (!Array.isArray(tun) || tun.length < 1 || tun.length > 5) return null;
+  if (tun.some((t) => typeof t !== "string" || !t.trim() || t.length > 400)) return null;
+  if (typeof fertig !== "string" || !fertig.trim() || fertig.length > 300) return null;
+  if (typeof hinweis !== "string" || hinweis.length > 400) return null;
+  // Ein Pflicht-Hinweis aus der Vorlage darf nie verloren gehen.
+  const neuerHinweis = hinweis.trim() || (vorlage.hinweis || "");
+  return {
+    titel: titel.trim(),
+    tun: tun.map((t) => t.trim()),
+    // Die App schreibt "Fertig, wenn" davor. Steht es schon da, wird es entfernt.
+    fertig: fertig.trim().replace(/^fertig,?\s*wenn\s*/i, ""),
+    hinweis: neuerHinweis,
+  };
+}
+
+// Schreibt eine Tagesaufgabe für die Person um. Gibt die angepasste Aufgabe oder null zurück.
+export async function passeAufgabeAn(env, kontext, schritt, gespraech) {
+  if (!env.ANTHROPIC_API_KEY) return null;
+  const client = new Anthropic({ apiKey: env.ANTHROPIC_API_KEY });
+  const vorlage = {
+    tag: schritt.nr,
+    titel: schritt.titel,
+    minuten: schritt.min,
+    schritte: schritt.tun,
+    fertig_wenn: schritt.fertig,
+    hinweis: schritt.hinweis || "",
+  };
+  const ausGespraech = gespraech.length
+    ? "Aus dem Gespräch mit dem Mentor (neueste zuletzt):\n" +
+      gespraech.map((n) => (n.rolle === "user" ? "Person: " : "Mentor: ") + n.text.slice(0, 500)).join("\n")
+    : "Mit dem Mentor wurde noch nicht gesprochen.";
+  try {
+    const antwort = await client.beta.messages.create({
+      model: env.MENTOR_MODELL || STANDARD_MODELL,
+      max_tokens: 16000,
+      output_config: { effort: "low", format: AUFGABE_FORMAT },
+      betas: ["server-side-fallback-2026-07-01"],
+      fallbacks: "default",
+      system: [
+        { type: "text", text: ANPASSEN, cache_control: { type: "ephemeral" } },
+        { type: "text", text: "Was über die Person bekannt ist:\n\n" + kontext + "\n\n" + ausGespraech },
+      ],
+      messages: [{ role: "user", content: "Vorlage für die heutige Aufgabe:\n" + JSON.stringify(vorlage, null, 2) }],
+    });
+    if (antwort.stop_reason !== "end_turn") return null;
+    const text = antwort.content.filter((b) => b.type === "text").map((b) => b.text).join("");
+    return pruefeAngepasst(JSON.parse(text), schritt);
+  } catch (fehler) {
+    // Klappt das Anpassen nicht, bekommt die Person einfach die Vorlage. Das ist kein Grund für eine Fehlermeldung.
+    console.error("Aufgabe anpassen fehlgeschlagen:", fehler?.status || "", fehler?.message || fehler);
+    return null;
+  }
+}
+
 // Aus den gespeicherten Nachrichten die Liste für die KI machen. Sie muss mit einer Nutzer-Nachricht beginnen.
 export function baueVerlauf(nachrichten) {
   const letzte = nachrichten.slice(-VERLAUF_LAENGE);

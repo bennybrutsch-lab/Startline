@@ -442,7 +442,11 @@ $("knopf-plan-neu").addEventListener("click", andererWeg);
 let vorausArbeiten = false; // true, wenn jemand heute freiwillig noch eine Aufgabe machen will
 
 async function zeigeHeute() {
+  // Das Anpassen durch die KI kann ein paar Sekunden dauern.
+  $("laden").textContent = "Deine Aufgabe wird vorbereitet …";
+  $("laden").hidden = false;
   const daten = await api("/api/heute");
+  $("laden").textContent = "Lädt …";
   if (!daten.ok) return zeigeStart();
   hatPlan = true;
   meldung("heute-fehler", "");
@@ -470,6 +474,7 @@ async function zeigeHeute() {
   if (!pause && !allesFertig) {
     const s = daten.schritt;
     $("heute-titel").textContent = `Tag ${s.nr}: ${s.titel}`;
+    $("heute-persoenlich").hidden = !s.persoenlich;
     $("heute-dauer").textContent = `Etappe ${s.etappe}: ${s.etappeName} · ca. ${s.min} Minuten`;
     const liste = $("heute-schritte");
     liste.replaceChildren();
@@ -548,6 +553,12 @@ async function zeigePlan() {
     tag.className = "tag" + (s.erledigt ? " erledigt" : "") + (s.nr === naechster ? " naechster" : "");
     const titel = document.createElement("h3");
     titel.textContent = `Tag ${s.nr}: ${s.titel}` + (s.erledigt ? " (erledigt)" : "");
+    if (s.persoenlich) {
+      const marke = document.createElement("span");
+      marke.className = "marke";
+      marke.textContent = "Für dich angepasst";
+      titel.append(" ", marke);
+    }
     const dauer = document.createElement("p");
     dauer.className = "daten";
     dauer.textContent = `ca. ${s.min} Minuten`;

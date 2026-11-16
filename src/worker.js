@@ -7,7 +7,7 @@ import mentorDaten from "../daten/mentor.json";
 import einfuehrungDaten from "../daten/einfuehrung.json";
 import { alleFragen, berechne } from "./punkte.js";
 import { erstellePlan } from "./plan.js";
-import { baueKontext, baueVerlauf, frageMentor, MAX_ZEICHEN, MAX_PRO_TAG } from "./mentor.js";
+import { baueKontext, baueVerlauf, frageMentor, passeAufgabeAn, MAX_ZEICHEN, MAX_PRO_TAG } from "./mentor.js";
 import {
   pruefeEingabe,
   registriere,
@@ -85,18 +85,54 @@ async function ladePlan(db, nutzerId) {
     .prepare("SELECT nr, etappe, etappe_name, ziel, titel, min, tun, fertig, hinweis, erledigt_am FROM plan_schritte WHERE nutzer_id = ? ORDER BY nr")
     .bind(nutzerId)
     .all();
-  return results.map((z) => ({
-    nr: z.nr,
-    etappe: z.etappe,
-    etappeName: z.etappe_name,
-    ziel: z.ziel,
-    titel: z.titel,
-    min: z.min,
-    tun: JSON.parse(z.tun),
-    fertig: z.fertig,
-    hinweis: z.hinweis,
-    erledigt: Boolean(z.erledigt_am),
-  }));
+  const { results: eigene } = await db
+    .prepare("SELECT nr, inhalt FROM plan_persoenlich WHERE nutzer_id = ?")
+    .bind(nutzerId)
+    .all();
+  const angepasst = new Map(eigene.map((z) => [z.nr, JSON.parse(z.inhalt)]));
+  return results.map((z) => {
+    const vorlage = {
+      nr: z.nr,
+      etappe: z.etappe,
+      etappeName: z.etappe_name,
+      ziel: z.ziel,
+      titel: z.titel,
+      min: z.min,
+      tun: JSON.parse(z.tun),
+      fertig: z.fertig,
+      hinweis: z.hinweis,
+      erledigt: Boolean(z.erledigt_am),
+      persoenlich: false,
+    };
+    // Gibt es eine persönliche Fassung, ersetzt sie Titel, Schritte, Fertig und Hinweis.
+    const eigen = angepasst.get(z.nr);
+    return eigen ? { ...vorlage, ...eigen, persoenlich: true } : vorlage;
+  });
+}
+
+// Schreibt die Aufgabe eines Tages persönlich um, falls das noch nicht passiert ist.
+async function persoenlicheAufgabe(db, env, nutzerId, schritt, alleSchritte) {
+  if (schritt.persoenlich || !env.ANTHROPIC_API_KEY) return schritt;
+  const mentor = await db.prepare("SELECT ton FROM mentor WHERE nutzer_id = ?").bind(nutzerId).first();
+  const kontext = baueKontext({
+    ton: mentor ? mentor.ton : 2,
+    fragen: alleFragen(fragenDaten),
+    antworten: await ladeAntworten(db, nutzerId),
+    weg: await ladeWeg(db, nutzerId),
+    vertiefung: await ladeVertiefung(db, nutzerId),
+    schritte: alleSchritte,
+  });
+  const { results: gespraech } = await db
+    .prepare("SELECT rolle, text FROM (SELECT id, rolle, text FROM mentor_nachrichten WHERE nutzer_id = ? ORDER BY id DESC LIMIT 12) ORDER BY id")
+    .bind(nutzerId)
+    .all();
+  const eigen = await passeAufgabeAn(env, kontext, schritt, gespraech);
+  if (!eigen) return schritt;
+  await db
+    .prepare("INSERT INTO plan_persoenlich (nutzer_id, nr, inhalt) VALUES (?, ?, ?) ON CONFLICT (nutzer_id, nr) DO UPDATE SET inhalt = excluded.inhalt, erstellt = datetime('now')")
+    .bind(nutzerId, schritt.nr, JSON.stringify(eigen))
+    .run();
+  return { ...schritt, ...eigen, persoenlich: true };
 }
 
 async function api(request, env, url) {
@@ -299,6 +335,7 @@ async function api(request, env, url) {
     await db.batch([
       db.prepare("DELETE FROM vertiefung WHERE nutzer_id = ?").bind(nutzer.id),
       db.prepare("DELETE FROM plan_schritte WHERE nutzer_id = ?").bind(nutzer.id),
+      db.prepare("DELETE FROM plan_persoenlich WHERE nutzer_id = ?").bind(nutzer.id),
       db.prepare("DELETE FROM plan_info WHERE nutzer_id = ?").bind(nutzer.id),
       db.prepare("INSERT INTO wege (nutzer_id, richtung) VALUES (?, ?) ON CONFLICT (nutzer_id) DO UPDATE SET richtung = excluded.richtung, gewaehlt_am = datetime('now')").bind(nutzer.id, eingabe.richtung),
     ]);
@@ -310,6 +347,7 @@ async function api(request, env, url) {
     await db.batch([
       db.prepare("DELETE FROM vertiefung WHERE nutzer_id = ?").bind(nutzer.id),
       db.prepare("DELETE FROM plan_schritte WHERE nutzer_id = ?").bind(nutzer.id),
+      db.prepare("DELETE FROM plan_persoenlich WHERE nutzer_id = ?").bind(nutzer.id),
       db.prepare("DELETE FROM plan_info WHERE nutzer_id = ?").bind(nutzer.id),
       db.prepare("DELETE FROM wege WHERE nutzer_id = ?").bind(nutzer.id),
     ]);
@@ -344,6 +382,7 @@ async function api(request, env, url) {
     const befehle = [
       db.prepare("DELETE FROM vertiefung WHERE nutzer_id = ?").bind(nutzer.id),
       db.prepare("DELETE FROM plan_schritte WHERE nutzer_id = ?").bind(nutzer.id),
+      db.prepare("DELETE FROM plan_persoenlich WHERE nutzer_id = ?").bind(nutzer.id),
       db.prepare("DELETE FROM plan_info WHERE nutzer_id = ?").bind(nutzer.id),
     ];
     for (const [nr, wert] of Object.entries(vertiefung)) {
@@ -365,7 +404,9 @@ async function api(request, env, url) {
   if (weg === "/api/heute" && art === "GET") {
     const schritte = await ladePlan(db, nutzer.id);
     if (!schritte.length) return antwort({ fehler: "Du hast noch keinen Plan." }, 404);
-    const offen = schritte.find((s) => !s.erledigt) || null;
+    let offen = schritte.find((s) => !s.erledigt) || null;
+    // Die Aufgabe, die gerade dran ist, wird für die Person angepasst. Ohne Schlüssel bleibt es bei der Vorlage.
+    if (offen) offen = await persoenlicheAufgabe(db, env, nutzer.id, offen, schritte);
     const letzter = await db
       .prepare("SELECT nr, titel, erledigt_am FROM plan_schritte WHERE nutzer_id = ? AND erledigt_am IS NOT NULL ORDER BY nr DESC LIMIT 1")
       .bind(nutzer.id)

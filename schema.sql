@@ -84,3 +84,12 @@ CREATE TABLE IF NOT EXISTS mentor_nachrichten (
   erstellt TEXT NOT NULL DEFAULT (datetime('now'))
 );
 CREATE INDEX IF NOT EXISTS mentor_nachrichten_nutzer ON mentor_nachrichten (nutzer_id, id);
+
+-- Die von der KI persönlich umgeschriebene Fassung eines Tages. Fehlt sie, gilt die Vorlage.
+CREATE TABLE IF NOT EXISTS plan_persoenlich (
+  nutzer_id INTEGER NOT NULL REFERENCES nutzer(id) ON DELETE CASCADE,
+  nr INTEGER NOT NULL,
+  inhalt TEXT NOT NULL,       -- JSON: titel, tun, fertig, hinweis
+  erstellt TEXT NOT NULL DEFAULT (datetime('now')),
+  PRIMARY KEY (nutzer_id, nr)
+);

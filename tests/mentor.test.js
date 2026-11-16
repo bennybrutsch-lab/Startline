@@ -46,3 +46,29 @@ test("ohne Schlüssel meldet der Mentor, dass er nicht verbunden ist, statt abzu
   assert.equal(e.nichtVerbunden, true);
   assert.match(e.text, /nicht verbunden/);
 });
+
+import { pruefeAngepasst, passeAufgabeAn } from "../src/mentor.js";
+
+const vorlage = { nr: 8, titel: "Dein Angebot", min: 30, tun: ["a"], fertig: "x", hinweis: "Pflicht für dich: Eltern fragen." };
+
+test("eine gute angepasste Aufgabe wird übernommen, doppeltes \"Fertig, wenn\" entfernt", () => {
+  const a = pruefeAngepasst({ titel: "Dein Angebot für Salon Mia", tun: ["Schritt 1", "Schritt 2"], fertig: "Fertig, wenn dein Angebot steht.", hinweis: "Pflicht für dich: Eltern fragen." }, vorlage);
+  assert.equal(a.titel, "Dein Angebot für Salon Mia");
+  assert.equal(a.fertig, "dein Angebot steht.");
+});
+
+test("fehlt der Hinweis in der Antwort, bleibt der aus der Vorlage erhalten", () => {
+  const a = pruefeAngepasst({ titel: "T", tun: ["s"], fertig: "f", hinweis: "" }, vorlage);
+  assert.equal(a.hinweis, "Pflicht für dich: Eltern fragen.");
+});
+
+test("unbrauchbare Antworten werden verworfen", () => {
+  assert.equal(pruefeAngepasst({ titel: "", tun: ["s"], fertig: "f", hinweis: "" }, vorlage), null);
+  assert.equal(pruefeAngepasst({ titel: "T", tun: [], fertig: "f", hinweis: "" }, vorlage), null);
+  assert.equal(pruefeAngepasst({ titel: "T", tun: ["1", "2", "3", "4", "5", "6"], fertig: "f", hinweis: "" }, vorlage), null);
+  assert.equal(pruefeAngepasst(null, vorlage), null);
+});
+
+test("ohne Schlüssel wird nichts angepasst und die Vorlage gilt", async () => {
+  assert.equal(await passeAufgabeAn({}, "k", vorlage, []), null);
+});
