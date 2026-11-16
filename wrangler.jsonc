@@ -1,0 +1,12 @@
+{
+  // Einstellungen für Cloudflare. "name" ist der Name der App bei Cloudflare.
+  "name": "startline",
+  "main": "src/worker.js",
+  "compatibility_date": "2026-10-01",
+  // Alles im Ordner "public" wird direkt als Website ausgeliefert.
+  "assets": { "directory": "./public", "binding": "ASSETS" },
+  // Die Datenbank. Die database_id wird beim Anlegen online eingetragen (siehe LIESMICH.md).
+  "d1_databases": [
+    { "binding": "DB", "database_name": "startline-db", "database_id": "00000000-0000-0000-0000-000000000000" }
+  ]
+}

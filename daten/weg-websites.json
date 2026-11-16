@@ -1,0 +1,81 @@
+{
+  "id": "W",
+  "name": "Websites für Betriebe vor Ort",
+  "kurz": "Du baust Läden, Praxen und Vereinen in deiner Nähe eine Website.",
+  "ehrlich": "Kein Weg zu schnellem Reichtum. Die meisten Betriebe sagen zuerst Nein oder Vielleicht. Wer 30 Betriebe anspricht, hat realistisch ein bis drei ernsthafte Gespräche.",
+  "vertiefung": [
+    { "frage": "Welche Betriebe gibt es in deiner Nähe am meisten?", "antworten": ["Friseure, Kosmetik, Barber", "Cafés, Restaurants, Imbisse", "Handwerker", "Kleine Läden", "Praxen, Vereine, andere"], "wozu": "Legt die Branche für dein erstes Beispiel fest." },
+    { "frage": "Wie kommst du zu den Betrieben?", "antworten": ["Zu Fuß oder mit dem Rad", "Mit Bus oder Bahn", "Mit dem Auto", "Gar nicht, nur online"], "wozu": "Entscheidet, ob du Betriebe besuchst oder anschreibst." },
+    { "frage": "Kennst du einen Inhaber so gut, dass du ihn direkt fragen kannst?", "antworten": ["Ja, selbst", "Ja, über Familie oder Freunde", "Nein"], "wozu": "Wer jemanden kennt, startet dort. Das ist der leichteste erste Kunde." },
+    { "frage": "Hast du schon eine Website gebaut, die du zeigen kannst?", "antworten": ["Ja, mehrere", "Ja, eine", "Nein"], "wozu": "Wer schon Beispiele hat, überspringt einen Teil von Etappe 1." },
+    { "frage": "Bis wann willst du den ersten Kunden haben?", "antworten": ["In 30 Tagen", "In 60 Tagen", "Ohne Zeitdruck"], "wozu": "Bestimmt das Tempo beim Ansprechen." },
+    { "frage": "Wie sieht es mit Geld annehmen und Rechnungen aus?", "antworten": ["Ich bin volljährig und habe ein Gewerbe", "Ich bin volljährig, noch ohne Gewerbe", "Ich bin unter 18, meine Eltern wissen Bescheid", "Ich bin unter 18, meine Eltern wissen es noch nicht"], "wozu": "Legt fest, wann das Gespräch mit den Eltern und die Anmeldung im Plan stehen." }
+  ],
+  "etappen": [
+    {
+      "nr": 1, "name": "Zeigen, was du kannst", "tage": "Tag 1 bis 7",
+      "ziel": "Am Ende hast du eine Beispiel-Website online, die du jedem Betrieb zeigen kannst.",
+      "schritte": [
+        { "tag": 1, "titel": "Deine Liste mit 20 Betrieben", "min": 30, "tun": ["Öffne eine Karten-App und such in deiner Umgebung nach Betrieben deiner Branche.", "Schreib 20 auf: Name, Adresse, und ob sie keine Website, eine alte oder eine gute haben.", "Markiere die, bei denen du jemanden kennst."], "fertig": "20 Betriebe auf deiner Liste stehen." },
+        { "tag": 2, "titel": "Fünf gute Vorbilder", "min": 25, "tun": ["Such fünf richtig gute Websites deiner Branche, gern aus anderen Städten.", "Notiere bei jeder, was sofort zu sehen ist: Öffnungszeiten, Telefon, Bilder, Preise, Terminbuchung.", "Schreib die drei Dinge auf, die alle fünf gemeinsam haben."], "fertig": "du drei Dinge kennst, die auf keiner Website deiner Branche fehlen dürfen." },
+        { "tag": 3, "titel": "Dein Beispiel: die Startseite", "min": 45, "tun": ["Erfinde einen Betrieb deiner Branche mit Name und Ort.", "Bau mit dem Mentor die Startseite: Name, was der Betrieb anbietet, Öffnungszeiten, Telefon.", "Lass dir kurz erklären, aus welchen Teilen die Seite besteht."], "fertig": "die Startseite im Browser läuft." },
+        { "tag": 4, "titel": "Leistungen und Kontakt", "min": 45, "tun": ["Ergänze einen Bereich mit Leistungen oder Preisen und einen mit Kontakt und Anfahrt.", "Öffne die Seite am Handy und prüfe, ob alles lesbar ist.", "Behebe die zwei größten Probleme."], "fertig": "die Seite am Handy gut aussieht." },
+        { "tag": 5, "titel": "Online stellen", "min": 30, "tun": ["Ergänze Impressum und Datenschutz mit Platzhaltern und dem Hinweis, dass es ein Beispiel ist.", "Stell die Seite kostenlos online. Der Mentor führt dich durch.", "Schick dir den Link selbst und öffne ihn auf einem anderen Gerät."], "fertig": "du einen Link hast, der überall funktioniert." },
+        { "tag": 6, "titel": "Drei ehrliche Meinungen", "min": 20, "tun": ["Zeig die Seite drei Leuten und frag nur: Was würdest du hier als Erstes tun? Was verstehst du nicht?", "Schreib die Antworten wörtlich auf.", "Verbessere die eine Sache, die mehr als einer genannt hat."], "fertig": "eine Verbesserung online ist." },
+        { "tag": 7, "titel": "Wochenrückblick", "min": 15, "tun": ["Beantworte dem Mentor: Was lief gut, was war schwer, wie viel Zeit hast du wirklich gebraucht?", "Der Mentor passt die nächste Woche an."], "fertig": "dein Plan für Woche 2 steht." }
+      ]
+    },
+    {
+      "nr": 2, "name": "Angebot und erste Gespräche", "tage": "Tag 8 bis 14",
+      "ziel": "Am Ende hast du mit mindestens sechs Betrieben gesprochen und weißt, was sie wirklich brauchen.",
+      "schritte": [
+        { "tag": 8, "titel": "Dein Angebot", "min": 30, "tun": ["Leg fest: Was bekommt der Betrieb genau? Wie lange brauchst du? Was kostet es?", "Der Mentor nennt dir eine übliche Preisspanne für Einsteiger. Wähle einen Preis, den du ohne Zögern aussprechen kannst.", "Bist du unter 18: Sprich heute mit deinen Eltern darüber, dass du Aufträge annehmen willst."], "fertig": "dein Angebot in drei Sätzen aufgeschrieben ist.", "hinweis": "Unter 18 brauchst du für Aufträge die Zustimmung deiner Eltern." },
+        { "tag": 9, "titel": "Dein Einstiegssatz", "min": 20, "tun": ["Schreib drei Sätze: wer du bist, was dir an ihrer Website aufgefallen ist, was du anbietest.", "Kein Verkaufsgerede. Ziel ist eine Frage, kein Abschluss.", "Sprich die Sätze fünfmal laut."], "fertig": "du deinen Einstieg frei sagen kannst." },
+        { "tag": 10, "titel": "Eine Vorschau für einen echten Betrieb", "min": 45, "tun": ["Wähle von deiner Liste den Betrieb, bei dem die Chance am größten ist.", "Bau aus deinem Beispiel eine Vorschau mit seinem echten Namen und seinen öffentlichen Angaben.", "Stell sie online, mit dem klaren Hinweis: unverbindliche Vorschau."], "fertig": "du einen Link mit der Vorschau hast." },
+        { "tag": 11, "titel": "Die ersten drei Betriebe", "min": 45, "tun": ["Geh in drei Betriebe, am besten zu ruhigen Zeiten, nicht in der Mittagspause.", "Frag nur: Wer kümmert sich bei Ihnen um die Website? Darf ich Ihnen etwas zeigen?", "Schreib direkt danach auf, was gesagt wurde."], "fertig": "du drei Gespräche notiert hast, egal wie sie ausgingen.", "hinweis": "Ein Nein ist heute ein Erfolg. Es zählt, dass du gefragt hast." },
+        { "tag": 12, "titel": "Drei weitere, mit Vorschau", "min": 45, "tun": ["Geh in drei weitere Betriebe und zeig diesmal die Vorschau am Handy.", "Frag am Ende: Was müsste die Seite können, damit sie Ihnen hilft?", "Notiere die Antworten."], "fertig": "sechs Betriebe angesprochen sind." },
+        { "tag": 13, "titel": "Nachfassen", "min": 20, "tun": ["Schreib allen, die Vielleicht gesagt haben, eine kurze Nachricht mit dem Link.", "Biete einen festen Termin an, um die Vorschau gemeinsam anzusehen.", "Trag in deine Liste ein, wer wann wieder dran ist."], "fertig": "jedes Vielleicht eine Nachricht bekommen hat." },
+        { "tag": 14, "titel": "Wochenrückblick", "min": 15, "tun": ["Was haben die Betriebe am häufigsten gesagt?", "Der Mentor hilft dir, Einstiegssatz und Angebot daran anzupassen."], "fertig": "dein Angebot auf echten Gesprächen beruht." }
+      ]
+    },
+    {
+      "nr": 3, "name": "Der erste Auftrag", "tage": "Tag 15 bis 22",
+      "ziel": "Am Ende ist eine Website für einen echten Betrieb online, bezahlt oder als Referenz.",
+      "schritte": [
+        { "tag": 15, "titel": "Zehn neue Betriebe", "min": 45, "tun": ["Ergänze deine Liste um zehn Betriebe.", "Sprich fünf davon an, mit dem verbesserten Einstieg.", "Notiere jedes Gespräch."], "fertig": "elf Betriebe insgesamt angesprochen sind." },
+        { "tag": 16, "titel": "Das schriftliche Angebot", "min": 30, "tun": ["Schreib für jeden Interessenten eine Seite: was er bekommt, Preis, Termin, was du von ihm brauchst.", "Der Mentor hilft beim Formulieren.", "Schick es ab und nenne einen Tag, an dem du nachfragst."], "fertig": "mindestens ein Angebot verschickt ist. Gibt es noch keinen Interessenten, springt der Plan zu Tag 18." },
+        { "tag": 17, "titel": "Das Rechtliche vor dem ersten Geld", "min": 30, "tun": ["Kläre, wie du Geld annehmen darfst: Gewerbe, Rechnung, bei unter 18 die Eltern.", "Der Mentor gibt dir eine Liste mit Fragen für das Gewerbeamt oder deine Eltern.", "Das ist keine Rechtsberatung. Im Zweifel nachfragen."], "fertig": "du weißt, wie du eine Rechnung stellen darfst.", "hinweis": "Ohne Gewerbe keine Rechnung. Unter 18 geht das nur mit Eltern und Familiengericht." },
+        { "tag": 18, "titel": "Inhalte sammeln", "min": 30, "tun": ["Schick dem Kunden einen kurzen Fragebogen: Texte, Fotos, Öffnungszeiten, Kontakt.", "Hast du noch keinen Kunden: Biete einem Betrieb eine kostenlose Website an, im Tausch gegen eine Empfehlung und ehrliche Rückmeldung.", "Leg einen Termin für die Übergabe fest."], "fertig": "du alle Inhalte hast oder weißt, wann sie kommen." },
+        { "tag": 19, "titel": "Bauen, Teil 1", "min": 60, "tun": ["Bau Startseite und Leistungen mit den echten Inhalten.", "Nimm echte Fotos des Betriebs, keine erfundenen."], "fertig": "die Startseite mit echten Inhalten steht." },
+        { "tag": 20, "titel": "Bauen, Teil 2", "min": 60, "tun": ["Ergänze Kontakt, Anfahrt, Impressum und Datenschutz mit den Angaben des Betriebs.", "Prüfe alles am Handy und an einem zweiten Gerät."], "fertig": "die Website vollständig ist." },
+        { "tag": 21, "titel": "Dem Kunden zeigen", "min": 30, "tun": ["Zeig die Website persönlich oder per Link.", "Schreib alle Änderungswünsche auf und setze sie um.", "Kläre, wer die Adresse der Website bezahlt und wem sie gehört."], "fertig": "der Kunde sagt: So kann sie online." },
+        { "tag": 22, "titel": "Online und Rückblick", "min": 30, "tun": ["Stell die Website unter der Adresse des Kunden online.", "Stell die Rechnung, falls vereinbart.", "Rückblick mit dem Mentor: Was würdest du beim nächsten Mal anders machen?"], "fertig": "die erste echte Website online ist." }
+      ]
+    },
+    {
+      "nr": 4, "name": "Wiederholen und besser werden", "tage": "Tag 23 bis 30",
+      "ziel": "Am Ende hast du eine Referenz, einen festen Ablauf und weißt, ob dieser Weg deiner ist.",
+      "schritte": [
+        { "tag": 23, "titel": "Empfehlung holen", "min": 15, "tun": ["Bitte deinen Kunden um einen Satz, den du zeigen darfst.", "Frag nach zwei Betrieben, denen er dich empfehlen würde."], "fertig": "du einen Satz und zwei Namen hast." },
+        { "tag": 24, "titel": "Deine eigene Seite", "min": 45, "tun": ["Bau eine kleine Seite über dich: was du machst, dein Beispiel, die Empfehlung, wie man dich erreicht.", "Stell sie online."], "fertig": "du einen Link hast, den du jedem schicken kannst." },
+        { "tag": 25, "titel": "Fünf neue Betriebe", "min": 45, "tun": ["Sprich fünf Betriebe an, diesmal mit Referenz.", "Fang mit den zwei empfohlenen an."], "fertig": "fünf weitere Gespräche notiert sind." },
+        { "tag": 26, "titel": "Betreuung als Angebot", "min": 25, "tun": ["Überleg dir ein kleines monatliches Angebot: Änderungen, neue Fotos, Öffnungszeiten aktuell halten.", "Leg einen Preis fest und biete es deinem ersten Kunden an."], "fertig": "dein Betreuungsangebot in zwei Sätzen steht." },
+        { "tag": 27, "titel": "Fünf weitere Betriebe", "min": 45, "tun": ["Sprich fünf weitere Betriebe an.", "Fass bei allen offenen Angeboten nach."], "fertig": "kein Angebot länger als eine Woche unbeantwortet ist." },
+        { "tag": 28, "titel": "Dein Ablauf", "min": 25, "tun": ["Schreib deine eigene Liste: von der ersten Frage bis zur Übergabe, Schritt für Schritt.", "Die nutzt du ab jetzt bei jedem Kunden."], "fertig": "dein Ablauf auf einer Seite steht." },
+        { "tag": 29, "titel": "Deine Zahlen", "min": 20, "tun": ["Zähle: angesprochen, Gespräche, Angebote, Aufträge, eingenommenes Geld.", "Der Mentor zeigt dir, an welcher Stelle am meisten verloren geht."], "fertig": "du deine schwächste Stelle kennst." },
+        { "tag": 30, "titel": "Entscheidung", "min": 20, "tun": ["Sag dem Mentor ehrlich: Macht dir das Spaß? Was war das Beste, was das Schlimmste?", "Entscheide: weiter so, anpassen oder einen anderen Weg testen.", "Der Mentor erstellt den Plan für die nächsten 30 Tage."], "fertig": "du weißt, wie es weitergeht." }
+      ]
+    }
+  ],
+  "anpassung": [
+    { "wenn": "Unter 20 Minuten Zeit am Tag", "dann": "Jeder Schritt wird auf zwei Tage verteilt. Der Plan dauert 60 Tage." },
+    { "wenn": "Mehr als zwei Stunden Zeit am Tag", "dann": "Etappe 1 wird auf vier Tage verkürzt, in Etappe 2 und 3 werden doppelt so viele Betriebe angesprochen." },
+    { "wenn": "Schon eine Website gebaut", "dann": "Tag 3 und 4 entfallen. Die vorhandene Website wird auf die Branche angepasst." },
+    { "wenn": "Kennt einen Inhaber persönlich", "dann": "Die Vorschau an Tag 10 und das erste Gespräch an Tag 11 gehen an diesen Betrieb." },
+    { "wenn": "Fremde ansprechen fällt schwer", "dann": "Die ersten Kontakte laufen schriftlich oder über Bekannte. Der erste Besuch vor Ort kommt erst in Etappe 3." },
+    { "wenn": "Kommt nicht zu den Betrieben", "dann": "Alle Besuche werden durch Nachrichten und Anrufe ersetzt, die Liste wird auf 40 Betriebe verdoppelt." },
+    { "wenn": "Unter 18", "dann": "Das Gespräch mit den Eltern steht fest an Tag 8, das Rechtliche an Tag 17 wird nicht übersprungen." },
+    { "wenn": "Bis Tag 16 kein Interessent", "dann": "Der Plan wechselt auf ein kostenloses Pilotprojekt gegen Empfehlung. Das ist kein Scheitern, sondern der übliche Weg zur ersten Referenz." },
+    { "wenn": "Eine Tagesaufgabe wird nicht geschafft", "dann": "Sie rutscht auf den nächsten Tag und wird kleiner. Nach drei verpassten Tagen fragt der Mentor nach dem Grund und passt das Tempo an." }
+  ]
+}

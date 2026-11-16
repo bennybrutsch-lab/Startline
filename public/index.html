@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Startline</title>
+  <link rel="stylesheet" href="/stil.css">
+</head>
+<body>
+  <header>
+    <strong>STARTLINE</strong>
+    <span id="konto" hidden><span id="konto-email"></span> <button id="abmelden" type="button">Abmelden</button></span>
+  </header>
+
+  <main>
+    <p id="laden">Lädt …</p>
+
+    <!-- Ansicht 1: Anmelden oder registrieren -->
+    <section id="ansicht-anmelden" hidden>
+      <h1>Du willst loslegen, weißt aber nicht womit? Fang hier an.</h1>
+      <p>25 Fragen. Drei Wege. Ein Plan, der zu dir passt.</p>
+      <form id="formular-konto">
+        <label for="email">E-Mail</label>
+        <input id="email" type="email" autocomplete="email" required>
+        <label for="passwort">Passwort (mindestens 8 Zeichen)</label>
+        <input id="passwort" type="password" autocomplete="current-password" minlength="8" required>
+        <p id="konto-fehler" class="fehler" role="alert" hidden></p>
+        <div class="reihe">
+          <button id="knopf-registrieren" type="submit" value="registrieren">Konto anlegen</button>
+          <button id="knopf-anmelden" type="submit" value="anmelden" class="zweit">Anmelden</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Ansicht 2: Die 25 Fragen, eine nach der anderen -->
+    <section id="ansicht-fragen" hidden>
+      <p id="fragen-stand"></p>
+      <progress id="fragen-balken" max="25" value="0"></progress>
+      <p id="fragen-block" class="klein"></p>
+      <h1 id="frage-text"></h1>
+      <div id="frage-antworten" class="antworten"></div>
+      <p id="fragen-fehler" class="fehler" role="alert" hidden></p>
+      <div class="reihe">
+        <button id="knopf-zurueck" type="button" class="zweit">Zurück</button>
+        <button id="knopf-weiter" type="button">Weiter</button>
+      </div>
+    </section>
+
+    <!-- Ansicht 3: Die drei Vorschläge -->
+    <section id="ansicht-ergebnis" hidden>
+      <h1>Deine drei Wege</h1>
+      <p id="ergebnis-hinweis"></p>
+      <div id="ergebnis-liste"></div>
+      <button id="knopf-nochmal" type="button" class="zweit">Antworten ändern</button>
+    </section>
+  </main>
+
+  <script src="/app.js" defer></script>
+</body>
+</html>
