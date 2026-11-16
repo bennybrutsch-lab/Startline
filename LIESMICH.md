@@ -17,6 +17,7 @@ Das Aussehen ist bewusst schlicht, das Design kommt später.
 | `src/plan.js` | Passt das Gerüst eines Weges an die Person an, ohne KI |
 | `daten/fragen.json` | Die 24 Fragen, die Punkte und die sechs Richtungen |
 | `daten/mentor.json` | Die Stile, in denen der Mentor reden kann |
+| `daten/einfuehrung.json` | Die Seiten der Einführung beim ersten Anmelden |
 | `daten/weg-websites.json` | Der 30-Tage-Plan für „Websites für Betriebe vor Ort“ |
 | `schema.sql` | Die Tabellen der Datenbank |
 | `tests/` | Automatische Prüfungen |

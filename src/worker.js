@@ -4,6 +4,7 @@
 import fragenDaten from "../daten/fragen.json";
 import wegWebsites from "../daten/weg-websites.json";
 import mentorDaten from "../daten/mentor.json";
+import einfuehrungDaten from "../daten/einfuehrung.json";
 import { alleFragen, berechne } from "./punkte.js";
 import { erstellePlan } from "./plan.js";
 import {
@@ -199,7 +200,18 @@ async function api(request, env, url) {
       weg: gewaehlt ? gewaehlt.name : null,
       plan: plan.gesamt > 0 ? { gesamt: plan.gesamt, geschafft: plan.geschafft } : null,
       mentor: mentor ? mentorDaten.toene[mentor.ton]?.name || null : null,
+      einfuehrungGesehen: Boolean(await db.prepare("SELECT 1 FROM einfuehrung WHERE nutzer_id = ?").bind(nutzer.id).first()),
     });
+  }
+
+  // Die Einführung: Seiten zum Durchtippen beim ersten Anmelden.
+  if (weg === "/api/einfuehrung" && art === "GET") {
+    return antwort({ seiten: einfuehrungDaten });
+  }
+
+  if (weg === "/api/einfuehrung/gesehen" && art === "POST") {
+    await db.prepare("INSERT INTO einfuehrung (nutzer_id) VALUES (?) ON CONFLICT (nutzer_id) DO NOTHING").bind(nutzer.id).run();
+    return antwort({ ok: true });
   }
 
   // Der Mentor: Auswahl ansehen und Ton festlegen.

@@ -68,3 +68,9 @@ CREATE TABLE IF NOT EXISTS mentor (
   ton INTEGER NOT NULL,
   eingerichtet_am TEXT NOT NULL DEFAULT (datetime('now'))
 );
+
+-- Wer die Einführung schon gesehen hat. Sie erscheint nur beim ersten Anmelden.
+CREATE TABLE IF NOT EXISTS einfuehrung (
+  nutzer_id INTEGER PRIMARY KEY REFERENCES nutzer(id) ON DELETE CASCADE,
+  gesehen_am TEXT NOT NULL DEFAULT (datetime('now'))
+);

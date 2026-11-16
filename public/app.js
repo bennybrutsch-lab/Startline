@@ -4,6 +4,7 @@
 const $ = (id) => document.getElementById(id);
 const ANSICHTEN = [
   "ansicht-anmelden",
+  "ansicht-einfuehrung",
   "ansicht-start",
   "ansicht-einleitung",
   "ansicht-fragen",
@@ -35,7 +36,8 @@ let stelle = 0; // welche Frage gerade zu sehen ist
 function zeige(ansicht) {
   $("laden").hidden = true;
   for (const id of ANSICHTEN) $(id).hidden = id !== ansicht;
-  $("menue").hidden = !angemeldet;
+  // Während der Einführung gibt es noch kein Menü, damit nichts ablenkt.
+  $("menue").hidden = !angemeldet || ansicht === "ansicht-einfuehrung";
   $("menue-heute").hidden = !hatPlan;
   for (const name of ["start", "heute", "plan", "mentor"]) {
     $("menue-" + name).setAttribute("aria-current", BEREICH[ansicht] === name ? "page" : "false");
@@ -91,6 +93,68 @@ $("abmelden").addEventListener("click", async () => {
   $("konto").hidden = true;
   zeige("ansicht-anmelden");
 });
+
+// ---------- Einführung ----------
+
+let einfuehrung = []; // die Seiten der Einführung
+let einfuehrungStelle = 0;
+
+async function zeigeEinfuehrung() {
+  const daten = await api("/api/einfuehrung");
+  if (!daten.ok || !daten.seiten.length) return zeigeStart();
+  einfuehrung = daten.seiten;
+  einfuehrungStelle = 0;
+  zeigeEinfuehrungSeite();
+  zeige("ansicht-einfuehrung");
+}
+
+function zeigeEinfuehrungSeite() {
+  const seite = einfuehrung[einfuehrungStelle];
+  const letzte = einfuehrungStelle === einfuehrung.length - 1;
+  $("einfuehrung-stand").textContent = `Schritt ${einfuehrungStelle + 1} von ${einfuehrung.length}`;
+  $("einfuehrung-balken").max = einfuehrung.length;
+  $("einfuehrung-balken").value = einfuehrungStelle + 1;
+  $("einfuehrung-titel").textContent = seite.titel;
+
+  const inhalt = $("einfuehrung-inhalt");
+  inhalt.replaceChildren();
+  for (const text of seite.text || []) {
+    const absatz = document.createElement("p");
+    absatz.textContent = text;
+    inhalt.append(absatz);
+  }
+  if (seite.punkte) {
+    const liste = document.createElement("ol");
+    for (const text of seite.punkte) {
+      const punkt = document.createElement("li");
+      punkt.textContent = text;
+      liste.append(punkt);
+    }
+    inhalt.append(liste);
+  }
+
+  $("einfuehrung-weiter").textContent = letzte ? "Zur Übersicht" : "Weiter";
+  $("einfuehrung-zurueck").hidden = einfuehrungStelle === 0;
+  $("einfuehrung-ueberspringen").hidden = letzte;
+  window.scrollTo(0, 0);
+}
+
+async function beendeEinfuehrung() {
+  await api("/api/einfuehrung/gesehen", {});
+  await zeigeStart();
+}
+
+$("einfuehrung-weiter").addEventListener("click", () => {
+  if (einfuehrungStelle === einfuehrung.length - 1) return beendeEinfuehrung();
+  einfuehrungStelle += 1;
+  zeigeEinfuehrungSeite();
+});
+$("einfuehrung-zurueck").addEventListener("click", () => {
+  if (einfuehrungStelle > 0) einfuehrungStelle -= 1;
+  zeigeEinfuehrungSeite();
+});
+$("einfuehrung-ueberspringen").addEventListener("click", beendeEinfuehrung);
+$("start-einfuehrung-knopf").addEventListener("click", zeigeEinfuehrung);
 
 // ---------- Startseite ----------
 
@@ -540,6 +604,9 @@ async function start() {
   if (!ich.ok) return zeige("ansicht-anmelden");
   $("konto-email").textContent = ich.email;
   $("konto").hidden = false;
+  // Beim ersten Anmelden kommt zuerst die Einführung.
+  const stand = await api("/api/stand");
+  if (stand.ok && !stand.einfuehrungGesehen) return zeigeEinfuehrung();
   await zeigeStart();
 }
 

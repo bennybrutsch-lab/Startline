@@ -38,6 +38,19 @@
       </form>
     </section>
 
+    <!-- Einführung: beim ersten Anmelden zum Durchtippen -->
+    <section id="ansicht-einfuehrung" hidden>
+      <p id="einfuehrung-stand" class="klein"></p>
+      <progress id="einfuehrung-balken" max="6" value="1"></progress>
+      <h1 id="einfuehrung-titel"></h1>
+      <div id="einfuehrung-inhalt"></div>
+      <div class="reihe">
+        <button id="einfuehrung-weiter" type="button">Weiter</button>
+        <button id="einfuehrung-zurueck" type="button" class="zweit">Zurück</button>
+        <button id="einfuehrung-ueberspringen" type="button" class="zweit">Überspringen</button>
+      </div>
+    </section>
+
     <!-- Startseite: erst umsehen, dann selbst entscheiden -->
     <section id="ansicht-start" hidden>
       <h1>Willkommen bei Startline</h1>
@@ -63,6 +76,8 @@
         <p id="start-mentor-text"></p>
         <button id="start-mentor-knopf" type="button" class="zweit"></button>
       </div>
+
+      <p><button id="start-einfuehrung-knopf" type="button" class="zweit">Einführung noch einmal ansehen</button></p>
     </section>
 
     <!-- Plan: Einleitung vor den Fragen -->
