@@ -1,31 +1,18 @@
 [
   {
     "titel": "Willkommen bei Startline",
-    "text": ["Schön, dass du da bist.", "In ein paar Schritten zeigen wir dir, was dich hier erwartet. Das dauert etwa eine Minute."]
-  },
-  {
-    "titel": "Worum es geht",
-    "text": ["Du willst etwas Eigenes aufbauen, weißt aber nicht, womit du anfangen sollst? Genau dafür ist Startline da.", "Du findest heraus, welcher Weg zu dir passt. Danach gehst du ihn Schritt für Schritt, mit einer klaren Aufgabe für jeden Tag."]
+    "text": ["Du willst etwas Eigenes aufbauen, weißt aber nicht, womit du anfangen sollst?", "Hier findest du heraus, welcher Weg zu dir passt, und bekommst einen Plan mit einer Aufgabe für jeden Tag."]
   },
   {
     "titel": "So funktioniert es",
     "punkte": [
-      "Du beantwortest 24 kurze Fragen über dich. Das dauert etwa zehn Minuten.",
-      "Du bekommst drei Wege vorgeschlagen, mit Begründung, warum sie zu dir passen.",
-      "Du wählst einen aus und bekommst deinen persönlichen Plan.",
-      "Jeden Tag wartet eine Aufgabe auf dich. Du hakst sie ab, wenn sie erledigt ist."
+      "Du beantwortest 24 kurze Fragen über dich. Etwa zehn Minuten.",
+      "Du bekommst drei Wege vorgeschlagen und wählst einen aus.",
+      "Jeden Tag wartet eine Aufgabe auf dich. Dein Mentor hilft, wenn du festhängst."
     ]
   },
   {
-    "titel": "Dein Mentor",
-    "text": ["Dein Mentor ist eine KI. Er kennt deine Antworten und deinen Plan und begleitet dich auf dem Weg.", "Du legst selbst fest, wie er mit dir reden soll: locker, fordernd, ruhig oder direkt. Ehrlich ist er in jedem Fall, auch wenn es unangenehm ist."]
-  },
-  {
-    "titel": "Was Startline nicht ist",
-    "text": ["Kein Weg zu schnellem Geld und kein Kurs zum Zuschauen.", "Etwas aufzubauen bedeutet Arbeit, und nicht jeder Weg passt zu jedem. Wir versprechen dir kein Einkommen.", "Was du bekommst: jeden Tag einen konkreten Schritt, den du wirklich schaffen kannst."]
-  },
-  {
-    "titel": "Bereit?",
-    "text": ["Gleich siehst du deine Übersicht. Sieh dich in Ruhe um und fang an, wo du willst.", "Die meisten starten mit „Plan gestalten“."]
+    "titel": "Ehrlich gesagt",
+    "text": ["Startline ist kein Weg zu schnellem Geld. Etwas aufzubauen bedeutet Arbeit.", "Dafür bekommst du jeden Tag einen Schritt, den du wirklich schaffen kannst."]
   }
 ]

@@ -163,36 +163,57 @@ async function zeigeStart() {
   if (!s.ok) return zeige("ansicht-anmelden");
   hatPlan = Boolean(s.plan);
 
-  // Karte "Heute": nur mit Plan.
-  $("karte-heute").hidden = !hatPlan;
+  // Die Startseite stellt eine Frage. Die Antworten hängen davon ab, wie weit man ist.
+  const auswahl = [];
+
   if (hatPlan) {
     const fertig = s.plan.geschafft >= s.plan.gesamt;
-    $("start-heute-titel").textContent = fertig ? "Du hast alle Tage geschafft." : `Tag ${s.plan.geschafft + 1} von ${s.plan.gesamt}`;
-    $("start-heute-text").textContent = fertig
-      ? "Schau dir an, was du alles gemacht hast."
-      : "Deine nächste Aufgabe wartet. Eine am Tag reicht.";
+    auswahl.push({
+      id: "wahl-heute",
+      titel: fertig ? "Ansehen, was ich geschafft habe" : "Die Aufgabe von heute",
+      text: fertig ? "Du hast alle Tage geschafft." : `Tag ${s.plan.geschafft + 1} von ${s.plan.gesamt}. Eine Aufgabe am Tag reicht.`,
+      los: () => zeigeHeute(),
+    });
   }
 
-  // Karte "Dein Plan": je nachdem, wie weit man ist.
-  const texte = {
-    neu: ["Du hast noch keinen Plan.", `In etwa zehn Minuten findest du heraus, welcher Weg zu dir passt. Danach bekommst du einen Plan mit einer Aufgabe für jeden Tag.`, "Plan gestalten"],
-    fragen: [`Du bist bei Frage ${Math.min(s.fragen.beantwortet + 1, s.fragen.anzahl)} von ${s.fragen.anzahl}.`, "Deine bisherigen Antworten sind gespeichert.", "Weitermachen"],
-    ergebnis: ["Deine drei Wege stehen fest.", "Sieh sie dir an und wähle den, mit dem du anfangen willst.", "Wege ansehen"],
-    vertiefung: [`Dein Weg: ${s.weg}`, "Noch sechs kurze Fragen, dann ist dein Plan fertig.", "Plan fertig machen"],
-    plan: [`Dein Weg: ${s.weg}`, s.plan ? `${s.plan.geschafft} von ${s.plan.gesamt} Tagen geschafft.` : "", "Plan ansehen"],
+  const plan = {
+    neu: ["Meinen Plan gestalten", "In etwa zehn Minuten findest du heraus, welcher Weg zu dir passt."],
+    fragen: ["Mit den Fragen weitermachen", `Du bist bei Frage ${Math.min(s.fragen.beantwortet + 1, s.fragen.anzahl)} von ${s.fragen.anzahl}. Deine Antworten sind gespeichert.`],
+    ergebnis: ["Meinen Weg wählen", "Deine drei Wege stehen fest. Sieh sie dir an und such dir einen aus."],
+    vertiefung: ["Meinen Plan fertig machen", `Dein Weg: ${s.weg}. Noch sechs kurze Fragen.`],
+    plan: ["Meinen ganzen Plan ansehen", s.plan ? `${s.weg}. ${s.plan.geschafft} von ${s.plan.gesamt} Tagen geschafft.` : ""],
   }[s.stand];
-  $("start-plan-titel").textContent = texte[0];
-  $("start-plan-text").textContent = texte[1];
-  $("start-plan-knopf").textContent = texte[2];
-  // Solange es keinen Plan gibt, ist "Plan gestalten" der wichtigste Knopf.
-  $("start-plan-knopf").className = hatPlan ? "zweit" : "";
+  auswahl.push({ id: "wahl-plan", titel: plan[0], text: plan[1], los: oeffnePlanBereich });
 
-  // Karte "Dein Mentor".
-  $("start-mentor-titel").textContent = s.mentor ? `Dein Mentor redet mit dir: ${s.mentor}` : "Dein Mentor ist noch nicht eingerichtet.";
-  $("start-mentor-text").textContent = s.mentor
-    ? "Du kannst den Stil jederzeit ändern."
-    : "Dein Mentor begleitet dich und kennt deinen Plan. Leg fest, wie er mit dir reden soll.";
-  $("start-mentor-knopf").textContent = s.mentor ? "Mentor ändern" : "Mentor einrichten";
+  auswahl.push({
+    id: "wahl-mentor",
+    titel: s.mentor ? "Meinen Mentor ändern" : "Meinen Mentor einrichten",
+    text: s.mentor ? `Er redet gerade so mit dir: ${s.mentor}.` : "Leg fest, wie dein Mentor mit dir reden soll.",
+    los: () => zeigeMentor(),
+  });
+
+  const neuHier = s.stand === "neu" && !s.mentor;
+  $("start-frage").textContent = neuHier ? "Womit willst du anfangen?" : "Womit willst du weitermachen?";
+  $("start-text").textContent = neuHier
+    ? "Startline hilft dir herauszufinden, womit du loslegen kannst. Such dir aus, wo du startest."
+    : "Die erste Möglichkeit ist dein nächster Schritt.";
+
+  const kasten = $("start-auswahl");
+  kasten.replaceChildren();
+  auswahl.forEach((wahl, nummer) => {
+    const knopf = document.createElement("button");
+    knopf.type = "button";
+    knopf.id = wahl.id;
+    // Die erste Möglichkeit ist der empfohlene nächste Schritt und fällt deshalb am stärksten auf.
+    knopf.className = nummer === 0 ? "" : "zweit";
+    const titel = document.createElement("strong");
+    titel.textContent = wahl.titel;
+    const text = document.createElement("span");
+    text.textContent = wahl.text;
+    knopf.append(titel, text);
+    knopf.addEventListener("click", wahl.los);
+    kasten.append(knopf);
+  });
 
   zeige("ansicht-start");
 }
@@ -210,9 +231,6 @@ async function oeffnePlanBereich() {
   zeige("ansicht-einleitung");
 }
 
-$("start-plan-knopf").addEventListener("click", oeffnePlanBereich);
-$("start-heute-knopf").addEventListener("click", () => zeigeHeute());
-$("start-mentor-knopf").addEventListener("click", () => zeigeMentor());
 $("menue-start").addEventListener("click", zeigeStart);
 $("menue-plan").addEventListener("click", oeffnePlanBereich);
 $("menue-heute").addEventListener("click", () => zeigeHeute());

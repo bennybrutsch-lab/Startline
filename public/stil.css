@@ -53,3 +53,7 @@ header { flex-wrap: wrap; }
 main ol { padding-left: 1.3em; }
 main ol li { margin-bottom: 8px; }
 .kasten p { margin: 2px 0 0; }
+.auswahl { display: flex; flex-direction: column; gap: 10px; margin: 18px 0; }
+.auswahl button { text-align: left; padding: 14px 16px; display: flex; flex-direction: column; gap: 3px; }
+.auswahl button strong { font-size: 1.1rem; }
+.auswahl button span { font-size: .93rem; opacity: .85; }
