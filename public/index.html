@@ -9,6 +9,10 @@
 <body>
   <header>
     <strong>STARTLINE</strong>
+    <nav id="menue" hidden aria-label="Bereiche">
+      <button id="menue-heute" type="button" class="zweit">Heute</button>
+      <button id="menue-plan" type="button" class="zweit">Plan</button>
+    </nav>
     <span id="konto" hidden><span id="konto-email"></span> <button id="abmelden" type="button">Abmelden</button></span>
   </header>
 
@@ -69,6 +73,31 @@
           <button id="knopf-anderer-weg" type="button" class="zweit">Anderen Weg wählen</button>
         </div>
       </form>
+    </section>
+
+    <!-- Ansicht 6: Die Aufgabe von heute -->
+    <section id="ansicht-heute" hidden>
+      <p id="heute-stand" class="klein"></p>
+      <progress id="heute-balken" max="30" value="0"></progress>
+
+      <div id="heute-geschafft" class="kasten" hidden>
+        <strong id="heute-geschafft-titel"></strong>
+        <p id="heute-geschafft-text"></p>
+        <div class="reihe">
+          <button id="knopf-weitermachen" type="button" class="zweit">Nächste Aufgabe schon jetzt</button>
+          <button id="knopf-rueckgaengig" type="button" class="zweit">Letzten Haken zurücknehmen</button>
+        </div>
+      </div>
+
+      <div id="heute-aufgabe">
+        <h1 id="heute-titel"></h1>
+        <p id="heute-dauer" class="daten"></p>
+        <ol id="heute-schritte"></ol>
+        <p id="heute-fertig"></p>
+        <p id="heute-hinweis" class="hinweis" hidden></p>
+        <p id="heute-fehler" class="fehler" role="alert" hidden></p>
+        <button id="knopf-erledigt" type="button">Erledigt</button>
+      </div>
     </section>
 
     <!-- Ansicht 5: Der persönliche Plan -->

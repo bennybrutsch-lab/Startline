@@ -3,7 +3,7 @@
 Eine Web-App für junge Leute, die etwas Eigenes aufbauen wollen und nicht wissen, womit.
 25 Fragen, drei Wege, ein Plan, jeden Tag eine Aufgabe.
 
-Stand: MVP, Etappe 2. Es funktionieren Konto, Anmeldung, die 25 Fragen, die drei Vorschläge, die Wahl eines Weges, die Vertiefungsfragen und der persönliche Plan.
+Stand: MVP, Etappe 3. Es funktionieren Konto, Anmeldung, die 25 Fragen, die drei Vorschläge, die Wahl eines Weges, die Vertiefungsfragen, der persönliche Plan und die Aufgabe von heute mit Abhaken.
 Das Aussehen ist bewusst schlicht, das Design kommt später.
 
 ## Was wo liegt
@@ -79,5 +79,5 @@ npm run deploy
 
 ## Noch nicht enthalten
 
-Aufgabe von heute mit Abhaken, Mentor-Chat, Bezahlung, Altersprüfung, Englisch, Design.
+Mentor-Chat, Bezahlung, Altersprüfung, Englisch, Design.
 Vor einem öffentlichen Start fehlen außerdem Impressum, Datenschutzerklärung und eine Begrenzung der Anmeldeversuche.

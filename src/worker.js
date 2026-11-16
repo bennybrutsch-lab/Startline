@@ -56,6 +56,11 @@ async function ladeAntworten(db, nutzerId) {
   return antworten;
 }
 
+// Das Datum in deutscher Zeit, zum Beispiel "2026-11-16". Damit zählt ein Tag von Mitternacht bis Mitternacht.
+function tagInBerlin(datum) {
+  return new Intl.DateTimeFormat("sv-SE", { timeZone: "Europe/Berlin" }).format(datum);
+}
+
 async function ladeVertiefung(db, nutzerId) {
   const { results } = await db
     .prepare("SELECT frage_nr, antwort FROM vertiefung WHERE nutzer_id = ?")
@@ -255,6 +260,55 @@ async function api(request, env, url) {
     befehle.push(db.prepare("INSERT INTO plan_info (nutzer_id, angewendet) VALUES (?, ?)").bind(nutzer.id, JSON.stringify(plan.angewendet)));
     await db.batch(befehle);
     return antwort({ ok: true, tage: plan.tage }, 201);
+  }
+
+  // Die Aufgabe von heute: der erste Tag im Plan, der noch offen ist.
+  if (weg === "/api/heute" && art === "GET") {
+    const schritte = await ladePlan(db, nutzer.id);
+    if (!schritte.length) return antwort({ fehler: "Du hast noch keinen Plan." }, 404);
+    const offen = schritte.find((s) => !s.erledigt) || null;
+    const letzter = await db
+      .prepare("SELECT nr, titel, erledigt_am FROM plan_schritte WHERE nutzer_id = ? AND erledigt_am IS NOT NULL ORDER BY nr DESC LIMIT 1")
+      .bind(nutzer.id)
+      .first();
+    return antwort({
+      schritt: offen,
+      geschafft: schritte.filter((s) => s.erledigt).length,
+      gesamt: schritte.length,
+      // Wurde heute schon ein Tag abgehakt? Dann gilt der Tag als geschafft.
+      heuteErledigt: Boolean(letzter) && tagInBerlin(new Date(letzter.erledigt_am)) === tagInBerlin(new Date()),
+      letzter: letzter ? { nr: letzter.nr, titel: letzter.titel } : null,
+    });
+  }
+
+  // Einen Tag abhaken. Es geht immer nur der nächste offene Tag, keiner wird übersprungen.
+  if (weg === "/api/schritt/erledigt" && art === "POST") {
+    const eingabe = await leseJson(request);
+    const offen = await db
+      .prepare("SELECT MIN(nr) AS nr FROM plan_schritte WHERE nutzer_id = ? AND erledigt_am IS NULL")
+      .bind(nutzer.id)
+      .first();
+    if (!offen || offen.nr === null) return antwort({ fehler: "Es ist kein Tag mehr offen." }, 409);
+    if (eingabe?.nr !== offen.nr) return antwort({ fehler: "Das ist nicht der nächste offene Tag." }, 409);
+    await db
+      .prepare("UPDATE plan_schritte SET erledigt_am = ? WHERE nutzer_id = ? AND nr = ?")
+      .bind(new Date().toISOString(), nutzer.id, offen.nr)
+      .run();
+    return antwort({ ok: true });
+  }
+
+  // Den zuletzt abgehakten Tag wieder öffnen, falls man sich vertippt hat.
+  if (weg === "/api/schritt/zurueck" && art === "POST") {
+    const letzter = await db
+      .prepare("SELECT MAX(nr) AS nr FROM plan_schritte WHERE nutzer_id = ? AND erledigt_am IS NOT NULL")
+      .bind(nutzer.id)
+      .first();
+    if (!letzter || letzter.nr === null) return antwort({ fehler: "Es ist noch kein Tag abgehakt." }, 409);
+    await db
+      .prepare("UPDATE plan_schritte SET erledigt_am = NULL WHERE nutzer_id = ? AND nr = ?")
+      .bind(nutzer.id, letzter.nr)
+      .run();
+    return antwort({ ok: true });
   }
 
   if (weg === "/api/plan" && art === "GET") {

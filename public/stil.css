@@ -35,3 +35,13 @@ fieldset input { width: auto; margin-top: 5px; }
 .tag ol { margin: 4px 0 8px; padding-left: 1.3em; }
 .tag .daten { font-size: .9rem; color: #444; margin: 0 0 4px; }
 .hinweis { background: #FFF4D6; border-radius: 6px; padding: 6px 10px; font-size: .93rem; }
+nav { display: flex; gap: 6px; }
+nav button { padding: 6px 12px; }
+nav button[aria-current="page"] { background: #111; color: #fff; }
+header { flex-wrap: wrap; }
+#heute-schritte { padding-left: 1.3em; margin: 8px 0 12px; }
+#heute-schritte li { margin-bottom: 6px; }
+.daten { font-size: .93rem; color: #444; }
+.tag.erledigt h3 { text-decoration: line-through; color: #555; }
+.tag.erledigt ol, .tag.erledigt .daten, .tag.erledigt .hinweis { display: none; }
+.tag.naechster { border-left: 4px solid #12BFB2; padding-left: 12px; }

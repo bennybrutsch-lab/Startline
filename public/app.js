@@ -1,7 +1,7 @@
 // Das Programm im Browser. Es zeigt immer genau eine Ansicht: Anmelden, Fragen oder Ergebnis.
 
 const $ = (id) => document.getElementById(id);
-const ANSICHTEN = ["ansicht-anmelden", "ansicht-fragen", "ansicht-ergebnis", "ansicht-vertiefung", "ansicht-plan"];
+const ANSICHTEN = ["ansicht-anmelden", "ansicht-fragen", "ansicht-ergebnis", "ansicht-vertiefung", "ansicht-plan", "ansicht-heute"];
 
 let fragen = []; // alle 25 Fragen in einer Liste
 let antworten = {}; // Nummer der Frage -> Nummer der gewählten Antwort
@@ -10,6 +10,11 @@ let stelle = 0; // welche Frage gerade zu sehen ist
 function zeige(ansicht) {
   $("laden").hidden = true;
   for (const id of ANSICHTEN) $(id).hidden = id !== ansicht;
+  // Das Menü gibt es nur, wenn ein Plan da ist.
+  const mitPlan = ansicht === "ansicht-heute" || ansicht === "ansicht-plan";
+  $("menue").hidden = !mitPlan;
+  $("menue-heute").setAttribute("aria-current", ansicht === "ansicht-heute" ? "page" : "false");
+  $("menue-plan").setAttribute("aria-current", ansicht === "ansicht-plan" ? "page" : "false");
 }
 
 // Schickt eine Anfrage an den Server und gibt die Antwort zurück.
@@ -52,6 +57,7 @@ $("abmelden").addEventListener("click", async () => {
   await api("/api/abmelden", {});
   $("konto").hidden = true;
   zeige("ansicht-anmelden");
+  $("menue").hidden = true;
 });
 
 // ---------- Fragen ----------
@@ -216,7 +222,7 @@ $("formular-vertiefung").addEventListener("submit", async (ereignis) => {
   }
   const ergebnis = await api("/api/plan/erstellen", { antworten: gewaehlt });
   if (!ergebnis.ok) return meldung("vertiefung-fehler", ergebnis.fehler);
-  await zeigePlan();
+  await zeigeHeute();
 });
 
 async function andererWeg() {
@@ -225,6 +231,74 @@ async function andererWeg() {
 }
 $("knopf-anderer-weg").addEventListener("click", andererWeg);
 $("knopf-plan-neu").addEventListener("click", andererWeg);
+
+// ---------- Heute ----------
+
+let vorausArbeiten = false; // true, wenn jemand heute freiwillig noch eine Aufgabe machen will
+
+async function zeigeHeute() {
+  const daten = await api("/api/heute");
+  if (!daten.ok) return zeigeVertiefung();
+  meldung("heute-fehler", "");
+  $("heute-stand").textContent = `${daten.geschafft} von ${daten.gesamt} Tagen geschafft`;
+  $("heute-balken").max = daten.gesamt;
+  $("heute-balken").value = daten.geschafft;
+
+  const allesFertig = !daten.schritt;
+  const pause = daten.heuteErledigt && !vorausArbeiten && !allesFertig;
+
+  // Kasten "geschafft": nach dem Abhaken oder wenn der ganze Plan durch ist.
+  $("heute-geschafft").hidden = !(pause || allesFertig);
+  if (allesFertig) {
+    $("heute-geschafft-titel").textContent = "Du hast den ganzen Plan geschafft.";
+    $("heute-geschafft-text").textContent = "Das schaffen die wenigsten. Schau dir im Plan an, was du alles gemacht hast.";
+  } else if (pause) {
+    $("heute-geschafft-titel").textContent = "Für heute geschafft.";
+    $("heute-geschafft-text").textContent = `Morgen geht es weiter mit Tag ${daten.schritt.nr}: ${daten.schritt.titel}.`;
+  }
+  $("knopf-weitermachen").hidden = allesFertig;
+  $("knopf-rueckgaengig").hidden = !daten.letzter;
+
+  // Die Aufgabe selbst.
+  $("heute-aufgabe").hidden = pause || allesFertig;
+  if (!pause && !allesFertig) {
+    const s = daten.schritt;
+    $("heute-titel").textContent = `Tag ${s.nr}: ${s.titel}`;
+    $("heute-dauer").textContent = `Etappe ${s.etappe}: ${s.etappeName} · ca. ${s.min} Minuten`;
+    const liste = $("heute-schritte");
+    liste.replaceChildren();
+    for (const text of s.tun) {
+      const punkt = document.createElement("li");
+      punkt.textContent = text;
+      liste.append(punkt);
+    }
+    $("heute-fertig").textContent = `Fertig, wenn ${s.fertig}`;
+    meldung("heute-hinweis", s.hinweis);
+    $("knopf-erledigt").dataset.nr = s.nr;
+  }
+  zeige("ansicht-heute");
+}
+
+$("knopf-erledigt").addEventListener("click", async () => {
+  const ergebnis = await api("/api/schritt/erledigt", { nr: Number($("knopf-erledigt").dataset.nr) });
+  if (!ergebnis.ok) return meldung("heute-fehler", ergebnis.fehler);
+  vorausArbeiten = false;
+  await zeigeHeute();
+});
+
+$("knopf-weitermachen").addEventListener("click", async () => {
+  vorausArbeiten = true;
+  await zeigeHeute();
+});
+
+$("knopf-rueckgaengig").addEventListener("click", async () => {
+  await api("/api/schritt/zurueck", {});
+  vorausArbeiten = true;
+  await zeigeHeute();
+});
+
+$("menue-heute").addEventListener("click", zeigeHeute);
+$("menue-plan").addEventListener("click", () => zeigePlan());
 
 // ---------- Plan ----------
 
@@ -252,6 +326,7 @@ async function zeigePlan() {
 
   const liste = $("plan-liste");
   liste.replaceChildren();
+  const naechster = daten.schritte.find((s) => !s.erledigt)?.nr;
   let etappe = 0;
   for (const s of daten.schritte) {
     if (s.etappe !== etappe) {
@@ -266,9 +341,9 @@ async function zeigePlan() {
       liste.append(kopf);
     }
     const tag = document.createElement("div");
-    tag.className = "tag";
+    tag.className = "tag" + (s.erledigt ? " erledigt" : "") + (s.nr === naechster ? " naechster" : "");
     const titel = document.createElement("h3");
-    titel.textContent = `Tag ${s.nr}: ${s.titel}`;
+    titel.textContent = `Tag ${s.nr}: ${s.titel}` + (s.erledigt ? " (erledigt)" : "");
     const dauer = document.createElement("p");
     dauer.className = "daten";
     dauer.textContent = `ca. ${s.min} Minuten`;
@@ -314,7 +389,7 @@ async function start() {
 
   // Weitermachen, wo man aufgehört hat.
   const stand = await api("/api/stand");
-  if (stand.stand === "plan") return zeigePlan();
+  if (stand.stand === "plan") return zeigeHeute();
   if (stand.stand === "vertiefung") return zeigeVertiefung();
   if (stand.stand === "ergebnis") return zeigeErgebnis();
   const offen = fragen.findIndex((f) => antworten[f.nr] === undefined);
