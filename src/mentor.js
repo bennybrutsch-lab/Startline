@@ -70,6 +70,7 @@ export function baueKontext({ ton, fragen, antworten, weg, vertiefung, schritte 
       .map((f, i) => (vertiefung[i + 1] !== undefined ? `${f.frage} ${f.antworten[vertiefung[i + 1]]}` : null))
       .filter(Boolean);
     if (zusatz.length) teile.push(zeilen("Weitere Angaben zum Weg:", zusatz));
+    if (weg.recht?.length) teile.push(zeilen("Rechtliche Hinweise zu diesem Weg, an die du bei Bedarf erinnerst:", weg.recht));
   } else {
     teile.push("Die Person hat noch keinen Weg gewählt und noch keinen Plan.");
   }

@@ -64,7 +64,7 @@
       <p class="klein">Dein Plan</p>
       <h1>So entsteht dein Plan</h1>
       <ol>
-        <li><strong>Du beantwortest <span id="einleitung-anzahl">24</span> kurze Fragen.</strong> Zum Antippen, etwa zehn Minuten. Es geht um deinen Alltag, was dir liegt und was du willst.</li>
+        <li><strong>Du beantwortest <span id="einleitung-anzahl">26</span> kurze Fragen.</strong> Zum Antippen, etwa zehn Minuten. Es geht um deinen Alltag, was dir liegt und was du willst.</li>
         <li><strong>Du bekommst drei Wege vorgeschlagen.</strong> Zu jedem steht, warum er zu dir passt und wie schwer er ist.</li>
         <li><strong>Du wählst einen aus.</strong> Daraus entsteht dein Plan mit einer Aufgabe für jeden Tag.</li>
       </ol>
@@ -78,7 +78,7 @@
     <!-- Plan: die Fragen, eine nach der anderen -->
     <section id="ansicht-fragen" hidden>
       <p id="fragen-stand" class="klein"></p>
-      <progress id="fragen-balken" max="24" value="0"></progress>
+      <progress id="fragen-balken" max="26" value="0"></progress>
       <div class="kasten">
         <strong id="fragen-block"></strong>
         <p id="fragen-warum"></p>
@@ -107,12 +107,17 @@
       <p class="klein">Dein Weg</p>
       <h1 id="vertiefung-weg"></h1>
       <p id="vertiefung-ehrlich"></p>
-      <p>Noch sechs Fragen, damit der Plan zu dir passt.</p>
+      <div id="vertiefung-recht-kasten" class="kasten" hidden>
+        <strong>Das solltest du vorher wissen</strong>
+        <ul id="vertiefung-recht"></ul>
+      </div>
+      <p id="vertiefung-anzahl"></p>
       <form id="formular-vertiefung">
         <div id="vertiefung-fragen"></div>
         <p id="vertiefung-fehler" class="fehler" role="alert" hidden></p>
+        <p id="vertiefung-warten" role="status" hidden></p>
         <div class="reihe">
-          <button type="submit">Plan erstellen</button>
+          <button id="knopf-plan-erstellen" type="submit">Plan erstellen</button>
           <button id="knopf-anderer-weg" type="button" class="zweit">Anderen Weg wählen</button>
         </div>
       </form>

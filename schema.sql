@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS sitzungen (
   ablauf TEXT NOT NULL
 );
 
--- Die Antworten auf die 25 Fragen. Pro Nutzer und Frage eine Zeile.
+-- Die Antworten auf die 26 Fragen. Pro Nutzer und Frage eine Zeile.
 CREATE TABLE IF NOT EXISTS antworten (
   nutzer_id INTEGER NOT NULL REFERENCES nutzer(id) ON DELETE CASCADE,
   frage_nr INTEGER NOT NULL,
@@ -93,3 +93,11 @@ CREATE TABLE IF NOT EXISTS plan_persoenlich (
   erstellt TEXT NOT NULL DEFAULT (datetime('now')),
   PRIMARY KEY (nutzer_id, nr)
 );
+
+-- Wann jemand einen Plan von der KI schreiben ließ. Dient als Kostenbremse pro Tag.
+CREATE TABLE IF NOT EXISTS plan_erstellungen (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  nutzer_id INTEGER NOT NULL REFERENCES nutzer(id) ON DELETE CASCADE,
+  erstellt TEXT NOT NULL DEFAULT (datetime('now'))
+);
+CREATE INDEX IF NOT EXISTS plan_erstellungen_nutzer ON plan_erstellungen (nutzer_id, id);
