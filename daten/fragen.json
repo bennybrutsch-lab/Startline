@@ -1,70 +1,53 @@
 {
-  "richtungen": [
+  "hinweis": "Jede Antwort sammelt Eigenschaften. Die Wege und ihre Profile stehen in wege.json. Die Nummern der Fragen bleiben fest, auch wenn Fragen umsortiert werden, weil gespeicherte Antworten und Regeln im Code sich darauf beziehen.",
+  "eigenschaften": [
     {
-      "id": "W",
-      "name": "Websites für Betriebe vor Ort",
-      "kurz": "Läden, Praxen und Vereine in deiner Nähe bekommen von dir eine Website.",
-      "gruppe": "kunden",
-      "brauchtLaptop": false,
-      "schwierigkeit": "mittel",
-      "erstesGeld": "üblicherweise nach zwei bis acht Wochen",
-      "ersterSchritt": "Eine Liste mit 20 Betrieben in deiner Nähe anlegen.",
-      "verfuegbar": true
+      "id": "kamera",
+      "name": "Kamera"
     },
     {
-      "id": "A",
-      "name": "KI-Helfer für Selbstständige",
-      "kurz": "Du baust kleine Automationen und Assistenten, die jemandem Büroarbeit abnehmen.",
-      "gruppe": "kunden",
-      "brauchtLaptop": true,
-      "schwierigkeit": "hoch",
-      "erstesGeld": "üblicherweise nach ein bis drei Monaten",
-      "ersterSchritt": "Drei Selbstständige fragen, welche Aufgabe sie jede Woche am meisten nervt.",
-      "verfuegbar": false
+      "id": "schnitt",
+      "name": "Schnitt"
     },
     {
-      "id": "T",
-      "name": "Ein eigenes Web-Tool",
-      "kurz": "Du baust eine kleine App für ein Problem, das viele haben.",
-      "gruppe": "produkt",
-      "brauchtLaptop": true,
-      "schwierigkeit": "hoch",
-      "erstesGeld": "üblicherweise nach drei bis sechs Monaten, oft später",
-      "ersterSchritt": "Zehn Leute nach einem Problem fragen, für dessen Lösung sie zahlen würden.",
-      "verfuegbar": false
+      "id": "design",
+      "name": "Design"
     },
     {
-      "id": "P",
-      "name": "Digitale Produkte",
-      "kurz": "Du baust Vorlagen, Mini-Kurse oder kleine Werkzeuge einmal und verkaufst sie oft.",
-      "gruppe": "produkt",
-      "brauchtLaptop": false,
-      "schwierigkeit": "mittel bis hoch",
-      "erstesGeld": "üblicherweise nach zwei bis sechs Monaten",
-      "ersterSchritt": "Zehn Leute fragen, wofür sie eine fertige Vorlage bräuchten.",
-      "verfuegbar": false
+      "id": "technik",
+      "name": "Technik"
     },
     {
-      "id": "K",
-      "name": "Öffentlich bauen",
-      "kurz": "Du zeigst auf einem eigenen Kanal, was du mit KI baust.",
-      "gruppe": "inhalte",
-      "brauchtLaptop": false,
-      "schwierigkeit": "mittel",
-      "erstesGeld": "üblicherweise erst nach vielen Monaten",
-      "ersterSchritt": "Drei kurze Videos über etwas drehen, das du diese Woche gebaut hast.",
-      "verfuegbar": false
+      "id": "verkaufen",
+      "name": "Verkaufen"
     },
     {
-      "id": "F",
-      "name": "Freiberuflich für andere bauen",
-      "kurz": "Du übernimmst Aufträge von Agenturen und Gründern, die jemanden zum Umsetzen suchen.",
-      "gruppe": "kunden",
-      "brauchtLaptop": true,
-      "schwierigkeit": "mittel",
-      "erstesGeld": "üblicherweise nach vier bis zwölf Wochen",
-      "ersterSchritt": "Drei Beispiele bauen, die du zeigen kannst.",
-      "verfuegbar": false
+      "id": "kunden",
+      "name": "Kunden"
+    },
+    {
+      "id": "bauen",
+      "name": "Eigenes bauen"
+    },
+    {
+      "id": "tempo",
+      "name": "Tempo"
+    },
+    {
+      "id": "geduld",
+      "name": "Geduld"
+    },
+    {
+      "id": "community",
+      "name": "Community"
+    },
+    {
+      "id": "schreiben",
+      "name": "Schreiben"
+    },
+    {
+      "id": "startgeld",
+      "name": "Startgeld"
     }
   ],
   "bloecke": [
@@ -75,73 +58,32 @@
           "nr": 1,
           "text": "Wie alt bist du?",
           "antworten": [
-            {
-              "text": "Unter 16",
-              "punkte": {}
-            },
-            {
-              "text": "16 oder 17",
-              "punkte": {}
-            },
-            {
-              "text": "18 bis 21",
-              "punkte": {}
-            },
-            {
-              "text": "22 bis 25",
-              "punkte": {}
-            }
+            { "text": "Unter 16", "eigenschaften": {} },
+            { "text": "16 oder 17", "eigenschaften": {} },
+            { "text": "18 bis 21", "eigenschaften": {} },
+            { "text": "22 bis 25", "eigenschaften": {} }
           ],
-          "zweck": "Keine Punkte. Legt fest, welche Hinweise zu Eltern und Verträgen erscheinen."
+          "zweck": "Keine Eigenschaften. Legt fest, welche Hinweise zu Eltern und Verträgen erscheinen."
         },
         {
           "nr": 2,
           "text": "Was machst du gerade?",
           "antworten": [
-            {
-              "text": "Schule",
-              "punkte": {}
-            },
-            {
-              "text": "Ausbildung",
-              "punkte": {}
-            },
-            {
-              "text": "Studium",
-              "punkte": {}
-            },
-            {
-              "text": "Job oder gerade nichts",
-              "punkte": {}
-            }
+            { "text": "Schule", "eigenschaften": {} },
+            { "text": "Ausbildung", "eigenschaften": {} },
+            { "text": "Studium", "eigenschaften": {} },
+            { "text": "Job oder gerade nichts", "eigenschaften": {} }
           ],
-          "zweck": "Keine Punkte. Der Mentor wählt danach seine Beispiele und plant um Schule oder Arbeit herum."
+          "zweck": "Keine Eigenschaften. Der Mentor wählt danach seine Beispiele und plant um Schule oder Arbeit herum."
         },
         {
           "nr": 3,
           "text": "Wie viel Zeit hast du an einem normalen Tag?",
           "antworten": [
-            {
-              "text": "Unter 20 Minuten",
-              "punkte": {
-                "P": 1,
-                "K": 1
-              }
-            },
-            {
-              "text": "20 bis 60 Minuten",
-              "punkte": {}
-            },
-            {
-              "text": "Ein bis zwei Stunden",
-              "punkte": {}
-            },
-            {
-              "text": "Mehr als zwei Stunden",
-              "punkte": {
-                "T": 1
-              }
-            }
+            { "text": "Unter 20 Minuten", "eigenschaften": {} },
+            { "text": "20 bis 60 Minuten", "eigenschaften": {} },
+            { "text": "Ein bis zwei Stunden", "eigenschaften": {} },
+            { "text": "Mehr als zwei Stunden", "eigenschaften": {"geduld": 1} }
           ],
           "zweck": "Bestimmt vor allem die Größe der Tagesaufgaben."
         },
@@ -149,58 +91,23 @@
           "nr": 4,
           "text": "Wie viel Geld kannst du zum Start einsetzen?",
           "antworten": [
-            {
-              "text": "Gar keins",
-              "punkte": {
-                "W": 1,
-                "F": 1
-              }
-            },
-            {
-              "text": "Bis 50 €",
-              "punkte": {}
-            },
-            {
-              "text": "Bis 200 €",
-              "punkte": {}
-            },
-            {
-              "text": "Mehr",
-              "punkte": {
-                "T": 1,
-                "P": 1
-              }
-            }
+            { "text": "Gar keins", "eigenschaften": {} },
+            { "text": "Bis 50 €", "eigenschaften": {"startgeld": 1} },
+            { "text": "Bis 200 €", "eigenschaften": {"startgeld": 2} },
+            { "text": "Mehr", "eigenschaften": {"startgeld": 3} }
           ],
-          "zweck": "Kundenarbeit braucht kein Startgeld, eigene Produkte manchmal etwas für Werkzeuge."
+          "zweck": "Zählt nur für die Eigenschaft Startgeld. Wege wie Sneaker-Reselling brauchen Geld für die erste Ware."
         },
         {
           "nr": 5,
           "text": "Womit arbeitest du?",
           "antworten": [
-            {
-              "text": "Nur mit dem Handy",
-              "punkte": {
-                "K": 2,
-                "P": 1
-              }
-            },
-            {
-              "text": "Handy und eigener Laptop oder PC",
-              "punkte": {}
-            },
-            {
-              "text": "Ein Gerät, das ich mir teile",
-              "punkte": {
-                "K": 1
-              }
-            },
-            {
-              "text": "Laptop und Tablet",
-              "punkte": {}
-            }
+            { "text": "Nur mit dem Handy", "eigenschaften": {} },
+            { "text": "Handy und eigener Laptop oder PC", "eigenschaften": {} },
+            { "text": "Ein Gerät, das ich mir teile", "eigenschaften": {} },
+            { "text": "Laptop und Tablet", "eigenschaften": {} }
           ],
-          "zweck": "Nur Handy sperrt A und T, weil man dafür einen Laptop braucht."
+          "zweck": "Keine Eigenschaften. Nur Handy sperrt alle Wege, für die man einen Laptop braucht."
         }
       ],
       "warum": "Damit der Plan zu deinem Alltag passt: wie alt du bist und wie viel Zeit und Geld du hast."
@@ -212,67 +119,33 @@
           "nr": 6,
           "text": "Was machst du am liebsten, wenn du frei hast?",
           "antworten": [
-            {
-              "text": "Sachen bauen oder basteln",
-              "punkte": {
-                "T": 2,
-                "A": 1
-              }
-            },
-            {
-              "text": "Mit Leuten unterwegs sein",
-              "punkte": {
-                "W": 2,
-                "F": 1
-              }
-            },
-            {
-              "text": "Videos machen oder schauen",
-              "punkte": {
-                "K": 2
-              }
-            },
-            {
-              "text": "Sachen kaufen und verkaufen",
-              "punkte": {
-                "P": 2
-              }
-            }
+            { "text": "Sachen bauen oder basteln", "eigenschaften": {"bauen": 2, "technik": 1} },
+            { "text": "Mit Leuten unterwegs sein", "eigenschaften": {"community": 2, "kunden": 1} },
+            { "text": "Videos machen oder schauen", "eigenschaften": {"schnitt": 2, "kamera": 1} },
+            { "text": "Sachen kaufen und verkaufen", "eigenschaften": {"verkaufen": 3} }
           ],
           "zweck": ""
+        },
+        {
+          "nr": 26,
+          "text": "Was machst du am Handy oder Laptop am meisten?",
+          "antworten": [
+            { "text": "Videos schauen und selbst posten", "eigenschaften": {"kamera": 1, "schnitt": 1, "community": 1} },
+            { "text": "Zocken und Streams schauen", "eigenschaften": {"community": 2, "technik": 1} },
+            { "text": "Shoppen, Vinted und Preise vergleichen", "eigenschaften": {"verkaufen": 2, "tempo": 1} },
+            { "text": "Mit KI und Apps herumprobieren", "eigenschaften": {"technik": 2, "bauen": 2} },
+            { "text": "Bilder und Videos bearbeiten", "eigenschaften": {"design": 2, "schnitt": 2} }
+          ],
+          "zweck": "Was jemand ohnehin täglich macht, fällt als eigenes Projekt am leichtesten."
         },
         {
           "nr": 7,
           "text": "Wobei fragen dich andere um Hilfe?",
           "antworten": [
-            {
-              "text": "Technik",
-              "punkte": {
-                "A": 2,
-                "T": 1
-              }
-            },
-            {
-              "text": "Wie etwas aussehen soll",
-              "punkte": {
-                "W": 2,
-                "P": 1
-              }
-            },
-            {
-              "text": "Reden und Überzeugen",
-              "punkte": {
-                "F": 2,
-                "W": 1
-              }
-            },
-            {
-              "text": "Etwas erklären",
-              "punkte": {
-                "K": 2,
-                "P": 1
-              }
-            }
+            { "text": "Technik", "eigenschaften": {"technik": 3} },
+            { "text": "Wie etwas aussehen soll", "eigenschaften": {"design": 3} },
+            { "text": "Reden und Überzeugen", "eigenschaften": {"kunden": 2, "verkaufen": 1} },
+            { "text": "Etwas erklären", "eigenschaften": {"schreiben": 1, "kamera": 1, "community": 1} }
           ],
           "zweck": ""
         },
@@ -280,35 +153,10 @@
           "nr": 8,
           "text": "Fremde ansprechen, die nichts von dir wollen. Wie ist das für dich?",
           "antworten": [
-            {
-              "text": "Kein Problem",
-              "punkte": {
-                "W": 2,
-                "F": 2
-              }
-            },
-            {
-              "text": "Geht, wenn es sein muss",
-              "punkte": {
-                "W": 1,
-                "F": 1
-              }
-            },
-            {
-              "text": "Lieber schriftlich",
-              "punkte": {
-                "A": 1,
-                "F": 1,
-                "P": 1
-              }
-            },
-            {
-              "text": "Bitte nicht",
-              "punkte": {
-                "T": 2,
-                "P": 2
-              }
-            }
+            { "text": "Kein Problem", "eigenschaften": {"kunden": 3, "verkaufen": 1} },
+            { "text": "Geht, wenn es sein muss", "eigenschaften": {"kunden": 1} },
+            { "text": "Lieber schriftlich", "eigenschaften": {"schreiben": 1} },
+            { "text": "Bitte nicht", "eigenschaften": {"kunden": -2} }
           ],
           "zweck": "Die wichtigste Frage für alle Wege mit Kunden."
         },
@@ -316,32 +164,10 @@
           "nr": 9,
           "text": "Vor der Kamera stehen?",
           "antworten": [
-            {
-              "text": "Gern",
-              "punkte": {
-                "K": 3
-              }
-            },
-            {
-              "text": "Mit Überwindung",
-              "punkte": {
-                "K": 1
-              }
-            },
-            {
-              "text": "Nur Stimme und Bildschirm",
-              "punkte": {
-                "K": 1,
-                "T": 1
-              }
-            },
-            {
-              "text": "Nein",
-              "punkte": {
-                "T": 1,
-                "A": 1
-              }
-            }
+            { "text": "Gern", "eigenschaften": {"kamera": 3} },
+            { "text": "Mit Überwindung", "eigenschaften": {"kamera": 1} },
+            { "text": "Nur Stimme und Bildschirm", "eigenschaften": {"schnitt": 1, "kamera": -1} },
+            { "text": "Nein", "eigenschaften": {"kamera": -3} }
           ],
           "zweck": ""
         },
@@ -349,34 +175,10 @@
           "nr": 10,
           "text": "Was fühlt sich für dich besser an?",
           "antworten": [
-            {
-              "text": "Etwas für einen Kunden fertig machen",
-              "punkte": {
-                "W": 2,
-                "F": 2,
-                "A": 1
-              }
-            },
-            {
-              "text": "Etwas Eigenes bauen",
-              "punkte": {
-                "T": 2,
-                "P": 2
-              }
-            },
-            {
-              "text": "Wissen weitergeben",
-              "punkte": {
-                "K": 2
-              }
-            },
-            {
-              "text": "Ein kniffliges Problem lösen",
-              "punkte": {
-                "A": 2,
-                "T": 1
-              }
-            }
+            { "text": "Etwas für einen Kunden fertig machen", "eigenschaften": {"kunden": 2} },
+            { "text": "Etwas Eigenes bauen", "eigenschaften": {"bauen": 3} },
+            { "text": "Wissen weitergeben", "eigenschaften": {"community": 2, "schreiben": 1} },
+            { "text": "Ein kniffliges Problem lösen", "eigenschaften": {"technik": 2} }
           ],
           "zweck": ""
         },
@@ -384,34 +186,10 @@
           "nr": 11,
           "text": "Wie lange hältst du durch, bis ein Ergebnis da ist?",
           "antworten": [
-            {
-              "text": "Ich will diese Woche etwas sehen",
-              "punkte": {
-                "W": 2,
-                "F": 1
-              }
-            },
-            {
-              "text": "Einen Monat",
-              "punkte": {
-                "A": 1,
-                "P": 1,
-                "F": 1
-              }
-            },
-            {
-              "text": "Drei Monate",
-              "punkte": {
-                "T": 2
-              }
-            },
-            {
-              "text": "Egal, wenn es am Ende groß wird",
-              "punkte": {
-                "T": 2,
-                "K": 2
-              }
-            }
+            { "text": "Ich will diese Woche etwas sehen", "eigenschaften": {"tempo": 3, "geduld": -1} },
+            { "text": "Einen Monat", "eigenschaften": {"tempo": 1, "geduld": 1} },
+            { "text": "Drei Monate", "eigenschaften": {"geduld": 2} },
+            { "text": "Egal, wenn es am Ende groß wird", "eigenschaften": {"geduld": 3, "tempo": -1} }
           ],
           "zweck": ""
         },
@@ -419,35 +197,10 @@
           "nr": 12,
           "text": "Was liegt dir am ehesten?",
           "antworten": [
-            {
-              "text": "Schreiben",
-              "punkte": {
-                "P": 2,
-                "K": 1
-              }
-            },
-            {
-              "text": "Gestalten",
-              "punkte": {
-                "W": 2,
-                "P": 1
-              }
-            },
-            {
-              "text": "Technik und Logik",
-              "punkte": {
-                "A": 2,
-                "T": 2
-              }
-            },
-            {
-              "text": "Zahlen und Verhandeln",
-              "punkte": {
-                "F": 1,
-                "W": 1,
-                "P": 1
-              }
-            }
+            { "text": "Schreiben", "eigenschaften": {"schreiben": 3} },
+            { "text": "Gestalten", "eigenschaften": {"design": 3} },
+            { "text": "Technik und Logik", "eigenschaften": {"technik": 3} },
+            { "text": "Zahlen und Verhandeln", "eigenschaften": {"verkaufen": 3} }
           ],
           "zweck": ""
         },
@@ -455,31 +208,10 @@
           "nr": 13,
           "text": "Details oder das große Ganze?",
           "antworten": [
-            {
-              "text": "Details, es muss genau stimmen",
-              "punkte": {
-                "A": 2,
-                "F": 1
-              }
-            },
-            {
-              "text": "Das große Bild",
-              "punkte": {
-                "K": 1,
-                "T": 1
-              }
-            },
-            {
-              "text": "Beides im Wechsel",
-              "punkte": {
-                "W": 1,
-                "P": 1
-              }
-            },
-            {
-              "text": "Weiß ich nicht",
-              "punkte": {}
-            }
+            { "text": "Details, es muss genau stimmen", "eigenschaften": {"schnitt": 1, "design": 1} },
+            { "text": "Das große Bild", "eigenschaften": {"bauen": 1} },
+            { "text": "Beides im Wechsel", "eigenschaften": {} },
+            { "text": "Weiß ich nicht", "eigenschaften": {} }
           ],
           "zweck": ""
         }
@@ -490,37 +222,24 @@
       "titel": "Was du willst",
       "fragen": [
         {
+          "nr": 25,
+          "text": "Welcher Bereich reizt dich am meisten?",
+          "antworten": [
+            { "text": "Creator und Social Media", "eigenschaften": {}, "bereich": "creator" },
+            { "text": "Fashion, Sneaker und Reselling", "eigenschaften": {}, "bereich": "fashion" },
+            { "text": "KI und Apps", "eigenschaften": {}, "bereich": "ki" },
+            { "text": "Weiß ich noch nicht", "eigenschaften": {} }
+          ],
+          "zweck": "Keine Eigenschaften. Wege aus dem gewählten Bereich bekommen einen kleinen Vorsprung."
+        },
+        {
           "nr": 14,
           "text": "Warum willst du starten?",
           "antworten": [
-            {
-              "text": "Eigenes Geld verdienen",
-              "punkte": {
-                "W": 1,
-                "F": 1
-              }
-            },
-            {
-              "text": "Unabhängig sein",
-              "punkte": {
-                "T": 1,
-                "P": 1
-              }
-            },
-            {
-              "text": "Zeigen, dass ich es kann",
-              "punkte": {
-                "K": 1,
-                "T": 1
-              }
-            },
-            {
-              "text": "Neugier, ich will es ausprobieren",
-              "punkte": {
-                "A": 1,
-                "T": 1
-              }
-            }
+            { "text": "Eigenes Geld verdienen", "eigenschaften": {"verkaufen": 1, "tempo": 1} },
+            { "text": "Unabhängig sein", "eigenschaften": {"bauen": 1} },
+            { "text": "Zeigen, dass ich es kann", "eigenschaften": {"community": 1, "kamera": 1} },
+            { "text": "Neugier, ich will es ausprobieren", "eigenschaften": {"technik": 1} }
           ],
           "zweck": ""
         },
@@ -528,35 +247,10 @@
           "nr": 15,
           "text": "Wie schnell soll das erste Geld kommen?",
           "antworten": [
-            {
-              "text": "In zwei Wochen",
-              "punkte": {
-                "W": 2,
-                "F": 2
-              }
-            },
-            {
-              "text": "In ein bis zwei Monaten",
-              "punkte": {
-                "A": 1,
-                "P": 1,
-                "W": 1
-              }
-            },
-            {
-              "text": "In drei bis sechs Monaten",
-              "punkte": {
-                "T": 1,
-                "K": 1
-              }
-            },
-            {
-              "text": "Geld ist erst einmal egal",
-              "punkte": {
-                "T": 2,
-                "K": 2
-              }
-            }
+            { "text": "In zwei Wochen", "eigenschaften": {"tempo": 3, "geduld": -1} },
+            { "text": "In ein bis zwei Monaten", "eigenschaften": {"tempo": 1, "geduld": 1} },
+            { "text": "In drei bis sechs Monaten", "eigenschaften": {"geduld": 2} },
+            { "text": "Geld ist erst einmal egal", "eigenschaften": {"geduld": 3} }
           ],
           "zweck": "Der Mentor sagt hier ehrlich, wenn ein Wunsch unrealistisch ist."
         },
@@ -564,34 +258,10 @@
           "nr": 16,
           "text": "Welche Art Einnahme gefällt dir am besten?",
           "antworten": [
-            {
-              "text": "Ein fester kleiner Betrag jeden Monat",
-              "punkte": {
-                "A": 2,
-                "W": 1
-              }
-            },
-            {
-              "text": "Einzelne größere Aufträge",
-              "punkte": {
-                "F": 2,
-                "W": 1
-              }
-            },
-            {
-              "text": "Viele kleine Verkäufe",
-              "punkte": {
-                "P": 2,
-                "T": 1
-              }
-            },
-            {
-              "text": "Erst aufbauen, später groß",
-              "punkte": {
-                "K": 2,
-                "T": 2
-              }
-            }
+            { "text": "Ein fester kleiner Betrag jeden Monat", "eigenschaften": {"kunden": 2} },
+            { "text": "Einzelne größere Aufträge", "eigenschaften": {"kunden": 2, "tempo": 1} },
+            { "text": "Viele kleine Verkäufe", "eigenschaften": {"verkaufen": 2} },
+            { "text": "Erst aufbauen, später groß", "eigenschaften": {"geduld": 2, "community": 1, "bauen": 1} }
           ],
           "zweck": ""
         },
@@ -599,35 +269,10 @@
           "nr": 17,
           "text": "Jemand sagt Nein zu deinem Angebot. Was passiert bei dir?",
           "antworten": [
-            {
-              "text": "Egal, der Nächste",
-              "punkte": {
-                "W": 2,
-                "F": 2
-              }
-            },
-            {
-              "text": "Ärgert mich kurz",
-              "punkte": {
-                "W": 1,
-                "F": 1,
-                "A": 1
-              }
-            },
-            {
-              "text": "Zieht mich runter",
-              "punkte": {
-                "P": 1,
-                "T": 1
-              }
-            },
-            {
-              "text": "Dem gehe ich lieber aus dem Weg",
-              "punkte": {
-                "T": 2,
-                "P": 1
-              }
-            }
+            { "text": "Egal, der Nächste", "eigenschaften": {"verkaufen": 2, "kunden": 2} },
+            { "text": "Ärgert mich kurz", "eigenschaften": {"kunden": 1} },
+            { "text": "Zieht mich runter", "eigenschaften": {"kunden": -1} },
+            { "text": "Dem gehe ich lieber aus dem Weg", "eigenschaften": {"kunden": -2, "verkaufen": -1} }
           ],
           "zweck": ""
         },
@@ -635,31 +280,10 @@
           "nr": 18,
           "text": "Wie sichtbar willst du sein?",
           "antworten": [
-            {
-              "text": "Mit Gesicht und Namen",
-              "punkte": {
-                "K": 3
-              }
-            },
-            {
-              "text": "Nur für meine Kunden",
-              "punkte": {
-                "W": 1,
-                "F": 1,
-                "A": 1
-              }
-            },
-            {
-              "text": "Hinter einem Produkt",
-              "punkte": {
-                "T": 2,
-                "P": 2
-              }
-            },
-            {
-              "text": "Ist mir egal",
-              "punkte": {}
-            }
+            { "text": "Mit Gesicht und Namen", "eigenschaften": {"kamera": 3, "community": 1} },
+            { "text": "Nur für meine Kunden", "eigenschaften": {"kunden": 2} },
+            { "text": "Hinter einem Produkt", "eigenschaften": {"bauen": 2, "kamera": -1} },
+            { "text": "Ist mir egal", "eigenschaften": {} }
           ],
           "zweck": ""
         }
@@ -673,33 +297,10 @@
           "nr": 19,
           "text": "Hast du schon etwas mit KI gebaut?",
           "antworten": [
-            {
-              "text": "Nein, noch nie",
-              "punkte": {
-                "W": 1
-              }
-            },
-            {
-              "text": "Texte und Bilder",
-              "punkte": {
-                "P": 1,
-                "K": 1
-              }
-            },
-            {
-              "text": "Eine Website",
-              "punkte": {
-                "W": 2,
-                "F": 1
-              }
-            },
-            {
-              "text": "Eine App oder Automation",
-              "punkte": {
-                "T": 2,
-                "A": 2
-              }
-            }
+            { "text": "Nein, noch nie", "eigenschaften": {} },
+            { "text": "Texte und Bilder", "eigenschaften": {"design": 1, "schreiben": 1} },
+            { "text": "Eine Website", "eigenschaften": {"technik": 2, "design": 1} },
+            { "text": "Eine App oder Automation", "eigenschaften": {"technik": 3, "bauen": 1} }
           ],
           "zweck": "Bestimmt auch, wie einfach die ersten Aufgaben sind."
         },
@@ -707,32 +308,10 @@
           "nr": 20,
           "text": "Hast du schon einmal etwas verkauft?",
           "antworten": [
-            {
-              "text": "Nein",
-              "punkte": {}
-            },
-            {
-              "text": "Sachen an Freunde oder über Kleinanzeigen",
-              "punkte": {
-                "P": 1,
-                "W": 1
-              }
-            },
-            {
-              "text": "Eine Leistung gegen Geld",
-              "punkte": {
-                "F": 2,
-                "W": 1
-              }
-            },
-            {
-              "text": "Ja, regelmäßig",
-              "punkte": {
-                "W": 1,
-                "F": 1,
-                "P": 1
-              }
-            }
+            { "text": "Nein", "eigenschaften": {} },
+            { "text": "Sachen an Freunde oder über Kleinanzeigen", "eigenschaften": {"verkaufen": 2} },
+            { "text": "Eine Leistung gegen Geld", "eigenschaften": {"kunden": 2, "verkaufen": 1} },
+            { "text": "Ja, regelmäßig", "eigenschaften": {"verkaufen": 3} }
           ],
           "zweck": ""
         },
@@ -740,61 +319,21 @@
           "nr": 21,
           "text": "Du hast schon etwas angefangen und wieder aufgehört. Woran lag es?",
           "antworten": [
-            {
-              "text": "Keine Zeit",
-              "punkte": {}
-            },
-            {
-              "text": "Ich wusste nicht weiter",
-              "punkte": {}
-            },
-            {
-              "text": "Es kam nichts dabei heraus",
-              "punkte": {
-                "W": 1,
-                "F": 1
-              }
-            },
-            {
-              "text": "Ich habe noch nie etwas angefangen",
-              "punkte": {}
-            }
+            { "text": "Keine Zeit", "eigenschaften": {} },
+            { "text": "Ich wusste nicht weiter", "eigenschaften": {} },
+            { "text": "Es kam nichts dabei heraus", "eigenschaften": {} },
+            { "text": "Ich habe noch nie etwas angefangen", "eigenschaften": {} }
           ],
-          "zweck": "Kaum Punkte. Der Mentor stellt sich darauf ein: kleinere Schritte, mehr Führung oder schnellere Ergebnisse."
+          "zweck": "Keine Eigenschaften. Der Mentor stellt sich darauf ein: kleinere Schritte, mehr Führung oder schnellere Ergebnisse."
         },
         {
           "nr": 22,
           "text": "Kennst du Betriebe oder Selbstständige in deiner Nähe persönlich?",
           "antworten": [
-            {
-              "text": "Ja, mehrere",
-              "punkte": {
-                "W": 3,
-                "A": 2
-              }
-            },
-            {
-              "text": "Ein oder zwei",
-              "punkte": {
-                "W": 2,
-                "A": 1
-              }
-            },
-            {
-              "text": "Nein, aber es gibt viele Läden",
-              "punkte": {
-                "W": 1
-              }
-            },
-            {
-              "text": "Nein, ich wohne abgelegen",
-              "punkte": {
-                "T": 1,
-                "P": 1,
-                "K": 1,
-                "F": 1
-              }
-            }
+            { "text": "Ja, mehrere", "eigenschaften": {"kunden": 2} },
+            { "text": "Ein oder zwei", "eigenschaften": {"kunden": 1} },
+            { "text": "Nein, aber es gibt viele Läden", "eigenschaften": {} },
+            { "text": "Nein, ich wohne abgelegen", "eigenschaften": {} }
           ],
           "zweck": "Wer schon jemanden kennt, hat den ersten Kunden fast."
         }
@@ -808,49 +347,21 @@
           "nr": 23,
           "text": "Wie steht dein Umfeld dazu, dass du etwas Eigenes startest?",
           "antworten": [
-            {
-              "text": "Sie unterstützen mich",
-              "punkte": {}
-            },
-            {
-              "text": "Sie wissen es nicht",
-              "punkte": {}
-            },
-            {
-              "text": "Sie sind dagegen",
-              "punkte": {}
-            },
-            {
-              "text": "Ich bin volljährig und entscheide selbst",
-              "punkte": {}
-            }
+            { "text": "Sie unterstützen mich", "eigenschaften": {} },
+            { "text": "Sie wissen es nicht", "eigenschaften": {} },
+            { "text": "Sie sind dagegen", "eigenschaften": {} },
+            { "text": "Ich bin volljährig und entscheide selbst", "eigenschaften": {} }
           ],
-          "zweck": "Keine Punkte. Unter 18 und ohne Rückhalt rät der Mentor zuerst zu Wegen ohne Kundenverträge."
+          "zweck": "Keine Eigenschaften. Unter 18 und ohne Rückhalt rät der Mentor zuerst zu Wegen ohne Kundenverträge."
         },
         {
           "nr": 24,
           "text": "Wie gut ist dein Englisch?",
           "antworten": [
-            {
-              "text": "Fließend",
-              "punkte": {
-                "T": 1,
-                "F": 1,
-                "K": 1
-              }
-            },
-            {
-              "text": "Gut",
-              "punkte": {}
-            },
-            {
-              "text": "Wenig",
-              "punkte": {}
-            },
-            {
-              "text": "Kaum",
-              "punkte": {}
-            }
+            { "text": "Fließend", "eigenschaften": {} },
+            { "text": "Gut", "eigenschaften": {} },
+            { "text": "Wenig", "eigenschaften": {} },
+            { "text": "Kaum", "eigenschaften": {} }
           ],
           "zweck": "Gutes Englisch öffnet Kunden und Publikum außerhalb von Deutschland."
         }
