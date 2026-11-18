@@ -180,7 +180,7 @@ async function zeigeStart() {
     neu: ["Meinen Plan gestalten", "In etwa zehn Minuten findest du heraus, welcher Weg zu dir passt."],
     fragen: ["Mit den Fragen weitermachen", `Du bist bei Frage ${Math.min(s.fragen.beantwortet + 1, s.fragen.anzahl)} von ${s.fragen.anzahl}. Deine Antworten sind gespeichert.`],
     ergebnis: ["Meinen Weg wählen", "Deine drei Wege stehen fest. Sieh sie dir an und such dir einen aus."],
-    vertiefung: ["Meinen Plan fertig machen", `Dein Weg: ${s.weg}. Noch sechs kurze Fragen.`],
+    vertiefung: ["Meinen Plan fertig machen", `Dein Weg: ${s.weg}. Noch ein paar kurze Fragen.`],
     plan: ["Meinen ganzen Plan ansehen", s.plan ? `${s.weg}. ${s.plan.geschafft} von ${s.plan.gesamt} Tagen geschafft.` : ""],
   }[s.stand];
   auswahl.push({ id: "wahl-plan", titel: plan[0], text: plan[1], los: oeffnePlanBereich });
@@ -389,12 +389,26 @@ $("knopf-nochmal").addEventListener("click", () => oeffneFragen(true));
 
 // ---------- Vertiefung ----------
 
+let kiPlan = false; // Schreibt die KI den Plan für den gewählten Weg? Dann dauert das Erstellen länger.
+
 async function zeigeVertiefung() {
   const daten = await api("/api/vertiefung");
   if (!daten.ok) return zeigeErgebnis();
   $("vertiefung-weg").textContent = daten.weg.name;
   $("vertiefung-ehrlich").textContent = daten.weg.ehrlich;
+  const zahlwort = ["", "eine Frage", "zwei Fragen", "drei Fragen", "vier Fragen", "fünf Fragen", "sechs Fragen"];
+  $("vertiefung-anzahl").textContent = `Noch ${zahlwort[daten.fragen.length] || daten.fragen.length + " Fragen"}, damit der Plan zu dir passt.`;
+  kiPlan = Boolean(daten.weg.kiPlan);
+  const recht = $("vertiefung-recht");
+  recht.replaceChildren();
+  for (const hinweis of daten.weg.recht || []) {
+    const punkt = document.createElement("li");
+    punkt.textContent = hinweis;
+    recht.append(punkt);
+  }
+  $("vertiefung-recht-kasten").hidden = !recht.children.length;
   meldung("vertiefung-fehler", "");
+  meldung("vertiefung-warten", "");
 
   const kasten = $("vertiefung-fragen");
   kasten.replaceChildren();
@@ -427,7 +441,13 @@ $("formular-vertiefung").addEventListener("submit", async (ereignis) => {
   for (const wahl of document.querySelectorAll("#vertiefung-fragen input:checked")) {
     gewaehlt[Number(wahl.name.slice(1))] = Number(wahl.value);
   }
+  meldung("vertiefung-fehler", "");
+  // Bei den neuen Wegen schreibt die KI den Plan. Das dauert, deshalb gibt es eine Meldung und der Knopf ist gesperrt.
+  if (kiPlan) meldung("vertiefung-warten", "Dein Plan wird gerade für dich geschrieben. Das dauert etwa ein bis zwei Minuten. Lass die Seite so lange offen.");
+  $("knopf-plan-erstellen").disabled = true;
   const ergebnis = await api("/api/plan/erstellen", { antworten: gewaehlt });
+  $("knopf-plan-erstellen").disabled = false;
+  meldung("vertiefung-warten", "");
   if (!ergebnis.ok) return meldung("vertiefung-fehler", ergebnis.fehler);
   hatPlan = true;
   await zeigeHeute();

@@ -107,12 +107,17 @@
       <p class="klein">Dein Weg</p>
       <h1 id="vertiefung-weg"></h1>
       <p id="vertiefung-ehrlich"></p>
-      <p>Noch sechs Fragen, damit der Plan zu dir passt.</p>
+      <div id="vertiefung-recht-kasten" class="kasten" hidden>
+        <strong>Das solltest du vorher wissen</strong>
+        <ul id="vertiefung-recht"></ul>
+      </div>
+      <p id="vertiefung-anzahl"></p>
       <form id="formular-vertiefung">
         <div id="vertiefung-fragen"></div>
         <p id="vertiefung-fehler" class="fehler" role="alert" hidden></p>
+        <p id="vertiefung-warten" role="status" hidden></p>
         <div class="reihe">
-          <button type="submit">Plan erstellen</button>
+          <button id="knopf-plan-erstellen" type="submit">Plan erstellen</button>
           <button id="knopf-anderer-weg" type="button" class="zweit">Anderen Weg wählen</button>
         </div>
       </form>

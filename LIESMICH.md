@@ -4,7 +4,7 @@ Eine Web-App für junge Leute, die etwas Eigenes aufbauen wollen und nicht wisse
 26 Fragen, drei Vorschläge aus 26 Wegen, ein Plan, jeden Tag eine Aufgabe.
 
 Stand: MVP komplett. Nach dem Anmelden kommt eine kurze Einführung, dann die Startseite mit den Bereichen Heute, Plan und Mentor. Es funktionieren Konto, die 26 Fragen, die drei Vorschläge aus 26 Wegen, die Wahl eines Weges, die Vertiefungsfragen, der persönliche Plan, die Aufgabe von heute mit Abhaken und das Gespräch mit dem Mentor.
-Einen fertigen Plan hat bisher nur der Weg „Websites mit KI für Läden“. Die anderen 25 Wege werden vorgeschlagen und tragen die Marke „Plan kommt bald“, bis die KI ihre Pläne schreibt (Teil 2 in `NAECHSTE-SCHRITTE.md`).
+Der Weg „Websites mit KI für Läden“ hat einen handgeschriebenen Plan. Für die anderen 25 Wege schreibt die KI den Plan für jede Person einzeln. Dafür braucht die App den Schlüssel für Claude. Ohne Schlüssel tragen diese Wege die Marke „Plan kommt bald“.
 Das Aussehen ist bewusst schlicht, das Design kommt später.
 
 ## Was wo liegt
@@ -15,7 +15,8 @@ Das Aussehen ist bewusst schlicht, das Design kommt später.
 | `src/worker.js` | Der Server. Beantwortet alle Adressen, die mit `/api/` beginnen |
 | `src/konto.js` | Registrieren, Anmelden, Passwörter sicher speichern |
 | `src/punkte.js` | Rechnet aus den Antworten das Profil der Person und daraus die drei Vorschläge aus, ohne KI |
-| `src/plan.js` | Passt das Gerüst eines Weges an die Person an, ohne KI |
+| `src/plan.js` | Passt den handgeschriebenen Plan des Website-Wegs an die Person an, ohne KI |
+| `src/plan-ki.js` | Lässt die KI für die anderen Wege einen Plan für 30 Tage schreiben und prüft ihn |
 | `src/mentor.js` | Der Mentor: Regeln für die KI, was er über die Person weiß, Aufruf von Claude |
 | `daten/fragen.json` | Die 26 Fragen und die Eigenschaften, die jede Antwort sammelt |
 | `daten/wege.json` | Die 26 Wege mit Steckbrief und Profil |
@@ -83,6 +84,17 @@ npx wrangler secret put ANTHROPIC_API_KEY
 ```
 
 Ohne Schlüssel läuft die App trotzdem. Der Mentor sagt dann, dass er noch nicht verbunden ist.
+
+### Pläne für die neuen Wege
+
+Mit Schlüssel lassen sich alle 26 Wege wählen. Bei den 25 neuen Wegen läuft es so:
+
+1. Die Person wählt den Weg und beantwortet seine drei Vertiefungsfragen. Darüber stehen die rechtlichen Hinweise aus dem Steckbrief.
+2. Die KI bekommt den Steckbrief des Weges, alle Antworten der Person und die Regeln aus `src/plan-ki.js`. Sie schreibt einen Plan für 30 Tage in einem festen Format. Das dauert etwa ein bis zwei Minuten.
+3. Die App prüft den Plan, bevor sie ihn speichert: genau 30 Tage, jeder Tag mit Titel, ein bis fünf Schritten, Dauer und Fertig-Kriterium. Besteht der Plan die Prüfung nicht, gibt es genau einen zweiten Versuch. Danach erscheint eine Fehlermeldung, und nichts wird gespeichert.
+4. Einiges legt die App selbst fest, nicht die KI: zu welcher Etappe ein Tag gehört, dass keine Aufgabe länger dauert, als die Person am Tag Zeit hat, und dass unter 18 das Gespräch mit den Eltern im Plan steht.
+
+Der Plan wird einmal geschrieben und dann gespeichert. Kostenbremse: höchstens 3 KI-Pläne pro Nutzer und Tag (`MAX_PLAENE_PRO_TAG` in `src/plan-ki.js`).
 
 Mit Schlüssel schreibt die KI außerdem die Aufgabe jedes Tages persönlich um, sobald sie dran ist. Grundlage ist immer die geprüfte Vorlage aus `daten/`. Die angepasste Fassung wird gespeichert und trägt in der App die Marke „Für dich angepasst“. Klappt das Anpassen nicht, erscheint einfach die Vorlage.
 

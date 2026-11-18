@@ -48,7 +48,7 @@ test("die 25 neuen Wege haben drei Vertiefungsfragen und vier Etappen mit je dre
   const neue = wege.filter((w) => !w.plan);
   assert.equal(neue.length, 25);
   for (const w of neue) {
-    assert.equal(w.verfuegbar, false, `${w.id}: Plan kommt erst mit Teil 2`);
+    assert.equal(w.verfuegbar, false, `${w.id}: wählbar erst, wenn der Schlüssel für die KI hinterlegt ist`);
     assert.equal(w.vertiefung.length, 3, w.id);
     for (const f of w.vertiefung) {
       assert.ok(text(f.frage) && text(f.wozu), w.id);

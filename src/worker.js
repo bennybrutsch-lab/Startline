@@ -8,6 +8,7 @@ import mentorDaten from "../daten/mentor.json";
 import einfuehrungDaten from "../daten/einfuehrung.json";
 import { alleFragen, berechne } from "./punkte.js";
 import { erstellePlan } from "./plan.js";
+import { schreibePlan, MAX_PLAENE_PRO_TAG } from "./plan-ki.js";
 import { baueKontext, baueVerlauf, frageMentor, passeAufgabeAn, MAX_ZEICHEN, MAX_PRO_TAG } from "./mentor.js";
 import {
   pruefeEingabe,
@@ -20,8 +21,17 @@ import {
   beendeSitzung,
 } from "./konto.js";
 
-// Alle Wege, für die es schon einen Plan gibt. Die Steckbriefe aller 26 Wege stehen in daten/wege.json.
-const WEGE = { [wegWebsites.id]: wegWebsites };
+// Alle 26 Wege aus daten/wege.json. Der Website-Weg bekommt dazu seinen handgeschriebenen Plan.
+// Für alle anderen schreibt die KI den Plan aus dem Steckbrief (src/plan-ki.js).
+const WEGE = Object.fromEntries(
+  wegeDaten.wege.map((w) => [w.id, w.plan ? { ...w, ...wegWebsites, festerPlan: true } : { ...w, festerPlan: false }])
+);
+
+// Kann man diesen Weg gerade wählen? Wege ohne festen Plan brauchen den Schlüssel für die KI.
+function waehlbar(env, id) {
+  const weg = WEGE[id];
+  return Boolean(weg) && (weg.festerPlan || Boolean(env.ANTHROPIC_API_KEY));
+}
 
 function antwort(daten, status = 200, kopf = {}) {
   return new Response(JSON.stringify(daten), {
@@ -210,7 +220,7 @@ async function api(request, env, url) {
     const ergebnis = berechne(fragenDaten, wegeDaten, antworten);
     // Die genaue Übereinstimmung bleibt auf dem Server. Der Browser bekommt nur die Vorschläge.
     return antwort({
-      vorschlaege: ergebnis.vorschlaege.map(({ passung, ...rest }) => rest),
+      vorschlaege: ergebnis.vorschlaege.map(({ passung, ...rest }) => ({ ...rest, verfuegbar: waehlbar(env, rest.id) })),
       knapp: ergebnis.knapp,
       gesperrt: ergebnis.gesperrt,
     });
@@ -331,7 +341,7 @@ async function api(request, env, url) {
     }
     const erlaubt = berechne(fragenDaten, wegeDaten, antworten).vorschlaege.map((v) => v.id);
     if (!erlaubt.includes(eingabe?.richtung)) return antwort({ fehler: "Dieser Weg wurde dir nicht vorgeschlagen." }, 400);
-    if (!WEGE[eingabe.richtung]) return antwort({ fehler: "Für diesen Weg gibt es noch keinen Plan." }, 409);
+    if (!waehlbar(env, eingabe.richtung)) return antwort({ fehler: "Für diesen Weg gibt es noch keinen Plan." }, 409);
     // Ein neuer Weg heißt: alte Vertiefung und alter Plan gelten nicht mehr.
     await db.batch([
       db.prepare("DELETE FROM vertiefung WHERE nutzer_id = ?").bind(nutzer.id),
@@ -359,7 +369,7 @@ async function api(request, env, url) {
     const gewaehlt = await ladeWeg(db, nutzer.id);
     if (!gewaehlt) return antwort({ fehler: "Wähle zuerst einen Weg." }, 409);
     return antwort({
-      weg: { id: gewaehlt.id, name: gewaehlt.name, ehrlich: gewaehlt.ehrlich },
+      weg: { id: gewaehlt.id, name: gewaehlt.name, ehrlich: gewaehlt.ehrlich, recht: gewaehlt.recht || [], kiPlan: !gewaehlt.festerPlan },
       fragen: gewaehlt.vertiefung.map((f, i) => ({ nr: i + 1, text: f.frage, antworten: f.antworten })),
       antworten: await ladeVertiefung(db, nutzer.id),
     });
@@ -379,7 +389,28 @@ async function api(request, env, url) {
       vertiefung[i + 1] = wert;
     }
     const antworten = await ladeAntworten(db, nutzer.id);
-    const plan = erstellePlan(gewaehlt, antworten, vertiefung);
+    let plan;
+    if (gewaehlt.festerPlan) {
+      plan = erstellePlan(gewaehlt, antworten, vertiefung);
+    } else {
+      // Kostenbremse: nur eine bestimmte Zahl KI-Pläne pro Tag.
+      const heute = tagInBerlin(new Date());
+      const { results: bisher } = await db
+        .prepare("SELECT erstellt FROM plan_erstellungen WHERE nutzer_id = ? ORDER BY id DESC LIMIT ?")
+        .bind(nutzer.id, MAX_PLAENE_PRO_TAG)
+        .all();
+      const heuteErstellt = bisher.filter((z) => tagInBerlin(new Date(z.erstellt.replace(" ", "T") + "Z")) === heute).length;
+      if (heuteErstellt >= MAX_PLAENE_PRO_TAG) {
+        return antwort({ fehler: `Du hast heute schon ${MAX_PLAENE_PRO_TAG} Pläne schreiben lassen. Morgen geht es weiter.` }, 429);
+      }
+      const ergebnis = await schreibePlan(env, gewaehlt, alleFragen(fragenDaten), antworten, vertiefung);
+      // Gezählt wird nur, wenn die KI wirklich geschrieben hat, nicht bei Verbindungsfehlern.
+      if (!ergebnis.fehler || ergebnis.gezaehlt) {
+        await db.prepare("INSERT INTO plan_erstellungen (nutzer_id) VALUES (?)").bind(nutzer.id).run();
+      }
+      if (ergebnis.fehler) return antwort({ fehler: ergebnis.fehler }, ergebnis.status || 502);
+      plan = ergebnis.plan;
+    }
     const befehle = [
       db.prepare("DELETE FROM vertiefung WHERE nutzer_id = ?").bind(nutzer.id),
       db.prepare("DELETE FROM plan_schritte WHERE nutzer_id = ?").bind(nutzer.id),

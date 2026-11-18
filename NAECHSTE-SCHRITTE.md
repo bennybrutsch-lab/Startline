@@ -53,24 +53,31 @@ Gestrichen: Eventfotografie und alles, was nach Nebenjob für Erwachsene klingt,
 - Jeder Weg hat ein Profil aus diesen Eigenschaften. Die drei Wege mit der besten Übereinstimmung werden vorgeschlagen, der dritte aus einem anderen Bereich.
 - Zwei neue Fragen, damit 26: Welcher Bereich reizt dich am meisten? Was machst du am Handy oder Laptop am meisten?
 - Steckbriefe für alle 26 Wege in `daten/wege.json`. Der Website-Weg heißt jetzt überall „Websites mit KI für Läden“.
-- Die 25 neuen Wege werden vorgeschlagen, lassen sich aber noch nicht wählen („Plan kommt bald“).
 
 Noch zu prüfen von einem Menschen:
 - Die Texte der Steckbriefe gegenlesen, vor allem die ehrlichen Sätze und die rechtlichen Hinweise. Mindestalter und Regeln der Plattformen ändern sich.
 - Die Profile der Wege in `daten/wege.json` sind eine erste Einschätzung. Mit echten Testpersonen nachjustieren. Reselling-Wege kommen bei zufälligen Antworten etwas häufiger vor, Discord-Bots und Online-Shops seltener.
 
+## Erledigt: Teil 2, Plan-Erstellung durch die KI
+
+- Beim Wählen eines neuen Weges schreibt die KI 30 Tage aus dem Steckbrief und den Antworten der Person, als festes Format, geprüft vor dem Speichern (`src/plan-ki.js`).
+- Die neuen Wege haben drei Vertiefungsfragen, der Website-Weg sechs. Die App zeigt die echte Zahl und darüber die rechtlichen Hinweise des Weges.
+- Der Mentor kennt die rechtlichen Hinweise des gewählten Weges.
+- Ohne Schlüssel bleiben die neuen Wege auf „Plan kommt bald“.
+- Kostenbremse: höchstens 3 KI-Pläne pro Nutzer und Tag. Dafür gibt es die neue Tabelle `plan_erstellungen`, also einmal `npm run db:lokal` ausführen.
+
+Noch nicht mit der echten KI ausprobiert. Geprüft ist der ganze Ablauf mit einer nachgebauten Antwort der Schnittstelle. Wie gut die Pläne wirklich sind, zeigt sich erst mit Schlüssel.
+
 ## Als Nächstes
 
-**Teil 2: Plan-Erstellung durch die KI**
-- Beim Wählen eines Weges schreibt die KI 30 Tage aus dem Steckbrief, als festes Format, geprüft vor dem Speichern.
-- Die neuen Wege haben drei Vertiefungsfragen, der Website-Weg sechs. Der Text „Noch sechs Fragen“ in der App muss dann die echte Zahl zeigen.
-- `src/plan.js` kennt bisher nur die Regeln des Website-Wegs.
-- Ohne Schlüssel bleiben die neuen Wege auf „Plan kommt bald“.
+- Mit echtem Schlüssel für drei bis fünf verschiedene Wege einen Plan schreiben lassen und lesen: Sind die Aufgaben klein genug, bauen die Tage aufeinander auf, stehen die rechtlichen Hinweise an sinnvollen Tagen?
+- Danach die Regeln in `src/plan-ki.js` nachschärfen.
+- Messen, wie lange ein Plan dauert und was er kostet.
 
 ## Offen bei Benny
 
 - Schlüssel für die Claude-Schnittstelle anlegen und in `.dev.vars` eintragen (siehe LIESMICH.md).
-- Mentor und angepasste Tagesaufgaben mit echtem Schlüssel ausprobieren und ein Bildschirmfoto schicken.
+- Mentor, angepasste Tagesaufgaben und einen KI-Plan für einen neuen Weg mit echtem Schlüssel ausprobieren und ein Bildschirmfoto schicken.
 - Internetadresse und Marke „Startline“ prüfen.
 
 ## Später, nicht jetzt
