@@ -2,6 +2,7 @@
 // Adressen, die mit /api/ beginnen, beantwortet dieser Code. Alles andere sind Dateien aus "public".
 
 import fragenDaten from "../daten/fragen.json";
+import wegeDaten from "../daten/wege.json";
 import wegWebsites from "../daten/weg-websites.json";
 import mentorDaten from "../daten/mentor.json";
 import einfuehrungDaten from "../daten/einfuehrung.json";
@@ -19,7 +20,7 @@ import {
   beendeSitzung,
 } from "./konto.js";
 
-// Alle Wege, für die es schon einen Plan gibt.
+// Alle Wege, für die es schon einen Plan gibt. Die Steckbriefe aller 26 Wege stehen in daten/wege.json.
 const WEGE = { [wegWebsites.id]: wegWebsites };
 
 function antwort(daten, status = 200, kopf = {}) {
@@ -37,8 +38,8 @@ async function leseJson(request) {
   }
 }
 
-// Die Fragen für den Browser, ohne die Punkte. Sonst könnte man das Ergebnis vorher ablesen.
-function fragenOhnePunkte() {
+// Die Fragen für den Browser, ohne die Eigenschaften. Sonst könnte man das Ergebnis vorher ablesen.
+function fragenOhneWertung() {
   return fragenDaten.bloecke.map((block) => ({
     titel: block.titel,
     warum: block.warum,
@@ -181,7 +182,7 @@ async function api(request, env, url) {
   }
 
   if (weg === "/api/fragen" && art === "GET") {
-    return antwort({ bloecke: fragenOhnePunkte(), antworten: await ladeAntworten(db, nutzer.id) });
+    return antwort({ bloecke: fragenOhneWertung(), antworten: await ladeAntworten(db, nutzer.id) });
   }
 
   if (weg === "/api/antworten" && art === "POST") {
@@ -206,10 +207,10 @@ async function api(request, env, url) {
     if (Object.keys(antworten).length < anzahl) {
       return antwort({ fehler: "Es sind noch nicht alle Fragen beantwortet.", beantwortet: Object.keys(antworten).length, anzahl }, 409);
     }
-    const ergebnis = berechne(fragenDaten, antworten);
-    // Die genauen Punkte bleiben auf dem Server. Der Browser bekommt nur die Vorschläge.
+    const ergebnis = berechne(fragenDaten, wegeDaten, antworten);
+    // Die genaue Übereinstimmung bleibt auf dem Server. Der Browser bekommt nur die Vorschläge.
     return antwort({
-      vorschlaege: ergebnis.vorschlaege.map(({ punkte, ...rest }) => rest),
+      vorschlaege: ergebnis.vorschlaege.map(({ passung, ...rest }) => rest),
       knapp: ergebnis.knapp,
       gesperrt: ergebnis.gesperrt,
     });
@@ -328,7 +329,7 @@ async function api(request, env, url) {
     if (Object.keys(antworten).length < alleFragen(fragenDaten).length) {
       return antwort({ fehler: "Beantworte zuerst alle Fragen." }, 409);
     }
-    const erlaubt = berechne(fragenDaten, antworten).vorschlaege.map((v) => v.id);
+    const erlaubt = berechne(fragenDaten, wegeDaten, antworten).vorschlaege.map((v) => v.id);
     if (!erlaubt.includes(eingabe?.richtung)) return antwort({ fehler: "Dieser Weg wurde dir nicht vorgeschlagen." }, 400);
     if (!WEGE[eingabe.richtung]) return antwort({ fehler: "Für diesen Weg gibt es noch keinen Plan." }, 409);
     // Ein neuer Weg heißt: alte Vertiefung und alter Plan gelten nicht mehr.

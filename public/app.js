@@ -343,6 +343,10 @@ async function zeigeErgebnis() {
       titel.append(marke);
     }
 
+    const bereich = document.createElement("p");
+    bereich.className = "klein";
+    bereich.textContent = v.bereich;
+
     const kurz = document.createElement("p");
     kurz.textContent = v.kurz;
 
@@ -359,7 +363,7 @@ async function zeigeErgebnis() {
     daten.className = "daten";
     daten.textContent = `Schwierigkeit: ${v.schwierigkeit}. Erstes Geld ${v.erstesGeld}, ohne Garantie. Erster Schritt: ${v.ersterSchritt}`;
 
-    karte.append(titel, kurz);
+    karte.append(titel, bereich, kurz);
     if (v.gruende.length) karte.append(warum, gruende);
     karte.append(daten);
 

@@ -1,0 +1,650 @@
+{
+  "hinweis": "Die 26 Wege mit ihren Steckbriefen. Das Profil sagt, welche Eigenschaften aus fragen.json ein Weg braucht (1 bis 3, negativ heißt: passt besser zu Leuten ohne diese Eigenschaft). Die rechtlichen Hinweise sind eine erste Orientierung und keine Rechtsberatung.",
+  "bereiche": [
+    { "id": "creator", "name": "Creator und Social Media" },
+    { "id": "fashion", "name": "Fashion, Sneaker und Reselling" },
+    { "id": "ki", "name": "KI und Apps" }
+  ],
+  "wege": [
+    {
+      "id": "kanal",
+      "name": "Eigener TikTok- oder YouTube-Kanal",
+      "bereich": "creator",
+      "kurz": "Du baust einen Kanal zu einem Thema auf, das dich selbst interessiert, und zeigst dich dabei.",
+      "ehrlich": "Die meisten Kanäle bleiben klein. Die ersten 30 Videos sieht fast niemand, und Geld kommt meist erst nach vielen Monaten. Wer dranbleibt, lernt aber Dinge, die bei fast jedem anderen Weg helfen.",
+      "recht": ["Plattformen haben ein Mindestalter, meist 13 Jahre. Unter 16 brauchst du für das Konto in der Regel deine Eltern.", "Nutze nur Musik, Bilder und Clips, die du verwenden darfst. Am sichersten ist die Musik aus der App selbst.", "Bekommst du Geld oder Produkte für ein Video, musst du es als Werbung kennzeichnen. Zeig andere Menschen nur, wenn sie einverstanden sind."],
+      "schwierigkeit": "mittel",
+      "erstesGeld": "üblicherweise erst nach vielen Monaten",
+      "ersterSchritt": "Drei Kanäle aufschreiben, die du selbst gern schaust, und warum.",
+      "brauchtLaptop": false,
+      "verfuegbar": false,
+      "profil": {"kamera": 3, "schnitt": 2, "geduld": 3, "community": 2},
+      "vertiefung": [
+        {"frage": "Worum soll dein Kanal gehen?", "antworten": ["Ein Hobby oder Sport", "Gaming", "Alltag und Humor", "Etwas erklären oder beibringen", "Weiß ich noch nicht"], "wozu": "Legt das Thema für deine ersten Videos fest."},
+        {"frage": "Wo willst du starten?", "antworten": ["TikTok", "YouTube Shorts", "Lange Videos auf YouTube", "Instagram Reels"], "wozu": "Jede Plattform braucht eine andere Länge und einen anderen Aufbau."},
+        {"frage": "Wie oft kannst du posten?", "antworten": ["Jeden Tag", "Drei- bis viermal pro Woche", "Einmal pro Woche"], "wozu": "Bestimmt, wie viele Videos im Plan stehen."}
+      ],
+      "etappen": [
+        {"nr": 1, "name": "Thema und erste Videos", "tage": "Tag 1 bis 7", "ziel": "Am Ende hast du ein klares Thema und drei Videos online.", "meilensteine": ["Thema in einem Satz aufgeschrieben", "Kanal mit Name, Bild und Beschreibung eingerichtet", "Drei Videos veröffentlicht"]},
+        {"nr": 2, "name": "Regelmäßig posten", "tage": "Tag 8 bis 14", "ziel": "Am Ende hast du einen festen Rhythmus und zehn Videos online.", "meilensteine": ["Fester Plan mit Tagen zum Posten", "Zehn Videos online", "Zwei Formate ausprobiert und verglichen"]},
+        {"nr": 3, "name": "Lernen, was ankommt", "tage": "Tag 15 bis 22", "ziel": "Am Ende weißt du, welche Videos funktionieren und warum.", "meilensteine": ["Zahlen der besten und schlechtesten drei Videos verglichen", "Die ersten drei Sekunden bei fünf Videos gezielt verbessert", "Auf jeden Kommentar geantwortet"]},
+        {"nr": 4, "name": "Dein Format finden", "tage": "Tag 23 bis 30", "ziel": "Am Ende hast du ein Format, das du jede Woche wiederholen kannst.", "meilensteine": ["Eine Serie mit mindestens vier Folgen gestartet", "20 Videos online", "Plan für die nächsten 30 Tage geschrieben"]}
+      ]
+    },
+    {
+      "id": "faceless",
+      "name": "Faceless-Kanal mit KI",
+      "bereich": "creator",
+      "kurz": "Du baust einen Kanal ohne dein Gesicht: Texte, Stimme und Bilder entstehen mit KI, die Ideen kommen von dir.",
+      "ehrlich": "Davon gibt es sehr viele, und die meisten sehen gleich aus. Lieblos gemachte KI-Videos werden kaum ausgespielt und oft nicht bezahlt. Es klappt nur mit einer guten Nische und eigenen Ideen.",
+      "recht": ["KI-Inhalte, die echt wirken, musst du auf den Plattformen als KI-erstellt markieren.", "Kopiere keine fremden Videos, Stimmen oder Figuren. Auch KI-Bilder dürfen keine echten Personen oder Marken nachmachen.", "Plattformen zahlen für massenhaft gleiche Inhalte oft kein Geld aus. Lies die Regeln zur Monetarisierung."],
+      "schwierigkeit": "mittel",
+      "erstesGeld": "üblicherweise erst nach vielen Monaten",
+      "ersterSchritt": "Fünf Faceless-Kanäle suchen und aufschreiben, was sie gut machen.",
+      "brauchtLaptop": false,
+      "verfuegbar": false,
+      "profil": {"schnitt": 2, "schreiben": 2, "geduld": 2, "technik": 1, "kamera": -2},
+      "vertiefung": [
+        {"frage": "Welche Nische reizt dich?", "antworten": ["Wissen und Fakten", "Geschichten und Rätsel", "Gaming", "Sport", "Geld und Motivation"], "wozu": "Legt das Thema und die Art der Videos fest."},
+        {"frage": "Was ist deine Stärke?", "antworten": ["Ideen und Texte", "Schnitt", "Bilder und Aussehen", "Noch nichts davon"], "wozu": "Der Plan beginnt mit dem, was dir am leichtesten fällt."},
+        {"frage": "Soll man deine eigene Stimme hören?", "antworten": ["Ja", "Nein, KI-Stimme", "Egal"], "wozu": "Entscheidet, welche Werkzeuge du brauchst."}
+      ],
+      "etappen": [
+        {"nr": 1, "name": "Nische und Werkzeuge", "tage": "Tag 1 bis 7", "ziel": "Am Ende hast du eine Nische und einen Ablauf, mit dem du ein Video bauen kannst.", "meilensteine": ["Nische in einem Satz aufgeschrieben", "Werkzeuge für Text, Stimme und Schnitt ausprobiert", "Erstes Video fertig"]},
+        {"nr": 2, "name": "Zehn Videos", "tage": "Tag 8 bis 14", "ziel": "Am Ende sind zehn Videos online, jedes etwas besser als das davor.", "meilensteine": ["Fester Ablauf vom Thema bis zum Upload", "Zehn Videos online", "Jedes Video als KI-erstellt markiert"]},
+        {"nr": 3, "name": "Besser als die anderen", "tage": "Tag 15 bis 22", "ziel": "Am Ende hebt sich dein Kanal von den Kopien ab.", "meilensteine": ["Eigenes Erkennungszeichen festgelegt: Aufbau, Stimme oder Stil", "Die besten drei Videos ausgewertet", "Fünf Videos nach diesem Muster gemacht"]},
+        {"nr": 4, "name": "Ein Ablauf, der hält", "tage": "Tag 23 bis 30", "ziel": "Am Ende schaffst du ein Video in fester Zeit, ohne dass die Qualität sinkt.", "meilensteine": ["Zeit pro Video gemessen und gekürzt", "Vorrat von fünf fertigen Videos", "Plan für die nächsten 30 Tage geschrieben"]}
+      ]
+    },
+    {
+      "id": "clipper",
+      "name": "Clipper: Clips für große Creator schneiden",
+      "bereich": "creator",
+      "kurz": "Du schneidest aus langen Streams und Videos kurze Clips und wirst nach Aufrufen bezahlt.",
+      "ehrlich": "Bezahlt wird nach Aufrufen, und die meisten Clips bekommen wenige. Viele verdienen in den ersten Wochen nichts oder ein paar Euro. Es ist aber ein schneller Weg, Schnitt zu lernen.",
+      "recht": ["Schneide nur Material, das der Creator dafür freigegeben hat, zum Beispiel über ein offizielles Clipping-Programm.", "Auszahlungen laufen oft über Dienste, für die du 18 sein musst. Unter 18 brauchst du deine Eltern.", "Halte dich an die Regeln der Kampagne. Gekaufte Aufrufe führen zum Ausschluss."],
+      "schwierigkeit": "leicht bis mittel",
+      "erstesGeld": "manchmal nach zwei bis vier Wochen, oft nur kleine Beträge",
+      "ersterSchritt": "Drei Creator suchen, die ein offizielles Clipping-Programm haben.",
+      "brauchtLaptop": false,
+      "verfuegbar": false,
+      "profil": {"schnitt": 3, "tempo": 2},
+      "vertiefung": [
+        {"frage": "Welche Inhalte schaust du selbst?", "antworten": ["Streamer und Gaming", "Podcasts und Interviews", "Sport", "Comedy", "Business und Motivation"], "wozu": "Du schneidest am besten, was du selbst kennst."},
+        {"frage": "Womit schneidest du?", "antworten": ["Handy", "Laptop oder PC", "Beides"], "wozu": "Legt das Schnittprogramm fest."},
+        {"frage": "Hast du schon Videos geschnitten?", "antworten": ["Ja, oft", "Ein paar Mal", "Noch nie"], "wozu": "Bestimmt, wie viel Übung am Anfang steht."}
+      ],
+      "etappen": [
+        {"nr": 1, "name": "Schneiden lernen", "tage": "Tag 1 bis 7", "ziel": "Am Ende schneidest du einen Clip mit Untertiteln in unter einer Stunde.", "meilensteine": ["Schnittprogramm eingerichtet", "Drei Übungsclips mit Untertiteln fertig", "Ein Clipping-Programm gefunden und die Regeln gelesen"]},
+        {"nr": 2, "name": "Die ersten Clips online", "tage": "Tag 8 bis 14", "ziel": "Am Ende sind zehn Clips auf einem eigenen Clip-Kanal online.", "meilensteine": ["Clip-Kanal eingerichtet", "Zehn Clips online", "Bei einer Kampagne angemeldet"]},
+        {"nr": 3, "name": "Lernen, was zieht", "tage": "Tag 15 bis 22", "ziel": "Am Ende weißt du, welche Stellen und Einstiege Aufrufe bringen.", "meilensteine": ["Die besten drei Clips ausgewertet", "Fünf Clips mit stärkerem Einstieg gemacht", "Erste Aufrufe eingereicht"]},
+        {"nr": 4, "name": "Mehr und besser", "tage": "Tag 23 bis 30", "ziel": "Am Ende hast du einen Ablauf für mehrere Clips am Tag.", "meilensteine": ["30 Clips online", "Zeit pro Clip halbiert", "Entschieden, ob du weiter clippst oder Schnitt als Dienst anbietest"]}
+      ]
+    },
+    {
+      "id": "editor",
+      "name": "Video-Editor für Creator",
+      "bereich": "creator",
+      "kurz": "Creator schicken dir ihr Rohmaterial, du machst daraus fertige Videos.",
+      "ehrlich": "Creator bekommen viele Anfragen von Editoren. Ohne Beispiele antwortet niemand. Am Anfang arbeitest du oft für wenig Geld, bis du zeigen kannst, was du kannst.",
+      "recht": ["Mach vor jedem Auftrag schriftlich aus: Was lieferst du, bis wann, für wie viel Geld.", "Unter 18 brauchst du für Aufträge die Zustimmung deiner Eltern. Wer regelmäßig Geld verdient, muss das anmelden.", "Zeig Kundenvideos nur dann als Beispiel, wenn der Kunde zustimmt."],
+      "schwierigkeit": "mittel",
+      "erstesGeld": "üblicherweise nach vier bis acht Wochen",
+      "ersterSchritt": "Ein Video eines kleinen Creators zur Übung neu schneiden.",
+      "brauchtLaptop": false,
+      "verfuegbar": false,
+      "profil": {"schnitt": 3, "kunden": 2, "design": 1, "tempo": 1},
+      "vertiefung": [
+        {"frage": "Was willst du schneiden?", "antworten": ["Kurze Videos für TikTok und Reels", "Lange YouTube-Videos", "Gaming-Videos", "Podcasts"], "wozu": "Legt fest, welche Beispiele du baust."},
+        {"frage": "Womit schneidest du?", "antworten": ["CapCut am Handy", "CapCut am Laptop", "DaVinci Resolve oder Premiere", "Noch gar nicht"], "wozu": "Der Plan baut auf deinem Programm auf."},
+        {"frage": "Kennst du einen Creator persönlich?", "antworten": ["Ja", "Über Freunde", "Nein"], "wozu": "Wer jemanden kennt, fragt dort zuerst."}
+      ],
+      "etappen": [
+        {"nr": 1, "name": "Drei Beispiele", "tage": "Tag 1 bis 7", "ziel": "Am Ende hast du drei geschnittene Videos, die du zeigen kannst.", "meilensteine": ["Art der Videos festgelegt", "Drei Beispielvideos fertig", "Beispiele an einem Ort gesammelt, den man verlinken kann"]},
+        {"nr": 2, "name": "Creator ansprechen", "tage": "Tag 8 bis 14", "ziel": "Am Ende hast du 20 kleine Creator angeschrieben.", "meilensteine": ["Liste mit 30 passenden Creatorn", "Kurze Nachricht mit einem Beispiel geschrieben", "20 Nachrichten verschickt"]},
+        {"nr": 3, "name": "Der erste Auftrag", "tage": "Tag 15 bis 22", "ziel": "Am Ende hast du ein Video für jemand anderen geschnitten.", "meilensteine": ["Ein Probevideo für einen Creator geliefert", "Rückmeldung eingeholt und eingearbeitet", "Preis und Lieferzeit festgelegt"]},
+        {"nr": 4, "name": "Aus einem werden mehrere", "tage": "Tag 23 bis 30", "ziel": "Am Ende hast du einen festen Ablauf und fragst nach weiteren Aufträgen.", "meilensteine": ["Fester Ablauf von Material bis Abgabe", "Den ersten Kunden nach einem Folgeauftrag gefragt", "20 weitere Creator angeschrieben"]}
+      ]
+    },
+    {
+      "id": "ugc",
+      "name": "UGC-Creator: Videos für Marken drehen",
+      "bereich": "creator",
+      "kurz": "Du drehst kurze Videos mit Produkten. Die Marke postet sie auf ihrem eigenen Kanal, du brauchst keine Follower.",
+      "ehrlich": "Viele Marken arbeiten nur mit Volljährigen, und am Anfang gibt es oft nur das Produkt statt Geld. Auf zehn Anfragen kommen meist neun Absagen oder keine Antwort.",
+      "recht": ["Verträge mit Marken gelten unter 18 nur mit Zustimmung deiner Eltern. Viele Plattformen für UGC verlangen 18 Jahre.", "Im Vertrag muss stehen, wo und wie lange die Marke dein Video nutzen darf.", "Sag über ein Produkt nur, was stimmt. Auch geschenkte Produkte sind eine Bezahlung."],
+      "schwierigkeit": "mittel",
+      "erstesGeld": "üblicherweise nach ein bis drei Monaten",
+      "ersterSchritt": "Drei Produkte von zu Hause aussuchen, die du gern benutzt.",
+      "brauchtLaptop": false,
+      "verfuegbar": false,
+      "profil": {"kamera": 3, "kunden": 2, "verkaufen": 1, "tempo": 2},
+      "vertiefung": [
+        {"frage": "Welche Produkte passen zu dir?", "antworten": ["Kosmetik und Pflege", "Mode", "Essen und Getränke", "Technik und Gaming", "Sport"], "wozu": "Du drehst deine Beispiele mit Produkten aus diesem Bereich."},
+        {"frage": "Bist du schon 18?", "antworten": ["Ja", "Nein, meine Eltern machen mit", "Nein, meine Eltern wissen es noch nicht"], "wozu": "Legt fest, wann das Gespräch mit den Eltern im Plan steht."},
+        {"frage": "Wo kannst du drehen?", "antworten": ["Im eigenen Zimmer", "Draußen", "Beides"], "wozu": "Bestimmt die Art der Videos."}
+      ],
+      "etappen": [
+        {"nr": 1, "name": "Beispielvideos", "tage": "Tag 1 bis 7", "ziel": "Am Ende hast du drei Beispielvideos mit Produkten, die du schon hast.", "meilensteine": ["Drei gute UGC-Videos angeschaut und den Aufbau notiert", "Drei eigene Beispielvideos gedreht", "Licht und Ton geprüft und verbessert"]},
+        {"nr": 2, "name": "Deine Mappe", "tage": "Tag 8 bis 14", "ziel": "Am Ende hast du eine Seite, auf der Marken deine Videos und deinen Preis sehen.", "meilensteine": ["Seite mit deinen Beispielen online", "Angebot festgelegt: was, wie viele Videos, welcher Preis", "Mit den Eltern besprochen, falls du unter 18 bist"]},
+        {"nr": 3, "name": "Marken anschreiben", "tage": "Tag 15 bis 22", "ziel": "Am Ende hast du 30 kleine Marken angeschrieben.", "meilensteine": ["Liste mit 40 kleinen Marken", "Kurze Nachricht mit Link zur Mappe geschrieben", "30 Nachrichten verschickt"]},
+        {"nr": 4, "name": "Der erste Auftrag", "tage": "Tag 23 bis 30", "ziel": "Am Ende hast du ein Video für eine Marke gedreht oder weißt, woran es hängt.", "meilensteine": ["Auf jede Antwort am selben Tag reagiert", "Erstes Video für eine Marke geliefert oder zehn weitere Marken angeschrieben", "Mappe mit dem besten neuen Video ergänzt"]}
+      ]
+    },
+    {
+      "id": "thumbnails",
+      "name": "Thumbnail- und Grafik-Designer für Creator",
+      "bereich": "creator",
+      "kurz": "Du gestaltest Vorschaubilder, Banner und Grafiken für YouTuber und Streamer.",
+      "ehrlich": "Die Preise sind am Anfang niedrig, weil es viele Anbieter gibt. Ohne starke Beispiele bekommst du keine Antwort. Gute Thumbnails sind aber gefragt, weil sie über Klicks entscheiden.",
+      "recht": ["Nutze nur Bilder und Schriften, die du geschäftlich verwenden darfst. Logos und Figuren aus Spielen und Filmen gehören anderen.", "Mach schriftlich aus, was du lieferst und wie viele Änderungen im Preis sind.", "Unter 18 brauchst du für Aufträge die Zustimmung deiner Eltern."],
+      "schwierigkeit": "mittel",
+      "erstesGeld": "üblicherweise nach vier bis acht Wochen",
+      "ersterSchritt": "Zehn Thumbnails sammeln, auf die du selbst geklickt hast.",
+      "brauchtLaptop": false,
+      "verfuegbar": false,
+      "profil": {"design": 3, "schnitt": 1, "kunden": 1, "tempo": 1},
+      "vertiefung": [
+        {"frage": "Womit gestaltest du?", "antworten": ["Canva", "Photoshop oder Photopea", "Am Handy", "Noch gar nicht"], "wozu": "Der Plan baut auf deinem Programm auf."},
+        {"frage": "Für wen willst du gestalten?", "antworten": ["Gaming-Kanäle", "Vlogs und Unterhaltung", "Wissen und Erklärvideos", "Streamer"], "wozu": "Jede Richtung hat ihren eigenen Stil."},
+        {"frage": "Hast du schon Arbeiten, die du zeigen kannst?", "antworten": ["Ja, mehrere", "Ein paar", "Nein"], "wozu": "Bestimmt, wie viele Beispiele du zuerst baust."}
+      ],
+      "etappen": [
+        {"nr": 1, "name": "Gute Thumbnails verstehen", "tage": "Tag 1 bis 7", "ziel": "Am Ende weißt du, was ein Bild klickbar macht, und hast drei gute nachgebaut.", "meilensteine": ["20 starke Thumbnails gesammelt und Gemeinsamkeiten notiert", "Drei davon zur Übung nachgebaut", "Eigene Vorlage für Schrift und Farben angelegt"]},
+        {"nr": 2, "name": "Sechs Beispiele", "tage": "Tag 8 bis 14", "ziel": "Am Ende hast du sechs eigene Thumbnails für echte Videos kleiner Kanäle.", "meilensteine": ["Sechs Videos kleiner Kanäle ausgesucht", "Für jedes ein besseres Thumbnail gestaltet", "Beispiele an einem Ort gesammelt, den man verlinken kann"]},
+        {"nr": 3, "name": "Creator anschreiben", "tage": "Tag 15 bis 22", "ziel": "Am Ende haben 20 Creator ein Thumbnail von dir gesehen.", "meilensteine": ["Liste mit 30 kleinen Creatorn", "20 Nachrichten mit einem fertigen Thumbnail für ihr Video verschickt", "Preis pro Bild festgelegt"]},
+        {"nr": 4, "name": "Erster Auftrag und Ablauf", "tage": "Tag 23 bis 30", "ziel": "Am Ende hast du einen bezahlten Auftrag oder einen klaren nächsten Schritt.", "meilensteine": ["Auf jede Antwort am selben Tag reagiert", "Ein Thumbnail gegen Geld geliefert oder 20 weitere Creator angeschrieben", "Fester Ablauf von Anfrage bis Abgabe"]}
+      ]
+    },
+    {
+      "id": "streamer",
+      "name": "Streamer auf Twitch oder Kick",
+      "bereich": "creator",
+      "kurz": "Du streamst live, was du spielst oder machst, und baust dir Zuschauer auf, die wiederkommen.",
+      "ehrlich": "Die meisten Streams haben am Anfang null bis drei Zuschauer, oft über Monate. Geld gibt es erst ab festen Zuschauerzahlen. Es kostet viele Stunden, die sich mit Schule oder Arbeit vertragen müssen.",
+      "recht": ["Plattformen haben ein Mindestalter. Unter 18 brauchst du die Zustimmung deiner Eltern, manche Plattformen sind erst ab 18 erlaubt.", "Zeig live keine privaten Daten: keine Adresse, keine Schule, keine anderen Personen ohne ihr Einverständnis.", "Musik im Stream kann zu Sperren führen. Für Auszahlungen brauchst du unter 18 deine Eltern."],
+      "schwierigkeit": "hoch",
+      "erstesGeld": "üblicherweise erst nach vielen Monaten",
+      "ersterSchritt": "Drei kleine Streamer mit unter 50 Zuschauern anschauen und notieren, was sie gut machen.",
+      "brauchtLaptop": true,
+      "verfuegbar": false,
+      "profil": {"kamera": 2, "community": 3, "geduld": 3, "technik": 1},
+      "vertiefung": [
+        {"frage": "Was willst du streamen?", "antworten": ["Ein Spiel, in dem ich gut bin", "Verschiedene Spiele", "Reden mit dem Chat", "Etwas Kreatives wie Zeichnen oder Musik"], "wozu": "Legt dein Thema und deine Kategorie fest."},
+        {"frage": "Was hast du zum Streamen?", "antworten": ["PC mit Mikrofon", "PC ohne Mikrofon", "Konsole", "Nur das Handy"], "wozu": "Bestimmt, was du zuerst einrichten musst."},
+        {"frage": "Wie oft kannst du streamen?", "antworten": ["Fast jeden Tag", "Zwei- bis dreimal pro Woche", "Nur am Wochenende"], "wozu": "Daraus wird dein fester Sendeplan."}
+      ],
+      "etappen": [
+        {"nr": 1, "name": "Technik und erster Stream", "tage": "Tag 1 bis 7", "ziel": "Am Ende läuft dein Stream mit gutem Ton, und du warst dreimal live.", "meilensteine": ["Kanal eingerichtet und mit den Eltern besprochen, falls du unter 18 bist", "Bild und Ton getestet", "Drei Streams gemacht"]},
+        {"nr": 2, "name": "Fester Sendeplan", "tage": "Tag 8 bis 14", "ziel": "Am Ende streamst du zu festen Zeiten, die jeder auf deinem Kanal sieht.", "meilensteine": ["Sendeplan auf dem Kanal eingetragen", "Sechs Streams nach Plan", "Den ganzen Stream über geredet, auch ohne Zuschauer"]},
+        {"nr": 3, "name": "Gefunden werden", "tage": "Tag 15 bis 22", "ziel": "Am Ende kommen Zuschauer auch von außerhalb auf deinen Kanal.", "meilensteine": ["Aus jedem Stream einen Clip gepostet", "In drei kleinen Communitys aktiv geworden", "Mit einem anderen kleinen Streamer zusammen gestreamt"]},
+        {"nr": 4, "name": "Stammzuschauer", "tage": "Tag 23 bis 30", "ziel": "Am Ende kennst du deine ersten Zuschauer beim Namen.", "meilensteine": ["Eigenen Ort für die Community eingerichtet", "Wiederkehrendes Format im Stream eingeführt", "Zahlen der letzten vier Wochen ausgewertet"]}
+      ]
+    },
+    {
+      "id": "podcast",
+      "name": "Podcast mit Freunden",
+      "bereich": "creator",
+      "kurz": "Ihr redet regelmäßig über ein Thema, nehmt es auf und veröffentlicht es als Podcast und in Clips.",
+      "ehrlich": "Die meisten Podcasts hören nach wenigen Folgen auf. Hörer kommen sehr langsam, und Geld gibt es lange keins. Am Anfang hören vor allem Freunde zu.",
+      "recht": ["Alle, die zu hören sind, müssen mit der Veröffentlichung einverstanden sein. Unter 18 auch die Eltern.", "Musik im Podcast braucht eine Erlaubnis. Nutze freie Musik oder keine.", "Behauptet über andere Menschen nichts, was nicht stimmt oder sie bloßstellt."],
+      "schwierigkeit": "leicht bis mittel",
+      "erstesGeld": "üblicherweise erst nach vielen Monaten, oft gar nicht",
+      "ersterSchritt": "Eine Person fragen, ob sie mitmacht, und zehn Themen aufschreiben.",
+      "brauchtLaptop": false,
+      "verfuegbar": false,
+      "profil": {"community": 3, "kamera": 1, "geduld": 2, "schnitt": 1, "schreiben": 1},
+      "vertiefung": [
+        {"frage": "Mit wem machst du den Podcast?", "antworten": ["Mit einem festen Freund oder einer festen Freundin", "Mit einer Gruppe", "Allein mit Gästen", "Weiß ich noch nicht"], "wozu": "Legt fest, wie ihr plant und aufnehmt."},
+        {"frage": "Worum geht es?", "antworten": ["Alltag und Humor", "Ein Hobby oder Sport", "Gaming und Internet", "Schule, Ausbildung und Zukunft"], "wozu": "Daraus entstehen die ersten Folgen."},
+        {"frage": "Nur Ton oder auch Video?", "antworten": ["Nur Ton", "Mit Video", "Erst Ton, später Video"], "wozu": "Mit Video könnt ihr Clips für TikTok und Shorts schneiden."}
+      ],
+      "etappen": [
+        {"nr": 1, "name": "Idee und Probefolge", "tage": "Tag 1 bis 7", "ziel": "Am Ende habt ihr ein Thema, einen Namen und eine Probefolge aufgenommen.", "meilensteine": ["Thema, Name und Länge festgelegt", "Probefolge aufgenommen und angehört", "Ton verbessert"]},
+        {"nr": 2, "name": "Die ersten Folgen online", "tage": "Tag 8 bis 14", "ziel": "Am Ende sind zwei Folgen auf den großen Podcast-Plattformen.", "meilensteine": ["Podcast bei einem Anbieter eingerichtet", "Zwei Folgen veröffentlicht", "Fester Tag für neue Folgen"]},
+        {"nr": 3, "name": "Clips und Reichweite", "tage": "Tag 15 bis 22", "ziel": "Am Ende findet man euch auch über kurze Clips.", "meilensteine": ["Aus jeder Folge drei Clips geschnitten und gepostet", "Vier Folgen online", "Zehn Leute um ehrliche Rückmeldung gebeten"]},
+        {"nr": 4, "name": "Dranbleiben", "tage": "Tag 23 bis 30", "ziel": "Am Ende habt ihr einen Ablauf, der auch in stressigen Wochen hält.", "meilensteine": ["Themen für die nächsten sechs Folgen gesammelt", "Aufgaben im Team verteilt", "Einen Gast eingeladen"]}
+      ]
+    },
+    {
+      "id": "community",
+      "name": "Eigene Community auf Discord oder als WhatsApp-Kanal",
+      "bereich": "creator",
+      "kurz": "Du bringst Leute mit dem gleichen Interesse an einem Ort zusammen und hältst ihn lebendig.",
+      "ehrlich": "Leere Server gibt es tausende. Die ersten 50 Mitglieder musst du einzeln holen, und ohne tägliche Pflege schläft alles wieder ein. Geld ist am Anfang kein Thema.",
+      "recht": ["Die Plattformen haben ein Mindestalter. In Deutschland liegt es je nach Dienst bei 13 bis 16 Jahren.", "Du bist für deinen Ort mitverantwortlich. Du brauchst klare Regeln und musst Beleidigungen und verbotene Inhalte entfernen.", "Sammle keine privaten Daten deiner Mitglieder und gib keine weiter."],
+      "schwierigkeit": "mittel",
+      "erstesGeld": "üblicherweise erst nach vielen Monaten",
+      "ersterSchritt": "Aufschreiben, für wen der Ort ist und was man dort bekommt.",
+      "brauchtLaptop": false,
+      "verfuegbar": false,
+      "profil": {"community": 3, "schreiben": 2, "geduld": 2},
+      "vertiefung": [
+        {"frage": "Worum geht es in deiner Community?", "antworten": ["Ein Spiel", "Ein Hobby oder Sport", "Lernen und Schule", "Sneaker, Mode oder Reselling", "KI und Technik"], "wozu": "Legt fest, wo du deine ersten Mitglieder findest."},
+        {"frage": "Welcher Ort passt?", "antworten": ["Discord-Server", "WhatsApp-Kanal", "Beides", "Weiß ich noch nicht"], "wozu": "Discord ist zum Mitreden, ein WhatsApp-Kanal zum Mitlesen."},
+        {"frage": "Hast du schon Leute, die mitmachen würden?", "antworten": ["Ja, eine Gruppe", "Ein paar", "Nein"], "wozu": "Bestimmt, wie du die ersten Mitglieder gewinnst."}
+      ],
+      "etappen": [
+        {"nr": 1, "name": "Aufbau", "tage": "Tag 1 bis 7", "ziel": "Am Ende steht dein Ort mit klaren Regeln, und die ersten zehn Leute sind da.", "meilensteine": ["Thema und Nutzen in einem Satz", "Ort eingerichtet, mit Regeln und wenigen Bereichen", "Zehn Leute persönlich eingeladen"]},
+        {"nr": 2, "name": "Jeden Tag etwas los", "tage": "Tag 8 bis 14", "ziel": "Am Ende gibt es jeden Tag einen Grund, hereinzuschauen.", "meilensteine": ["Sieben Tage lang jeden Tag einen Beitrag gepostet", "Ein festes Format pro Woche eingeführt", "25 Mitglieder"]},
+        {"nr": 3, "name": "Wachsen", "tage": "Tag 15 bis 22", "ziel": "Am Ende kommen neue Mitglieder auch ohne deine Einladung.", "meilensteine": ["An drei Orten vorgestellt, an denen deine Leute schon sind", "Mitglieder gebeten, je eine Person mitzubringen", "50 Mitglieder"]},
+        {"nr": 4, "name": "Hilfe holen", "tage": "Tag 23 bis 30", "ziel": "Am Ende trägst du die Community nicht mehr allein.", "meilensteine": ["Ein bis zwei Helfer zum Moderieren gewonnen", "Die Mitglieder gefragt, was sie sich wünschen", "Eine gemeinsame Aktion gemacht"]}
+      ]
+    },
+    {
+      "id": "smm",
+      "name": "Social-Media-Manager für junge Marken",
+      "bereich": "creator",
+      "kurz": "Du betreust die Kanäle einer kleinen Marke oder eines Ladens: Ideen, Beiträge und Antworten.",
+      "ehrlich": "Kleine Marken haben wenig Geld und erwarten schnell Ergebnisse. Den ersten Kunden bekommst du meist nur über ein kostenloses Probestück. Du trägst Verantwortung für einen fremden Auftritt.",
+      "recht": ["Mach schriftlich aus, was du jeden Monat lieferst und was es kostet. Unter 18 brauchst du die Zustimmung deiner Eltern.", "Du postest im Namen der Marke. Nutze nur Bilder und Musik, die sie verwenden darf.", "Gib Zugangsdaten nie weiter. Lass dir am besten einen eigenen Zugang geben."],
+      "schwierigkeit": "mittel",
+      "erstesGeld": "üblicherweise nach ein bis drei Monaten",
+      "ersterSchritt": "Fünf kleine Marken oder Läden suchen, deren Kanal eingeschlafen ist.",
+      "brauchtLaptop": false,
+      "verfuegbar": false,
+      "profil": {"kunden": 3, "schreiben": 2, "design": 1, "schnitt": 1, "community": 1},
+      "vertiefung": [
+        {"frage": "Für wen willst du arbeiten?", "antworten": ["Kleine Modemarken", "Läden und Cafés in meiner Nähe", "Online-Shops", "Vereine und Sportler"], "wozu": "Legt fest, wen du ansprichst."},
+        {"frage": "Welche Plattform kennst du am besten?", "antworten": ["TikTok", "Instagram", "Beide", "Keine richtig gut"], "wozu": "Du startest mit der Plattform, die du selbst nutzt."},
+        {"frage": "Was machst du am liebsten?", "antworten": ["Videos drehen und schneiden", "Bilder gestalten", "Texte und Ideen", "Planen und organisieren"], "wozu": "Dein Angebot beginnt mit deiner Stärke."}
+      ],
+      "etappen": [
+        {"nr": 1, "name": "Ein Beispiel bauen", "tage": "Tag 1 bis 7", "ziel": "Am Ende hast du für eine echte Marke einen Probeplan mit fertigen Beiträgen.", "meilensteine": ["Drei gute Kanäle kleiner Marken ausgewertet", "Für eine Marke fünf Beiträge als Beispiel gebaut", "Angebot in drei Sätzen aufgeschrieben"]},
+        {"nr": 2, "name": "Marken ansprechen", "tage": "Tag 8 bis 14", "ziel": "Am Ende haben 20 Marken dein Beispiel gesehen.", "meilensteine": ["Liste mit 30 Marken oder Läden", "20 Nachrichten mit einem Beispiel für genau diese Marke verschickt", "Mit den Eltern besprochen, falls du unter 18 bist"]},
+        {"nr": 3, "name": "Probewoche", "tage": "Tag 15 bis 22", "ziel": "Am Ende hast du eine Woche lang einen echten Kanal betreut.", "meilensteine": ["Probewoche mit einer Marke vereinbart", "Beiträge für sieben Tage geliefert", "Zahlen vor und nach der Woche verglichen"]},
+        {"nr": 4, "name": "Vom Test zum Auftrag", "tage": "Tag 23 bis 30", "ziel": "Am Ende hast du ein Angebot für die Betreuung pro Monat gemacht.", "meilensteine": ["Ergebnis der Probewoche auf einer Seite zusammengefasst", "Monatspreis festgelegt und angeboten", "Zehn weitere Marken angesprochen"]}
+      ]
+    },
+    {
+      "id": "sneaker",
+      "name": "Sneaker-Reselling",
+      "bereich": "fashion",
+      "kurz": "Du kaufst gefragte Sneaker zum Ladenpreis oder gebraucht und verkaufst sie mit Gewinn weiter.",
+      "ehrlich": "Die Gewinne sind kleiner als früher. Du brauchst Startgeld und kannst auf Schuhen sitzen bleiben. Gebühren und Versand fressen oft die Hälfte des Gewinns, und Fälschungen sind ein echtes Risiko.",
+      "recht": ["Wer regelmäßig kauft, um mit Gewinn zu verkaufen, handelt gewerblich. Unter 18 geht das nur mit deinen Eltern.", "Verkaufsplattformen verlangen meist 18 Jahre. Sie melden Verkäufer ab einer bestimmten Menge an das Finanzamt.", "Fälschungen zu verkaufen ist strafbar, auch aus Versehen. Als gewerblicher Verkäufer musst du Ware zurücknehmen."],
+      "schwierigkeit": "mittel",
+      "erstesGeld": "manchmal nach zwei bis vier Wochen, Verluste sind möglich",
+      "ersterSchritt": "Bei fünf Modellen den Ladenpreis mit echten Verkaufspreisen vergleichen.",
+      "brauchtLaptop": false,
+      "verfuegbar": false,
+      "profil": {"verkaufen": 3, "tempo": 2, "startgeld": 1},
+      "vertiefung": [
+        {"frage": "Wie viel Geld kannst du einsetzen, ohne dass es wehtut, wenn es weg ist?", "antworten": ["Unter 100 €", "100 bis 300 €", "Mehr als 300 €"], "wozu": "Bestimmt, mit welchen Schuhen du anfängst."},
+        {"frage": "Wo willst du einkaufen?", "antworten": ["Neue Releases online", "Outlets und Angebote", "Gebraucht auf Vinted und Kleinanzeigen", "Weiß ich noch nicht"], "wozu": "Jede Quelle braucht eine andere Vorbereitung."},
+        {"frage": "Wie gut kennst du dich mit Sneakern aus?", "antworten": ["Sehr gut", "Ein bisschen", "Kaum"], "wozu": "Legt fest, wie viel du vor dem ersten Kauf lernst."}
+      ],
+      "etappen": [
+        {"nr": 1, "name": "Den Markt verstehen", "tage": "Tag 1 bis 7", "ziel": "Am Ende erkennst du, welche Schuhe sich lohnen, und hast noch nichts gekauft.", "meilensteine": ["Bei 20 Modellen Einkaufspreis und echten Verkaufspreis notiert", "Gebühren und Versand für drei Plattformen ausgerechnet", "Mit den Eltern über Konto und Verkauf gesprochen, falls du unter 18 bist"]},
+        {"nr": 2, "name": "Der erste Kauf", "tage": "Tag 8 bis 14", "ziel": "Am Ende hast du ein Paar gekauft, bei dem die Rechnung vorher aufgeht.", "meilensteine": ["Budget und höchsten Preis pro Paar festgelegt", "Gelernt, woran man Fälschungen erkennt", "Erstes Paar gekauft, mit Beleg"]},
+        {"nr": 3, "name": "Der erste Verkauf", "tage": "Tag 15 bis 22", "ziel": "Am Ende hast du ein Paar verkauft und kennst deinen echten Gewinn.", "meilensteine": ["Gute Fotos und ehrliche Beschreibung erstellt", "Paar verkauft und sicher verschickt", "Gewinn nach allen Kosten ausgerechnet"]},
+        {"nr": 4, "name": "Wiederholen oder lassen", "tage": "Tag 23 bis 30", "ziel": "Am Ende weißt du anhand deiner Zahlen, ob sich der Weg für dich lohnt.", "meilensteine": ["Liste aller Käufe und Verkäufe geführt", "Zweites und drittes Paar gekauft oder bewusst gewartet", "Entscheidung getroffen: weitermachen, Quelle wechseln oder aufhören"]}
+      ]
+    },
+    {
+      "id": "vintage",
+      "name": "Vintage-Reselling auf Vinted und Depop",
+      "bereich": "fashion",
+      "kurz": "Du findest gute gebrauchte Kleidung günstig und verkaufst sie mit besseren Fotos teurer weiter.",
+      "ehrlich": "Pro Teil bleiben oft nur wenige Euro, und es steckt viel Arbeit drin: suchen, waschen, fotografieren, verpacken. Manche Teile liegen monatelang. Dafür brauchst du fast kein Startgeld.",
+      "recht": ["Eigene alte Sachen zu verkaufen ist privat. Wer gezielt einkauft, um mit Gewinn zu verkaufen, handelt gewerblich.", "Die Plattformen verlangen meist 18 Jahre. Unter 18 läuft es über das Konto deiner Eltern. Ab einer bestimmten Menge melden sie Verkäufe an das Finanzamt.", "Beschreib Mängel ehrlich. Fälschungen von Markenkleidung darfst du nicht verkaufen."],
+      "schwierigkeit": "leicht bis mittel",
+      "erstesGeld": "manchmal schon in den ersten zwei Wochen, kleine Beträge",
+      "ersterSchritt": "Fünf eigene Teile heraussuchen, die du nicht mehr trägst.",
+      "brauchtLaptop": false,
+      "verfuegbar": false,
+      "profil": {"verkaufen": 3, "tempo": 2, "design": 1},
+      "vertiefung": [
+        {"frage": "Womit fängst du an?", "antworten": ["Mit meinem eigenen Kleiderschrank", "Mit Sachen von Familie und Freunden", "Mit Flohmarkt und Secondhand-Läden"], "wozu": "Legt fest, woher deine ersten Teile kommen."},
+        {"frage": "Welcher Stil liegt dir?", "antworten": ["Streetwear", "Sportmarken und Trikots", "Vintage aus den 90ern und 2000ern", "Egal, Hauptsache es verkauft sich"], "wozu": "Wer einen Stil hat, wird wiedererkannt."},
+        {"frage": "Gibt es bei dir Flohmärkte oder Secondhand-Läden?", "antworten": ["Ja, mehrere", "Einen", "Nein"], "wozu": "Bestimmt, wie du später einkaufst."}
+      ],
+      "etappen": [
+        {"nr": 1, "name": "Die ersten Verkäufe aus dem eigenen Schrank", "tage": "Tag 1 bis 7", "ziel": "Am Ende sind zehn eigene Teile online und die ersten verkauft.", "meilensteine": ["Konto eingerichtet, unter 18 zusammen mit den Eltern", "Zehn Teile mit guten Fotos eingestellt", "Erstes Teil verkauft und verschickt"]},
+        {"nr": 2, "name": "Lernen, was geht", "tage": "Tag 8 bis 14", "ziel": "Am Ende weißt du, welche Marken und Teile sich schnell verkaufen.", "meilensteine": ["Bei 30 verkauften Teilen anderer die Preise notiert", "Fotos und Titel der eigenen Teile verbessert", "Liste mit zehn Marken, nach denen du suchst"]},
+        {"nr": 3, "name": "Einkaufen", "tage": "Tag 15 bis 22", "ziel": "Am Ende hast du gezielt eingekauft und dabei dein Budget gehalten.", "meilensteine": ["Budget und höchsten Preis pro Teil festgelegt", "Fünf Teile gezielt eingekauft", "Alle fünf am selben Tag eingestellt"]},
+        {"nr": 4, "name": "Dein Laden", "tage": "Tag 23 bis 30", "ziel": "Am Ende sieht dein Profil aus wie ein kleiner Laden mit eigenem Stil.", "meilensteine": ["Einheitliche Fotos für alle Teile", "Liste mit Einkauf, Verkauf und Gewinn geführt", "Geprüft, ob du ein Gewerbe anmelden musst"]}
+      ]
+    },
+    {
+      "id": "karten",
+      "name": "Trading Cards",
+      "bereich": "fashion",
+      "kurz": "Du kaufst und verkaufst Sammelkarten wie Pokémon oder Sportkarten und lernst, was welche Karte wert ist.",
+      "ehrlich": "Packungen zu öffnen ist fast immer ein Verlust. Geld verdient man nur mit Wissen über einzelne Karten, und die Preise schwanken stark. Du kannst Geld verlieren.",
+      "recht": ["Wer regelmäßig mit Gewinn handelt, handelt gewerblich. Unter 18 geht das nur mit deinen Eltern.", "Verkaufsplattformen verlangen meist 18 Jahre und melden Verkäufer ab einer bestimmten Menge an das Finanzamt.", "Fälschungen sind häufig. Gefälschte Karten zu verkaufen ist strafbar, auch aus Versehen."],
+      "schwierigkeit": "mittel",
+      "erstesGeld": "üblicherweise nach ein bis zwei Monaten, Verluste sind möglich",
+      "ersterSchritt": "Bei zehn Karten nachschauen, zu welchem Preis sie zuletzt wirklich verkauft wurden.",
+      "brauchtLaptop": false,
+      "verfuegbar": false,
+      "profil": {"verkaufen": 3, "geduld": 2, "startgeld": 1},
+      "vertiefung": [
+        {"frage": "Welche Karten kennst du?", "antworten": ["Pokémon", "Fußball und andere Sportkarten", "Yu-Gi-Oh, Magic oder One Piece", "Noch keine richtig"], "wozu": "Du handelst nur mit Karten, die du verstehst."},
+        {"frage": "Hast du schon eine Sammlung?", "antworten": ["Ja, eine große", "Ein paar Karten", "Nein"], "wozu": "Wer Karten hat, startet mit dem Verkaufen statt mit dem Kaufen."},
+        {"frage": "Wie viel Geld kannst du einsetzen, ohne dass es wehtut, wenn es weg ist?", "antworten": ["Gar keins", "Bis 50 €", "Bis 200 €", "Mehr"], "wozu": "Bestimmt, wie du einkaufst."}
+      ],
+      "etappen": [
+        {"nr": 1, "name": "Preise verstehen", "tage": "Tag 1 bis 7", "ziel": "Am Ende kannst du den Wert einer Karte selbst herausfinden.", "meilensteine": ["Gelernt, wo man echte Verkaufspreise sieht", "Bei 30 Karten Zustand und Preis notiert", "Gelernt, woran man Fälschungen erkennt"]},
+        {"nr": 2, "name": "Der erste Verkauf", "tage": "Tag 8 bis 14", "ziel": "Am Ende hast du Karten verkauft und sicher verschickt.", "meilensteine": ["Eigene oder günstig gekaufte Karten sortiert und bewertet", "Fünf Karten mit guten Fotos eingestellt", "Erste Karte verkauft und sicher verpackt verschickt"]},
+        {"nr": 3, "name": "Gezielt einkaufen", "tage": "Tag 15 bis 22", "ziel": "Am Ende hast du Karten unter Wert gekauft, ohne Packungen zu öffnen.", "meilensteine": ["Budget festgelegt", "Drei Quellen ausprobiert: Flohmarkt, Kleinanzeigen, Tauschtreffen", "Drei Karten oder Sammlungen unter Wert gekauft"]},
+        {"nr": 4, "name": "Dein Gebiet", "tage": "Tag 23 bis 30", "ziel": "Am Ende kennst du dich in einem kleinen Bereich besser aus als die meisten.", "meilensteine": ["Auf ein Set oder eine Art Karten festgelegt", "Liste mit Einkauf, Verkauf und Gewinn geführt", "Entscheidung nach Zahlen: weitermachen oder aufhören"]}
+      ]
+    },
+    {
+      "id": "custom",
+      "name": "Sneaker-Customizing und -Cleaning",
+      "bereich": "fashion",
+      "kurz": "Du reinigst Sneaker gründlich oder gestaltest sie um, zuerst für Freunde, dann gegen Geld.",
+      "ehrlich": "Ein Fehler kann ein teures Paar ruinieren, und dann haftest du. Reinigen bringt pro Paar wenig Geld, Customizing braucht viel Übung. Die ersten Kunden kommen aus deinem Umfeld.",
+      "recht": ["Geht ein fremder Schuh kaputt, musst du ihn ersetzen. Übe an eigenen Paaren und mach vorher Fotos.", "Umgestaltete Markenschuhe gewerblich zu verkaufen kann Markenrechte verletzen. Sicherer ist es, Schuhe im Auftrag ihrer Besitzer zu gestalten.", "Wer regelmäßig Geld dafür nimmt, muss das anmelden. Unter 18 brauchst du deine Eltern."],
+      "schwierigkeit": "mittel",
+      "erstesGeld": "üblicherweise nach drei bis sechs Wochen",
+      "ersterSchritt": "Ein eigenes altes Paar gründlich reinigen und vorher und nachher fotografieren.",
+      "brauchtLaptop": false,
+      "verfuegbar": false,
+      "profil": {"design": 3, "kunden": 2, "bauen": 1, "tempo": 1},
+      "vertiefung": [
+        {"frage": "Was reizt dich mehr?", "antworten": ["Reinigen und aufbereiten", "Bemalen und umgestalten", "Beides"], "wozu": "Reinigen geht schneller los, Customizing braucht mehr Übung."},
+        {"frage": "Hast du alte Paare zum Üben?", "antworten": ["Ja, mehrere", "Eins", "Nein"], "wozu": "Du übst nie an fremden Schuhen."},
+        {"frage": "Wie viel kannst du für Material ausgeben?", "antworten": ["Bis 20 €", "Bis 50 €", "Mehr"], "wozu": "Legt fest, mit welchem Material du startest."}
+      ],
+      "etappen": [
+        {"nr": 1, "name": "Üben an eigenen Paaren", "tage": "Tag 1 bis 7", "ziel": "Am Ende hast du zwei eigene Paare sauber bearbeitet.", "meilensteine": ["Material besorgt", "Zwei eigene Paare bearbeitet", "Vorher-Nachher-Fotos gemacht"]},
+        {"nr": 2, "name": "Zeigen", "tage": "Tag 8 bis 14", "ziel": "Am Ende sehen Leute in deinem Umfeld, was du kannst.", "meilensteine": ["Kanal oder Profil mit deinen Vorher-Nachher-Bildern", "Drei Paare von Familie oder Freunden kostenlos bearbeitet", "Preisliste geschrieben"]},
+        {"nr": 3, "name": "Die ersten zahlenden Kunden", "tage": "Tag 15 bis 22", "ziel": "Am Ende hast du Paare gegen Geld bearbeitet.", "meilensteine": ["Angebot im Umfeld und im Sportverein bekannt gemacht", "Vor jedem Auftrag Fotos gemacht und den Zustand besprochen", "Drei bezahlte Paare abgegeben"]},
+        {"nr": 4, "name": "Besser und bekannter", "tage": "Tag 23 bis 30", "ziel": "Am Ende kommen Anfragen auch von Leuten, die du nicht kennst.", "meilensteine": ["Jeden Auftrag als Vorher-Nachher gepostet", "Eine schwierigere Technik gelernt", "Kunden um eine Weiterempfehlung gebeten"]}
+      ]
+    },
+    {
+      "id": "fashion",
+      "name": "Fashion-Kanal mit Outfits, Hauls und Thrift-Flips",
+      "bereich": "fashion",
+      "kurz": "Du zeigst auf einem Kanal deine Outfits, Funde aus dem Secondhand-Laden und wie du Teile kombinierst.",
+      "ehrlich": "Mode-Kanäle gibt es sehr viele. Ohne eigenen Stil gehst du unter. Geld kommt lange keins, und ständig neue Kleidung zu kaufen wird schnell teuer.",
+      "recht": ["Plattformen haben ein Mindestalter, meist 13 Jahre. Unter 16 brauchst du für das Konto in der Regel deine Eltern.", "Bekommst du Kleidung geschenkt oder Geld für ein Video, musst du es als Werbung kennzeichnen.", "Nutze nur Musik aus der App und zeig andere Menschen nur mit ihrem Einverständnis."],
+      "schwierigkeit": "mittel",
+      "erstesGeld": "üblicherweise erst nach vielen Monaten",
+      "ersterSchritt": "Drei Outfits aus dem eigenen Schrank zusammenstellen und fotografieren.",
+      "brauchtLaptop": false,
+      "verfuegbar": false,
+      "profil": {"kamera": 3, "design": 2, "community": 2, "geduld": 2},
+      "vertiefung": [
+        {"frage": "Was zeigst du am liebsten?", "antworten": ["Outfits", "Hauls und Funde", "Thrift-Flips: alte Teile umgestalten", "Tipps zum Kombinieren"], "wozu": "Legt dein erstes Format fest."},
+        {"frage": "Welcher Stil ist deiner?", "antworten": ["Streetwear", "Vintage", "Sportlich", "Schick und clean", "Ich suche noch"], "wozu": "Ein klarer Stil macht deinen Kanal wiedererkennbar."},
+        {"frage": "Wie viel kannst du im Monat für Kleidung ausgeben?", "antworten": ["Nichts, ich nutze was ich habe", "Bis 30 €", "Mehr"], "wozu": "Der Plan kommt auch ohne neue Kleidung aus."}
+      ],
+      "etappen": [
+        {"nr": 1, "name": "Stil und erste Videos", "tage": "Tag 1 bis 7", "ziel": "Am Ende hast du deinen Stil beschrieben und drei Videos online.", "meilensteine": ["Stil in einem Satz aufgeschrieben", "Kanal eingerichtet", "Drei Videos mit Teilen aus dem eigenen Schrank online"]},
+        {"nr": 2, "name": "Regelmäßig posten", "tage": "Tag 8 bis 14", "ziel": "Am Ende hast du einen festen Rhythmus und zehn Videos online.", "meilensteine": ["Festen Drehort mit gutem Licht gefunden", "Zehn Videos online", "Zwei Formate ausprobiert und verglichen"]},
+        {"nr": 3, "name": "Dein Format", "tage": "Tag 15 bis 22", "ziel": "Am Ende hast du eine Serie, die man mit dir verbindet.", "meilensteine": ["Die besten drei Videos ausgewertet", "Eine Serie mit vier Folgen gestartet", "Auf jeden Kommentar geantwortet"]},
+        {"nr": 4, "name": "Gesehen werden", "tage": "Tag 23 bis 30", "ziel": "Am Ende kennen dich andere kleine Mode-Kanäle.", "meilensteine": ["Bei zehn ähnlichen Kanälen regelmäßig kommentiert", "Ein Video mit einem anderen Kanal zusammen gemacht", "Plan für die nächsten 30 Tage geschrieben"]}
+      ]
+    },
+    {
+      "id": "W",
+      "name": "Websites mit KI für Läden",
+      "bereich": "ki",
+      "kurz": "Läden, Praxen und Vereine in deiner Nähe bekommen von dir eine Website.",
+      "ehrlich": "Kein Weg zu schnellem Reichtum. Die meisten Betriebe sagen zuerst Nein oder Vielleicht. Wer 30 Betriebe anspricht, hat realistisch ein bis drei ernsthafte Gespräche.",
+      "recht": ["Unter 18 brauchst du für Aufträge die Zustimmung deiner Eltern. Wer regelmäßig Geld verdient, muss ein Gewerbe anmelden.", "Jede Website eines Betriebs braucht ein Impressum und eine Datenschutzerklärung. Die Angaben dafür liefert der Betrieb.", "Nutze nur Bilder und Texte, die der Betrieb verwenden darf."],
+      "schwierigkeit": "mittel",
+      "erstesGeld": "üblicherweise nach zwei bis acht Wochen",
+      "ersterSchritt": "Eine Liste mit 20 Betrieben in deiner Nähe anlegen.",
+      "brauchtLaptop": false,
+      "verfuegbar": true,
+      "profil": {"kunden": 3, "design": 2, "tempo": 2, "technik": 1, "verkaufen": 1},
+      "plan": "weg-websites.json"
+    },
+    {
+      "id": "app",
+      "name": "Eigene App bauen und veröffentlichen",
+      "bereich": "ki",
+      "kurz": "Du baust mit KI eine kleine App für ein Problem, das du selbst kennst, und bringst sie zu echten Nutzern.",
+      "ehrlich": "Die meisten Apps hat nach dem Start fast niemand. Bauen geht mit KI schnell, Nutzer zu finden ist der schwere Teil. Geld kommt, wenn überhaupt, erst nach Monaten.",
+      "recht": ["Für ein Entwicklerkonto in den App-Stores musst du 18 sein. Unter 18 läuft es über deine Eltern, oder du startest als Web-App.", "Sobald deine App Daten von Nutzern speichert, brauchst du eine Datenschutzerklärung und ein Impressum.", "Nimmst du Geld ein, musst du das anmelden."],
+      "schwierigkeit": "hoch",
+      "erstesGeld": "üblicherweise nach drei bis sechs Monaten, oft später",
+      "ersterSchritt": "Fünf Dinge aufschreiben, die dich im Alltag jede Woche nerven.",
+      "brauchtLaptop": true,
+      "verfuegbar": false,
+      "profil": {"technik": 3, "bauen": 3, "geduld": 3},
+      "vertiefung": [
+        {"frage": "Für wen ist deine App?", "antworten": ["Für mich und Leute wie mich", "Für Schüler und Azubis", "Für ein Hobby oder einen Verein", "Weiß ich noch nicht"], "wozu": "Du baust für Leute, die du fragen kannst."},
+        {"frage": "Was hast du schon gebaut?", "antworten": ["Eine App oder ein Programm", "Eine Website", "Noch nichts"], "wozu": "Bestimmt, wie klein die erste Version sein muss."},
+        {"frage": "Wo soll die App laufen?", "antworten": ["Im Browser", "Auf dem Handy", "Egal"], "wozu": "Im Browser kommst du am schnellsten zu echten Nutzern."}
+      ],
+      "etappen": [
+        {"nr": 1, "name": "Problem und Idee", "tage": "Tag 1 bis 7", "ziel": "Am Ende hast du ein Problem, das mindestens fünf Leute bestätigt haben.", "meilensteine": ["Zehn Probleme gesammelt", "Mit zehn Leuten darüber gesprochen", "Eine Idee ausgewählt und in einem Satz beschrieben"]},
+        {"nr": 2, "name": "Die kleinste Version", "tage": "Tag 8 bis 14", "ziel": "Am Ende läuft eine Version, die genau eine Sache kann.", "meilensteine": ["Die eine Hauptfunktion festgelegt", "Erste Version mit KI gebaut", "Online gestellt und selbst eine Woche benutzt"]},
+        {"nr": 3, "name": "Echte Nutzer", "tage": "Tag 15 bis 22", "ziel": "Am Ende haben zehn Leute die App benutzt, und du weißt, wo sie hängen.", "meilensteine": ["Zehn Leute persönlich eingeladen", "Bei drei Leuten zugeschaut, wie sie die App benutzen", "Die drei größten Probleme behoben"]},
+        {"nr": 4, "name": "Veröffentlichen", "tage": "Tag 23 bis 30", "ziel": "Am Ende ist die App öffentlich und an drei Orten vorgestellt.", "meilensteine": ["Impressum und Datenschutz ergänzt", "Eine einfache Seite, die die App erklärt", "An drei Orten vorgestellt, an denen deine Nutzer sind"]}
+      ]
+    },
+    {
+      "id": "kitool",
+      "name": "KI-Tool für eine Nische",
+      "bereich": "ki",
+      "kurz": "Du baust ein kleines Werkzeug mit KI für eine bestimmte Gruppe, zum Beispiel für Trainer, Friseure oder Schüler.",
+      "ehrlich": "Viele KI-Tools sind schnell kopiert, und kaum jemand zahlt für etwas, das ChatGPT auch kann. Es klappt nur, wenn du eine Gruppe wirklich gut kennst. Die KI kostet dich bei jeder Nutzung Geld.",
+      "recht": ["Sobald Nutzer Daten eingeben, brauchst du eine Datenschutzerklärung und ein Impressum. Gib keine fremden privaten Daten an eine KI weiter.", "Die KI-Schnittstelle kostet Geld pro Nutzung. Setz ein festes Limit. Bezahldienste verlangen meist 18 Jahre.", "Sag deinen Nutzern, dass Ergebnisse von einer KI stammen und falsch sein können."],
+      "schwierigkeit": "hoch",
+      "erstesGeld": "üblicherweise nach drei bis sechs Monaten, oft später",
+      "ersterSchritt": "Eine Gruppe aufschreiben, die du gut kennst, und drei ihrer nervigsten Aufgaben.",
+      "brauchtLaptop": true,
+      "verfuegbar": false,
+      "profil": {"technik": 3, "bauen": 3, "geduld": 2, "schreiben": 1},
+      "vertiefung": [
+        {"frage": "Welche Gruppe kennst du gut?", "antworten": ["Schüler und Azubis", "Einen Sport oder Verein", "Einen Beruf aus meiner Familie", "Creator und Streamer", "Weiß ich noch nicht"], "wozu": "Dein Tool entsteht für Leute, mit denen du reden kannst."},
+        {"frage": "Was hast du schon gebaut?", "antworten": ["Eine App oder Automation", "Eine Website", "Nur mit ChatGPT gearbeitet", "Noch nichts"], "wozu": "Bestimmt, wie einfach die erste Version ist."},
+        {"frage": "Kannst du Geld für die KI-Kosten einsetzen?", "antworten": ["Nein", "Bis 10 € im Monat", "Mehr"], "wozu": "Ohne Budget startest du mit kostenlosen Kontingenten."}
+      ],
+      "etappen": [
+        {"nr": 1, "name": "Nische und Problem", "tage": "Tag 1 bis 7", "ziel": "Am Ende kennst du eine Aufgabe, die deine Gruppe jede Woche Zeit kostet.", "meilensteine": ["Gruppe festgelegt", "Mit fünf Leuten aus der Gruppe gesprochen", "Eine Aufgabe ausgewählt, bei der KI wirklich hilft"]},
+        {"nr": 2, "name": "Erste Version", "tage": "Tag 8 bis 14", "ziel": "Am Ende löst dein Tool diese eine Aufgabe.", "meilensteine": ["Mit der Hand und einem KI-Chat getestet, ob die Idee funktioniert", "Erste Version gebaut", "Kostenlimit für die KI gesetzt"]},
+        {"nr": 3, "name": "Testen mit echten Leuten", "tage": "Tag 15 bis 22", "ziel": "Am Ende haben fünf Leute aus der Gruppe das Tool benutzt.", "meilensteine": ["Fünf Leute eingeladen", "Rückmeldungen wörtlich aufgeschrieben", "Die wichtigste Verbesserung umgesetzt"]},
+        {"nr": 4, "name": "Zeigen und entscheiden", "tage": "Tag 23 bis 30", "ziel": "Am Ende ist das Tool öffentlich, und du weißt, ob jemand dafür zahlen würde.", "meilensteine": ["Seite mit Erklärung, Impressum und Datenschutz", "Dort vorgestellt, wo die Gruppe sich trifft", "Fünf Leute gefragt, was ihnen das Tool wert wäre"]}
+      ]
+    },
+    {
+      "id": "roblox",
+      "name": "Roblox-Spiele bauen",
+      "bereich": "ki",
+      "kurz": "Du baust in Roblox Studio ein eigenes Spiel und veröffentlichst es für andere Spieler.",
+      "ehrlich": "Fast alle Roblox-Spiele haben keine Spieler. Geld gibt es erst ab hohen Robux-Summen und einem Mindestalter. Du lernst aber echtes Programmieren und Spieldesign.",
+      "recht": ["Um Robux in echtes Geld zu tauschen, gelten ein Mindestalter und eine Mindestsumme. Unter 18 brauchst du deine Eltern.", "Bau keine Figuren, Marken oder Musik aus anderen Spielen und Filmen nach.", "Halte dich an die Regeln von Roblox, vor allem bei Käufen im Spiel und beim Umgang mit jüngeren Spielern."],
+      "schwierigkeit": "mittel bis hoch",
+      "erstesGeld": "üblicherweise erst nach vielen Monaten, oft gar nicht",
+      "ersterSchritt": "Drei Roblox-Spiele spielen und aufschreiben, warum man dort bleibt.",
+      "brauchtLaptop": true,
+      "verfuegbar": false,
+      "profil": {"technik": 2, "bauen": 3, "design": 2, "geduld": 2, "community": 1},
+      "vertiefung": [
+        {"frage": "Welche Art Spiel willst du bauen?", "antworten": ["Obby oder Hindernislauf", "Tycoon oder Simulator", "Rollenspiel", "Kampf oder Wettkampf", "Weiß ich noch nicht"], "wozu": "Legt fest, was du zuerst lernst."},
+        {"frage": "Kennst du Roblox Studio?", "antworten": ["Ja, ich habe schon etwas gebaut", "Ich habe es geöffnet", "Nein"], "wozu": "Bestimmt, wie viel Einstieg im Plan steht."},
+        {"frage": "Baust du allein?", "antworten": ["Allein", "Mit einem Freund oder einer Freundin", "In einer Gruppe"], "wozu": "Im Team teilt ihr Bauen und Programmieren auf."}
+      ],
+      "etappen": [
+        {"nr": 1, "name": "Roblox Studio lernen", "tage": "Tag 1 bis 7", "ziel": "Am Ende hast du ein kleines Übungsspiel gebaut, das man durchspielen kann.", "meilensteine": ["Roblox Studio eingerichtet", "Die Grundlagen von Bauen und Skripten gelernt", "Ein Übungsspiel mit Anfang und Ende fertig"]},
+        {"nr": 2, "name": "Dein Spiel: der Kern", "tage": "Tag 8 bis 14", "ziel": "Am Ende funktioniert die eine Sache, die dein Spiel ausmacht.", "meilensteine": ["Spielidee in drei Sätzen", "Kern des Spiels gebaut", "Selbst zehn Minuten am Stück gespielt, ohne dass etwas kaputtgeht"]},
+        {"nr": 3, "name": "Testen mit Freunden", "tage": "Tag 15 bis 22", "ziel": "Am Ende haben fünf Leute dein Spiel gespielt, und du weißt, wo sie aufhören.", "meilensteine": ["Fünf Tester eingeladen", "Beim Spielen zugeschaut und Notizen gemacht", "Die drei größten Probleme behoben"]},
+        {"nr": 4, "name": "Veröffentlichen", "tage": "Tag 23 bis 30", "ziel": "Am Ende ist dein Spiel öffentlich, mit Bild und Beschreibung.", "meilensteine": ["Vorschaubild und Beschreibung erstellt", "Spiel veröffentlicht", "In zwei Communitys vorgestellt und erste Zahlen angeschaut"]}
+      ]
+    },
+    {
+      "id": "bots",
+      "name": "Discord-Bots",
+      "bereich": "ki",
+      "kurz": "Du baust Bots, die auf Discord-Servern Aufgaben übernehmen, zuerst für einen eigenen Server, dann für andere.",
+      "ehrlich": "Für die meisten Aufgaben gibt es schon kostenlose Bots. Geld zahlt nur, wer etwas Besonderes braucht, das es so nicht gibt. Ein Bot muss rund um die Uhr laufen, und du bist schuld, wenn er ausfällt.",
+      "recht": ["Halte dich an die Entwickler-Regeln von Discord. Ein Bot darf keine Nachrichten oder Daten von Mitgliedern sammeln, die er nicht braucht.", "Speichert dein Bot Daten, müssen die Mitglieder das wissen.", "Unter 18 brauchst du für bezahlte Aufträge die Zustimmung deiner Eltern."],
+      "schwierigkeit": "mittel bis hoch",
+      "erstesGeld": "üblicherweise nach zwei bis vier Monaten",
+      "ersterSchritt": "Auf drei Servern, auf denen du bist, aufschreiben, was die Moderatoren von Hand machen.",
+      "brauchtLaptop": true,
+      "verfuegbar": false,
+      "profil": {"technik": 2, "community": 3, "bauen": 1},
+      "vertiefung": [
+        {"frage": "Auf welchen Servern bist du unterwegs?", "antworten": ["Gaming", "Lernen und Schule", "Creator-Communitys", "Sneaker und Reselling", "Auf kaum welchen"], "wozu": "Du baust für Server, die du von innen kennst."},
+        {"frage": "Hast du schon programmiert?", "antworten": ["Ja, regelmäßig", "Ein bisschen", "Nein, ich lasse die KI schreiben"], "wozu": "Bestimmt, wie viel Erklärung der Plan enthält."},
+        {"frage": "Hast du einen eigenen Server zum Testen?", "antworten": ["Ja", "Nein, aber ich kann einen anlegen", "Ich bin Moderator auf einem fremden Server"], "wozu": "Du testest nie auf einem fremden Server ohne Erlaubnis."}
+      ],
+      "etappen": [
+        {"nr": 1, "name": "Der erste Bot", "tage": "Tag 1 bis 7", "ziel": "Am Ende läuft ein Bot auf deinem Testserver und reagiert auf einen Befehl.", "meilensteine": ["Testserver und Bot-Konto eingerichtet", "Ersten Befehl gebaut", "Zugangsschlüssel sicher abgelegt, nicht im Code"]},
+        {"nr": 2, "name": "Ein Bot, der etwas Nützliches kann", "tage": "Tag 8 bis 14", "ziel": "Am Ende löst dein Bot eine echte Aufgabe.", "meilensteine": ["Eine Aufgabe ausgewählt, die Moderatoren Zeit kostet", "Funktion gebaut und getestet", "Bot läuft dauerhaft online"]},
+        {"nr": 3, "name": "Auf einem echten Server", "tage": "Tag 15 bis 22", "ziel": "Am Ende nutzt ein fremder Server deinen Bot.", "meilensteine": ["Drei Server-Betreiber gefragt, ob sie testen", "Bot auf einem Server eingerichtet", "Fehler aus der ersten Woche behoben"]},
+        {"nr": 4, "name": "Vom Bot zum Angebot", "tage": "Tag 23 bis 30", "ziel": "Am Ende hast du ein Angebot für Bots nach Wunsch.", "meilensteine": ["Seite, die zeigt, was dein Bot kann", "Preis für einen Bot nach Wunsch festgelegt", "Zehn Server-Betreiber angeschrieben"]}
+      ]
+    },
+    {
+      "id": "automation",
+      "name": "KI-Chatbots und Automationen für Firmen und Creator",
+      "bereich": "ki",
+      "kurz": "Du baust Chatbots und kleine Automationen, die jemandem jede Woche Arbeit abnehmen.",
+      "ehrlich": "Firmen vertrauen Jugendlichen ihre Abläufe nicht leicht an. Du brauchst ein Beispiel, das wirklich läuft, und viel Geduld beim Erklären. Geht eine Automation kaputt, ruft der Kunde dich an.",
+      "recht": ["Sobald du mit Kundendaten arbeitest, gilt der Datenschutz. Der Kunde bleibt verantwortlich, und ihr braucht dafür eine schriftliche Vereinbarung.", "Ein Chatbot muss sagen, dass er eine KI ist.", "Unter 18 brauchst du für Aufträge die Zustimmung deiner Eltern. Wer regelmäßig Geld verdient, muss ein Gewerbe anmelden."],
+      "schwierigkeit": "hoch",
+      "erstesGeld": "üblicherweise nach ein bis drei Monaten",
+      "ersterSchritt": "Drei Selbstständige oder Creator fragen, welche Aufgabe sie jede Woche am meisten nervt.",
+      "brauchtLaptop": true,
+      "verfuegbar": false,
+      "profil": {"technik": 3, "kunden": 2, "tempo": 1},
+      "vertiefung": [
+        {"frage": "Für wen willst du bauen?", "antworten": ["Betriebe in meiner Nähe", "Creator und Streamer", "Online-Shops", "Vereine"], "wozu": "Legt fest, wen du zuerst fragst."},
+        {"frage": "Was hast du schon gebaut?", "antworten": ["Eine Automation oder einen Chatbot", "Eine Website oder App", "Noch nichts"], "wozu": "Bestimmt, wie einfach dein erstes Beispiel ist."},
+        {"frage": "Kennst du jemanden, der so etwas brauchen könnte?", "antworten": ["Ja, mehrere", "Eine Person", "Nein"], "wozu": "Wer jemanden kennt, baut das erste Beispiel für diese Person."}
+      ],
+      "etappen": [
+        {"nr": 1, "name": "Ein Beispiel, das läuft", "tage": "Tag 1 bis 7", "ziel": "Am Ende hast du eine Automation gebaut, die du vorführen kannst.", "meilensteine": ["Werkzeug ausgewählt und eingerichtet", "Eine einfache Automation für dich selbst gebaut", "Kurzes Video, das zeigt, wie sie arbeitet"]},
+        {"nr": 2, "name": "Zuhören", "tage": "Tag 8 bis 14", "ziel": "Am Ende kennst du drei Aufgaben, die echte Leute loswerden wollen.", "meilensteine": ["Liste mit 20 möglichen Kunden", "Mit sechs von ihnen gesprochen", "Die Aufgabe ausgewählt, die am häufigsten genannt wurde"]},
+        {"nr": 3, "name": "Der erste echte Einsatz", "tage": "Tag 15 bis 22", "ziel": "Am Ende läuft eine Automation bei jemand anderem.", "meilensteine": ["Mit einem Kunden Ziel und Umfang schriftlich festgelegt", "Automation gebaut und mit ihm getestet", "Datenschutz geklärt und Übergabe gemacht"]},
+        {"nr": 4, "name": "Angebot", "tage": "Tag 23 bis 30", "ziel": "Am Ende hast du ein klares Angebot mit Preis.", "meilensteine": ["Ergebnis des ersten Einsatzes in Zahlen aufgeschrieben", "Angebot mit festem Preis und Betreuung pro Monat", "Zehn weiteren möglichen Kunden vorgestellt"]}
+      ]
+    },
+    {
+      "id": "shops",
+      "name": "Online-Shops für junge Marken einrichten",
+      "bereich": "ki",
+      "kurz": "Du richtest für kleine Marken und Läden einen Online-Shop ein, mit Produkten, Bezahlung und Versand.",
+      "ehrlich": "Ein Shop hat viele rechtliche Pflichten, und Fehler können den Kunden Geld kosten. Viele kleine Marken haben kaum Budget. Ohne einen Beispiel-Shop glaubt dir niemand.",
+      "recht": ["Ein Shop braucht Impressum, Datenschutzerklärung, AGB und Widerrufsbelehrung. Die Texte liefert der Kunde oder ein Rechtstext-Dienst, nicht du.", "Verantwortlich für den Shop ist der Kunde. Halte schriftlich fest, was du einrichtest und was nicht.", "Unter 18 brauchst du für Aufträge die Zustimmung deiner Eltern. Wer regelmäßig Geld verdient, muss ein Gewerbe anmelden."],
+      "schwierigkeit": "mittel bis hoch",
+      "erstesGeld": "üblicherweise nach ein bis drei Monaten",
+      "ersterSchritt": "Drei Shops kleiner Marken anschauen und aufschreiben, was beim Bestellen hakt.",
+      "brauchtLaptop": true,
+      "verfuegbar": false,
+      "profil": {"kunden": 2, "design": 2, "verkaufen": 2, "technik": 2},
+      "vertiefung": [
+        {"frage": "Für wen willst du Shops einrichten?", "antworten": ["Kleine Modemarken", "Läden in meiner Nähe", "Creator mit eigenen Produkten", "Vereine"], "wozu": "Legt fest, wie dein Beispiel-Shop aussieht."},
+        {"frage": "Kennst du ein Shop-System?", "antworten": ["Ja, Shopify", "Ja, ein anderes", "Nein"], "wozu": "Der Plan baut auf einem System auf."},
+        {"frage": "Kennst du jemanden, der etwas verkauft und keinen Shop hat?", "antworten": ["Ja", "Vielleicht", "Nein"], "wozu": "Wer jemanden kennt, startet dort."}
+      ],
+      "etappen": [
+        {"nr": 1, "name": "Beispiel-Shop", "tage": "Tag 1 bis 7", "ziel": "Am Ende hast du einen Test-Shop, in dem man eine Bestellung durchspielen kann.", "meilensteine": ["Shop-System im Testmodus eingerichtet", "Fünf Beispielprodukte mit Bildern und Texten", "Testbestellung von Anfang bis Ende durchgespielt"]},
+        {"nr": 2, "name": "Angebot", "tage": "Tag 8 bis 14", "ziel": "Am Ende weißt du genau, was du anbietest und was nicht.", "meilensteine": ["Liste, was zu einem fertigen Shop gehört", "Festgelegt, welche Rechtstexte der Kunde selbst besorgt", "Preis und Dauer festgelegt"]},
+        {"nr": 3, "name": "Marken ansprechen", "tage": "Tag 15 bis 22", "ziel": "Am Ende haben 20 Marken oder Läden dein Beispiel gesehen.", "meilensteine": ["Liste mit 30 Marken und Läden ohne guten Shop", "20 Nachrichten mit Link zum Beispiel verschickt", "Mit jedem gesprochen, der antwortet"]},
+        {"nr": 4, "name": "Der erste Shop", "tage": "Tag 23 bis 30", "ziel": "Am Ende richtest du einen echten Shop ein oder weißt, woran es hängt.", "meilensteine": ["Auftrag schriftlich vereinbart", "Shop eingerichtet und mit dem Kunden getestet", "Übergabe mit kurzer Anleitung gemacht"]}
+      ]
+    },
+    {
+      "id": "kiwerbung",
+      "name": "KI-Werbeclips und KI-Bilder für Marken",
+      "bereich": "ki",
+      "kurz": "Du erstellst mit KI Produktbilder und kurze Werbeclips für kleine Marken und Läden.",
+      "ehrlich": "Die Werkzeuge kosten Geld, und die Qualität muss wirklich gut sein, sonst nimmt es keine Marke. Viele probieren das gerade aus. Du brauchst ein Auge dafür, was gut aussieht.",
+      "recht": ["Erzeuge keine echten Personen, fremden Marken oder Figuren. Für Stimmen und Gesichter echter Menschen brauchst du ihre Erlaubnis.", "Täuschend echte KI-Bilder und KI-Videos müssen als KI-erstellt gekennzeichnet werden. Sag das auch deinem Kunden.", "Prüf in den Regeln des KI-Werkzeugs, ob du die Ergebnisse geschäftlich nutzen darfst. Unter 18 brauchst du für Aufträge deine Eltern."],
+      "schwierigkeit": "mittel",
+      "erstesGeld": "üblicherweise nach ein bis drei Monaten",
+      "ersterSchritt": "Für ein Produkt von zu Hause drei KI-Werbebilder erstellen.",
+      "brauchtLaptop": false,
+      "verfuegbar": false,
+      "profil": {"design": 3, "schnitt": 2, "kunden": 2, "tempo": 1},
+      "vertiefung": [
+        {"frage": "Was willst du erstellen?", "antworten": ["Produktbilder", "Kurze Werbeclips", "Beides"], "wozu": "Bilder sind der leichtere Einstieg."},
+        {"frage": "Für wen?", "antworten": ["Kleine Modemarken", "Läden und Restaurants in meiner Nähe", "Online-Shops", "Creator"], "wozu": "Legt fest, welche Beispiele du baust."},
+        {"frage": "Kannst du Geld für KI-Werkzeuge einsetzen?", "antworten": ["Nein", "Bis 20 € im Monat", "Mehr"], "wozu": "Ohne Budget startest du mit kostenlosen Kontingenten."}
+      ],
+      "etappen": [
+        {"nr": 1, "name": "Werkzeuge beherrschen", "tage": "Tag 1 bis 7", "ziel": "Am Ende bekommst du mit KI zuverlässig ein gutes Bild hin.", "meilensteine": ["Zwei Werkzeuge ausprobiert und eins gewählt", "20 Bilder erstellt und die besten fünf ausgewählt", "Eigene Sammlung guter Anweisungen angelegt"]},
+        {"nr": 2, "name": "Beispiele für echte Marken", "tage": "Tag 8 bis 14", "ziel": "Am Ende hast du für drei echte kleine Marken je ein Beispiel.", "meilensteine": ["Drei kleine Marken ausgesucht", "Für jede drei Bilder oder einen Clip erstellt", "Beispiele an einem Ort gesammelt, den man verlinken kann"]},
+        {"nr": 3, "name": "Marken ansprechen", "tage": "Tag 15 bis 22", "ziel": "Am Ende haben 20 Marken ein Beispiel für ihr eigenes Produkt gesehen.", "meilensteine": ["Liste mit 30 Marken und Läden", "20 Nachrichten mit einem Beispiel verschickt", "Preis für ein Paket festgelegt"]},
+        {"nr": 4, "name": "Der erste Auftrag", "tage": "Tag 23 bis 30", "ziel": "Am Ende hast du ein bezahltes Paket geliefert oder einen klaren nächsten Schritt.", "meilensteine": ["Auf jede Antwort am selben Tag reagiert", "Ein Paket geliefert oder 20 weitere Marken angeschrieben", "Kennzeichnung als KI mit dem Kunden geklärt"]}
+      ]
+    },
+    {
+      "id": "vorlagen",
+      "name": "Notion-, Canva- und KI-Vorlagen verkaufen",
+      "bereich": "ki",
+      "kurz": "Du baust Vorlagen einmal und verkaufst sie oft: Lernpläne, Designs oder fertige KI-Anweisungen.",
+      "ehrlich": "Kostenlose Vorlagen gibt es überall. Die meisten Vorlagen verkaufen sich kein einziges Mal. Es klappt nur, wenn du ein Publikum hast oder ein sehr genaues Problem löst.",
+      "recht": ["Verkaufsplattformen und Bezahldienste verlangen meist 18 Jahre. Unter 18 läuft es über deine Eltern.", "Wer verkauft, muss das anmelden. Bei digitalen Produkten gelten besondere Regeln für Steuern und Widerruf, die Plattformen übernehmen oft einen Teil davon.", "Verkaufe nur Eigenes. Kopierte Vorlagen und geschützte Schriften oder Bilder sind tabu."],
+      "schwierigkeit": "mittel",
+      "erstesGeld": "üblicherweise nach zwei bis sechs Monaten",
+      "ersterSchritt": "Zehn Leute fragen, wofür sie eine fertige Vorlage bräuchten.",
+      "brauchtLaptop": false,
+      "verfuegbar": false,
+      "profil": {"design": 2, "schreiben": 2, "bauen": 2, "verkaufen": 2, "geduld": 1},
+      "vertiefung": [
+        {"frage": "Welche Vorlagen willst du bauen?", "antworten": ["Notion: Lernpläne und Organisation", "Canva: Designs für Social Media", "KI-Anweisungen und kleine Helfer", "Weiß ich noch nicht"], "wozu": "Legt dein Werkzeug fest."},
+        {"frage": "Für wen?", "antworten": ["Schüler und Studierende", "Creator", "Kleine Läden und Selbstständige", "Sportler und Vereine"], "wozu": "Du baust für Leute, die du fragen kannst."},
+        {"frage": "Hast du schon ein Publikum?", "antworten": ["Ja, einen Kanal mit Followern", "Einen kleinen Kanal", "Nein"], "wozu": "Ohne Publikum steht das Zeigen im Plan weiter vorn."}
+      ],
+      "etappen": [
+        {"nr": 1, "name": "Ein Problem finden", "tage": "Tag 1 bis 7", "ziel": "Am Ende kennst du eine Vorlage, die sich mehrere Leute wünschen.", "meilensteine": ["Zehn Leute befragt", "20 beliebte Vorlagen angeschaut und Lücken notiert", "Eine Idee ausgewählt"]},
+        {"nr": 2, "name": "Die erste Vorlage", "tage": "Tag 8 bis 14", "ziel": "Am Ende ist deine erste Vorlage fertig und von drei Leuten getestet.", "meilensteine": ["Vorlage gebaut", "Kurze Anleitung dazu geschrieben", "Von drei Leuten testen lassen und verbessert"]},
+        {"nr": 3, "name": "Zeigen", "tage": "Tag 15 bis 22", "ziel": "Am Ende haben Leute deine Vorlage gesehen und kostenlos ausprobiert.", "meilensteine": ["Kostenlose kleine Fassung online gestellt", "Fünf Beiträge gepostet, die die Vorlage in Benutzung zeigen", "Rückmeldungen gesammelt"]},
+        {"nr": 4, "name": "Verkaufen", "tage": "Tag 23 bis 30", "ziel": "Am Ende steht die Vorlage zum Verkauf, und du kennst deine Zahlen.", "meilensteine": ["Verkaufsweg eingerichtet, unter 18 mit den Eltern", "Preis festgelegt und Vorlage eingestellt", "Aufrufe und Verkäufe nach zwei Wochen ausgewertet"]}
+      ]
+    },
+    {
+      "id": "avatare",
+      "name": "KI-Avatare und Voiceover",
+      "bereich": "ki",
+      "kurz": "Du erstellst für Creator und kleine Firmen KI-Sprecher, Vertonungen und Avatar-Videos.",
+      "ehrlich": "Die Technik wird jeden Monat einfacher. Was heute ein Dienst ist, kann morgen jeder selbst. Geld gibt es nur, wenn du schneller und besser lieferst als der Kunde es allein könnte.",
+      "recht": ["Die Stimme oder das Gesicht eines echten Menschen darfst du nur mit seiner ausdrücklichen Erlaubnis nachbilden. Am besten schriftlich.", "Täuschend echte KI-Videos und KI-Stimmen müssen als KI-erstellt gekennzeichnet werden.", "Prüf, ob dein KI-Werkzeug die geschäftliche Nutzung erlaubt. Unter 18 brauchst du für Aufträge deine Eltern."],
+      "schwierigkeit": "mittel",
+      "erstesGeld": "üblicherweise nach ein bis drei Monaten",
+      "ersterSchritt": "Einen kurzen Text mit zwei KI-Stimmen vertonen und vergleichen.",
+      "brauchtLaptop": false,
+      "verfuegbar": false,
+      "profil": {"schnitt": 2, "technik": 2, "kunden": 2, "design": 1, "kamera": -1},
+      "vertiefung": [
+        {"frage": "Was willst du anbieten?", "antworten": ["Vertonung für Videos", "Avatar-Videos mit Sprecher", "Videos in andere Sprachen übersetzen", "Weiß ich noch nicht"], "wozu": "Legt dein erstes Beispiel fest."},
+        {"frage": "Für wen?", "antworten": ["Faceless-Kanäle", "Creator, die in mehr Sprachen wollen", "Kleine Firmen und Läden", "Erklärvideos für Schule und Vereine"], "wozu": "Bestimmt, wen du ansprichst."},
+        {"frage": "Kannst du Geld für KI-Werkzeuge einsetzen?", "antworten": ["Nein", "Bis 20 € im Monat", "Mehr"], "wozu": "Ohne Budget startest du mit kostenlosen Kontingenten."}
+      ],
+      "etappen": [
+        {"nr": 1, "name": "Werkzeuge beherrschen", "tage": "Tag 1 bis 7", "ziel": "Am Ende bekommst du eine Vertonung hin, die natürlich klingt.", "meilensteine": ["Zwei Werkzeuge ausprobiert und eins gewählt", "Fünf Texte vertont und verglichen", "Gelernt, wie man Betonung und Pausen steuert"]},
+        {"nr": 2, "name": "Drei Beispiele", "tage": "Tag 8 bis 14", "ziel": "Am Ende hast du drei fertige Beispiele, die du zeigen kannst.", "meilensteine": ["Drei kurze Videos mit Vertonung oder Avatar erstellt", "Alle als KI-erstellt gekennzeichnet", "Beispiele an einem Ort gesammelt, den man verlinken kann"]},
+        {"nr": 3, "name": "Kunden ansprechen", "tage": "Tag 15 bis 22", "ziel": "Am Ende haben 20 mögliche Kunden ein Beispiel gesehen.", "meilensteine": ["Liste mit 30 Creatorn oder Firmen", "20 Nachrichten mit einem passenden Beispiel verschickt", "Preis pro Minute oder pro Video festgelegt"]},
+        {"nr": 4, "name": "Der erste Auftrag", "tage": "Tag 23 bis 30", "ziel": "Am Ende hast du für jemand anderen geliefert oder einen klaren nächsten Schritt.", "meilensteine": ["Erlaubnis für Stimme oder Gesicht schriftlich eingeholt, falls nötig", "Ein Video geliefert oder 20 weitere Kunden angeschrieben", "Fester Ablauf von Text bis Abgabe"]}
+      ]
+    },
+    {
+      "id": "resellertools",
+      "name": "Tools für Reseller",
+      "bereich": "ki",
+      "kurz": "Du baust kleine Werkzeuge für Leute, die Sneaker, Kleidung oder Karten weiterverkaufen, zum Beispiel einen Gewinnrechner.",
+      "ehrlich": "Der Markt ist klein, und es gibt schon viele Tools. Reseller zahlen nur für etwas, das ihnen spürbar Geld oder Zeit bringt. Am besten klappt es, wenn du selbst verkaufst und weißt, was nervt.",
+      "recht": ["Daten automatisch von Plattformen abzurufen verstößt oft gegen deren Regeln. Bots, die Käufe automatisch abschließen, sind bei den meisten Shops verboten.", "Speichert dein Tool Daten von Nutzern, brauchst du eine Datenschutzerklärung und ein Impressum.", "Nimmst du Geld ein, musst du das anmelden. Bezahldienste verlangen meist 18 Jahre."],
+      "schwierigkeit": "hoch",
+      "erstesGeld": "üblicherweise nach drei bis sechs Monaten, oft später",
+      "ersterSchritt": "Fünf Reseller fragen, welche Aufgabe sie am meisten Zeit kostet.",
+      "brauchtLaptop": true,
+      "verfuegbar": false,
+      "profil": {"technik": 3, "verkaufen": 2, "bauen": 2, "geduld": 1},
+      "vertiefung": [
+        {"frage": "Verkaufst du selbst?", "antworten": ["Ja, regelmäßig", "Manchmal", "Nein, aber ich kenne Reseller", "Nein"], "wozu": "Wer selbst verkauft, baut zuerst für sich."},
+        {"frage": "Für welchen Bereich?", "antworten": ["Sneaker", "Kleidung auf Vinted und Depop", "Trading Cards", "Egal"], "wozu": "Legt fest, wen du fragst."},
+        {"frage": "Was hast du schon gebaut?", "antworten": ["Eine App oder Automation", "Eine Website", "Eine Tabelle mit Formeln", "Noch nichts"], "wozu": "Die erste Version darf auch eine gute Tabelle sein."}
+      ],
+      "etappen": [
+        {"nr": 1, "name": "Das Problem finden", "tage": "Tag 1 bis 7", "ziel": "Am Ende kennst du eine Aufgabe, die Reseller wirklich Zeit oder Geld kostet.", "meilensteine": ["Mit fünf Resellern gesprochen", "Zehn Aufgaben gesammelt und sortiert", "Eine Aufgabe ausgewählt, die ohne verbotenes Abrufen von Daten lösbar ist"]},
+        {"nr": 2, "name": "Erste Version", "tage": "Tag 8 bis 14", "ziel": "Am Ende gibt es ein einfaches Werkzeug, das diese Aufgabe löst.", "meilensteine": ["Einfachste Lösung gebaut, auch als Tabelle oder kleine Web-App", "Selbst mit echten Zahlen getestet", "Online gestellt"]},
+        {"nr": 3, "name": "Testen mit Resellern", "tage": "Tag 15 bis 22", "ziel": "Am Ende nutzen fünf Reseller dein Werkzeug.", "meilensteine": ["Fünf Tester eingeladen", "Rückmeldungen wörtlich aufgeschrieben", "Die wichtigste Verbesserung umgesetzt"]},
+        {"nr": 4, "name": "Zeigen und entscheiden", "tage": "Tag 23 bis 30", "ziel": "Am Ende ist das Tool in Reseller-Communitys bekannt, und du weißt, ob jemand zahlen würde.", "meilensteine": ["In drei Communitys vorgestellt", "Fünf Nutzer gefragt, was ihnen das Tool wert wäre", "Entscheidung: kostenlos lassen, Preis verlangen oder nächste Idee"]}
+      ]
+    }
+  ]
+}

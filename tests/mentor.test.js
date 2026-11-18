@@ -22,8 +22,8 @@ test("ohne Antworten sagt der Kontext, dass der Mentor die Person noch nicht ken
 
 test("mit Plan kennt der Mentor Antworten, Weg und die aktuelle Aufgabe", () => {
   const k = baueKontext({ ton: 1, fragen, antworten, weg, vertiefung, schritte: plan });
-  assert.match(k, /24 von 24/);
-  assert.match(k, /Websites für Betriebe vor Ort/);
+  assert.match(k, /26 von 26/);
+  assert.match(k, /Websites mit KI für Läden/);
   assert.match(k, /Cafés, Restaurants, Imbisse/);
   assert.match(k, /davon 2 geschafft/);
   assert.match(k, /Aktuelle Aufgabe, Tag 3/);

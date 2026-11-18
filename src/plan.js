@@ -15,7 +15,7 @@ function kopie(schritt) {
   return { ...schritt, tun: [...schritt.tun] };
 }
 
-// antworten: Antworten auf die 25 Fragen, vertiefung: Antworten auf die Vertiefungsfragen
+// antworten: Antworten auf die 26 Fragen, vertiefung: Antworten auf die Vertiefungsfragen
 export function erstellePlan(weg, antworten, vertiefung) {
   const unter18 = antworten[F_ALTER] === 0 || antworten[F_ALTER] === 1;
   const wenigZeit = antworten[F_ZEIT] === 0;

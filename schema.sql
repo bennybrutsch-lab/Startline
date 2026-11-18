@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS sitzungen (
   ablauf TEXT NOT NULL
 );
 
--- Die Antworten auf die 25 Fragen. Pro Nutzer und Frage eine Zeile.
+-- Die Antworten auf die 26 Fragen. Pro Nutzer und Frage eine Zeile.
 CREATE TABLE IF NOT EXISTS antworten (
   nutzer_id INTEGER NOT NULL REFERENCES nutzer(id) ON DELETE CASCADE,
   frage_nr INTEGER NOT NULL,

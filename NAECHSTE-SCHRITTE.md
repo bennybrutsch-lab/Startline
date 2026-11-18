@@ -1,6 +1,6 @@
 # Nächste Schritte
 
-Stand: 16.11.2026. Diese Datei hält fest, was entschieden ist und als Nächstes kommt.
+Stand: 18.11.2026. Diese Datei hält fest, was entschieden ist und als Nächstes kommt.
 
 ## Entschieden: 26 Wege statt 6
 
@@ -47,16 +47,24 @@ Gestrichen: Eventfotografie und alles, was nach Nebenjob für Erwachsene klingt,
 - Der Website-Weg behält seinen handgeschriebenen Plan.
 - Die Fragen schlagen direkt drei aus allen 26 Wegen vor.
 
-## Als Nächstes
+## Erledigt: Teil 1, Fragen und Steckbriefe
 
-**Teil 1: Fragen und Steckbriefe**
 - Antworten sammeln Eigenschaften (Kamera, Schnitt, Design, Technik, Verkaufen, Kunden, Eigenes bauen, Tempo, Geduld, Community, Schreiben, Startgeld) statt Punkte für sechs Richtungen.
-- Jeder Weg bekommt ein Profil aus diesen Eigenschaften. Die drei Wege mit der besten Übereinstimmung werden vorgeschlagen, der dritte aus einem anderen Bereich.
-- Zwei neue Fragen: Welcher Bereich reizt dich am meisten? Was machst du am Handy oder Laptop am meisten? Damit 26 Fragen.
-- Steckbriefe für alle 25 neuen Wege in `daten/wege.json`.
+- Jeder Weg hat ein Profil aus diesen Eigenschaften. Die drei Wege mit der besten Übereinstimmung werden vorgeschlagen, der dritte aus einem anderen Bereich.
+- Zwei neue Fragen, damit 26: Welcher Bereich reizt dich am meisten? Was machst du am Handy oder Laptop am meisten?
+- Steckbriefe für alle 26 Wege in `daten/wege.json`. Der Website-Weg heißt jetzt überall „Websites mit KI für Läden“.
+- Die 25 neuen Wege werden vorgeschlagen, lassen sich aber noch nicht wählen („Plan kommt bald“).
+
+Noch zu prüfen von einem Menschen:
+- Die Texte der Steckbriefe gegenlesen, vor allem die ehrlichen Sätze und die rechtlichen Hinweise. Mindestalter und Regeln der Plattformen ändern sich.
+- Die Profile der Wege in `daten/wege.json` sind eine erste Einschätzung. Mit echten Testpersonen nachjustieren. Reselling-Wege kommen bei zufälligen Antworten etwas häufiger vor, Discord-Bots und Online-Shops seltener.
+
+## Als Nächstes
 
 **Teil 2: Plan-Erstellung durch die KI**
 - Beim Wählen eines Weges schreibt die KI 30 Tage aus dem Steckbrief, als festes Format, geprüft vor dem Speichern.
+- Die neuen Wege haben drei Vertiefungsfragen, der Website-Weg sechs. Der Text „Noch sechs Fragen“ in der App muss dann die echte Zahl zeigen.
+- `src/plan.js` kennt bisher nur die Regeln des Website-Wegs.
 - Ohne Schlüssel bleiben die neuen Wege auf „Plan kommt bald“.
 
 ## Offen bei Benny
