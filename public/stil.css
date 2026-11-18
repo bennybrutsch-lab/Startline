@@ -1,68 +1,213 @@
-/* Bewusst schlicht. Das Design kommt nach dem MVP. */
+/* Das Aussehen von Startline: Weiß, Schwarz und Türkis.
+   Die Farben und Abstände stehen ganz oben als Variablen. Wer etwas ändern will, fängt dort an. */
+:root {
+  --schwarz: #0B0C10;
+  --weiss: #FFFFFF;
+  --tuerkis: #12BFB2;
+  --tuerkis-dunkel: #087F77; /* Türkis für Schrift auf Weiß, damit sie gut lesbar bleibt */
+  --tuerkis-hell: #E4F8F6;
+  --grau-text: #555B66;
+  --grau-linie: #DFE2E7;
+  --grau-flaeche: #F4F5F7;
+  --rot: #B3261E;
+  --rund: 14px;
+  --rund-klein: 10px;
+  --schatten: 0 1px 2px rgba(11, 12, 16, .06), 0 6px 18px rgba(11, 12, 16, .06);
+}
+
 * { box-sizing: border-box; }
 /* Was das Attribut "hidden" trägt, bleibt unsichtbar, egal welche Regel sonst gilt. */
 [hidden] { display: none !important; }
-body { margin: 0; font: 17px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; color: #111; background: #fff; }
-header { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 16px; border-bottom: 1px solid #ccc; }
-main { max-width: 640px; margin: 0 auto; padding: 24px 16px 64px; }
-h1 { font-size: 1.5rem; line-height: 1.25; margin: 0 0 12px; }
-h2 { font-size: 1.2rem; margin: 0 0 6px; }
+
+body {
+  margin: 0;
+  font: 17px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: var(--schwarz);
+  background: var(--weiss);
+  -webkit-text-size-adjust: 100%;
+}
+main { max-width: 640px; margin: 0 auto; padding: 28px 18px 72px; }
+h1 { font-size: 1.7rem; line-height: 1.2; letter-spacing: -.02em; font-weight: 800; margin: 0 0 12px; text-wrap: balance; }
+h2 { font-size: 1.2rem; line-height: 1.3; letter-spacing: -.01em; font-weight: 750; margin: 0 0 6px; }
+h3 { font-size: 1.05rem; line-height: 1.35; margin: 0 0 4px; }
 p { margin: 0 0 12px; }
-label { display: block; margin: 12px 0 4px; font-weight: 600; }
-input { width: 100%; padding: 10px; font: inherit; border: 1px solid #777; border-radius: 6px; }
-button { font: inherit; padding: 10px 16px; border: 1px solid #111; border-radius: 6px; background: #111; color: #fff; cursor: pointer; }
-button.zweit { background: #fff; color: #111; }
-button:disabled { opacity: .45; cursor: not-allowed; }
-button:focus-visible, input:focus-visible { outline: 3px solid #12BFB2; outline-offset: 2px; }
-.reihe { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
-.klein { font-size: .85rem; color: #555; text-transform: uppercase; letter-spacing: .06em; }
-.fehler { color: #a11; font-weight: 600; }
-progress { width: 100%; height: 10px; }
-.antworten { display: flex; flex-direction: column; gap: 8px; margin: 16px 0; }
-.antworten button { text-align: left; background: #fff; color: #111; border-color: #777; }
-.antworten button[aria-pressed="true"] { border: 3px solid #111; font-weight: 700; padding: 8px 14px; }
-.vorschlag { border: 1px solid #777; border-radius: 8px; padding: 14px; margin-bottom: 14px; }
-.vorschlag ul { margin: 6px 0 10px; padding-left: 1.2em; }
-.vorschlag .daten { font-size: .93rem; color: #444; }
-.marke { display: inline-block; font-size: .8rem; border: 1px solid #777; border-radius: 99px; padding: 0 8px; margin-left: 6px; }
-fieldset { border: 1px solid #777; border-radius: 8px; padding: 12px 14px; margin: 0 0 14px; }
-legend { font-weight: 700; padding: 0 6px; }
-fieldset label { display: flex; gap: 8px; align-items: flex-start; font-weight: 400; margin: 8px 0 0; }
-fieldset input { width: auto; margin-top: 5px; }
-.kasten { border-left: 4px solid #12BFB2; padding: 2px 0 2px 12px; margin: 0 0 18px; }
-.kasten ul { margin: 4px 0 0; padding-left: 1.2em; }
-.etappe { border-top: 3px solid #111; margin-top: 26px; padding-top: 10px; }
-.tag { border-top: 1px solid #ccc; padding: 12px 0; }
-.tag h3 { margin: 0 0 4px; font-size: 1.05rem; }
-.tag ol { margin: 4px 0 8px; padding-left: 1.3em; }
-.tag .daten { font-size: .9rem; color: #444; margin: 0 0 4px; }
-.hinweis { background: #FFF4D6; border-radius: 6px; padding: 6px 10px; font-size: .93rem; }
-nav { display: flex; gap: 6px; }
-nav button { padding: 6px 12px; }
-nav button[aria-current="page"] { background: #111; color: #fff; }
-header { flex-wrap: wrap; }
-#heute-schritte { padding-left: 1.3em; margin: 8px 0 12px; }
-#heute-schritte li { margin-bottom: 6px; }
-.daten { font-size: .93rem; color: #444; }
-.tag.erledigt h3 { text-decoration: line-through; color: #555; }
-.tag.erledigt ol, .tag.erledigt .daten, .tag.erledigt .hinweis { display: none; }
-.tag.naechster { border-left: 4px solid #12BFB2; padding-left: 12px; }
-.karte { border: 1px solid #777; border-radius: 8px; padding: 14px; margin: 14px 0; }
+#laden { color: var(--grau-text); }
+
+/* ---------- Kopf und Menü ---------- */
+header {
+  position: sticky; top: 0; z-index: 5;
+  display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px 14px;
+  padding: 10px 18px;
+  background: rgba(255, 255, 255, .94);
+  border-bottom: 1px solid var(--grau-linie);
+}
+.logo { display: inline-flex; align-items: center; gap: 8px; font-weight: 800; font-size: 1.15rem; letter-spacing: -.02em; }
+.logo img { display: block; }
+#konto { display: inline-flex; align-items: center; gap: 10px; min-width: 0; }
+#konto-email { font-size: .85rem; color: var(--grau-text); max-width: 190px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+nav { display: flex; gap: 4px; padding: 4px; background: var(--grau-flaeche); border-radius: 99px; }
+nav button, nav button.zweit {
+  padding: 7px 16px; border: 0; border-radius: 99px;
+  background: transparent; color: var(--grau-text); font-weight: 650; font-size: .95rem;
+}
+nav button:hover { color: var(--schwarz); background: transparent; }
+nav button[aria-current="page"] { background: var(--schwarz); color: var(--weiss); }
+
+/* ---------- Knöpfe und Felder ---------- */
+button {
+  font: inherit; font-weight: 650;
+  padding: 11px 18px; min-height: 44px;
+  border: 2px solid var(--schwarz); border-radius: var(--rund-klein);
+  background: var(--schwarz); color: var(--weiss);
+  cursor: pointer;
+  transition: background-color .12s, border-color .12s, color .12s, transform .06s;
+}
+button:hover { background: #23262E; border-color: #23262E; }
+button:active { transform: translateY(1px); }
+button.zweit { background: var(--weiss); color: var(--schwarz); border-color: var(--grau-linie); }
+button.zweit:hover { background: var(--weiss); border-color: var(--schwarz); }
+button.akzent { background: var(--tuerkis); border-color: var(--tuerkis); color: var(--schwarz); }
+button.akzent:hover { background: #0FAEA2; border-color: #0FAEA2; }
+button.gross { width: 100%; padding: 15px 18px; font-size: 1.08rem; border-radius: var(--rund); }
+button.klein-knopf { padding: 5px 12px; min-height: 34px; font-size: .85rem; border-width: 1px; }
+button:disabled { opacity: .45; cursor: not-allowed; transform: none; }
+button:focus-visible, input:focus-visible, textarea:focus-visible, summary:focus-visible {
+  outline: 3px solid var(--tuerkis); outline-offset: 2px;
+}
+
+label { display: block; margin: 14px 0 5px; font-weight: 650; font-size: .95rem; }
+input, textarea {
+  width: 100%; padding: 12px; font: inherit; color: inherit;
+  border: 1.5px solid var(--grau-linie); border-radius: var(--rund-klein); background: var(--weiss);
+}
+input:hover, textarea:hover { border-color: #B9BEC8; }
+textarea { resize: vertical; }
+input[type="radio"] { width: 20px; height: 20px; padding: 0; margin: 2px 0 0; flex: none; accent-color: var(--tuerkis-dunkel); }
+
+.reihe { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+.klein { font-size: .78rem; font-weight: 700; color: var(--tuerkis-dunkel); text-transform: uppercase; letter-spacing: .09em; margin-bottom: 6px; }
+.daten { font-size: .93rem; color: var(--grau-text); }
+.fehler { color: var(--rot); font-weight: 650; }
+.akzent-text { color: var(--tuerkis); }
+
+progress { width: 100%; height: 8px; margin: 0 0 20px; border: 0; border-radius: 99px; overflow: hidden; background: var(--grau-flaeche); appearance: none; -webkit-appearance: none; display: block; }
+progress::-webkit-progress-bar { background: var(--grau-flaeche); border-radius: 99px; }
+progress::-webkit-progress-value { background: var(--tuerkis); border-radius: 99px; }
+progress::-moz-progress-bar { background: var(--tuerkis); border-radius: 99px; }
+
+/* ---------- Bausteine ---------- */
+.karte { border: 1px solid var(--grau-linie); border-radius: var(--rund); padding: 18px; margin: 16px 0; background: var(--weiss); box-shadow: var(--schatten); }
 .karte .klein { margin-bottom: 4px; }
 .karte h2 { margin-bottom: 6px; }
+.kasten { background: var(--grau-flaeche); border-radius: var(--rund-klein); padding: 12px 14px; margin: 0 0 20px; font-size: .95rem; }
+.kasten p { margin: 2px 0 0; color: var(--grau-text); }
+.kasten ul { margin: 6px 0 0; padding-left: 1.2em; }
+.kasten li { margin-bottom: 4px; }
+.kasten .reihe { margin-top: 12px; }
+.hinweis { background: var(--tuerkis-hell); border-left: 4px solid var(--tuerkis); border-radius: 0 var(--rund-klein) var(--rund-klein) 0; padding: 9px 12px; font-size: .93rem; }
+.marke { display: inline-block; font-size: .75rem; font-weight: 700; line-height: 1.7; vertical-align: middle; background: var(--tuerkis-hell); color: var(--tuerkis-dunkel); border-radius: 99px; padding: 0 10px; margin-left: 6px; letter-spacing: 0; text-transform: none; }
 main ol { padding-left: 1.3em; }
 main ol li { margin-bottom: 8px; }
-.kasten p { margin: 2px 0 0; }
-.auswahl { display: flex; flex-direction: column; gap: 10px; margin: 18px 0; }
-.auswahl button { text-align: left; padding: 14px 16px; display: flex; flex-direction: column; gap: 3px; }
-.auswahl button strong { font-size: 1.1rem; }
-.auswahl button span { font-size: .93rem; opacity: .85; }
-textarea { width: 100%; padding: 10px; font: inherit; border: 1px solid #777; border-radius: 6px; resize: vertical; }
-textarea:focus-visible { outline: 3px solid #12BFB2; outline-offset: 2px; }
-.chat { display: flex; flex-direction: column; gap: 10px; margin: 16px 0; }
-.blase { max-width: 88%; padding: 10px 14px; border-radius: 14px; white-space: pre-wrap; overflow-wrap: anywhere; }
-.blase.mentor { align-self: flex-start; background: #EEF0F2; border-bottom-left-radius: 4px; }
-.blase.ich { align-self: flex-end; background: #111; color: #fff; border-bottom-right-radius: 4px; }
-.blase.leise { color: #555; font-style: italic; }
-details { margin-top: 22px; border-top: 1px solid #ccc; padding-top: 12px; }
-summary { cursor: pointer; font-weight: 600; margin-bottom: 10px; }
+
+/* ---------- Anmelden ---------- */
+.held { background: var(--schwarz); color: var(--weiss); border-radius: 22px; padding: 28px 22px 24px; margin-bottom: 18px; }
+.held img { display: block; margin-bottom: 18px; }
+.held h1 { font-size: 1.9rem; }
+.held p { color: #C9CDD6; }
+.schritte-kurz { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 0; margin: 20px 0 0; }
+.schritte-kurz li { border: 1px solid #2B2E38; border-radius: var(--rund-klein); padding: 10px 8px; font-size: .8rem; line-height: 1.3; color: #C9CDD6; text-align: center; }
+.schritte-kurz strong { display: block; font-size: 1.5rem; line-height: 1.2; color: var(--tuerkis); letter-spacing: -.02em; }
+#formular-konto { margin-top: 0; }
+#formular-konto label:first-child { margin-top: 0; }
+
+/* ---------- Startseite ---------- */
+.auswahl { display: flex; flex-direction: column; gap: 12px; margin: 20px 0; }
+.auswahl button { position: relative; text-align: left; padding: 18px 46px 18px 18px; border-radius: var(--rund); display: flex; flex-direction: column; gap: 3px; font-weight: 400; box-shadow: var(--schatten); }
+.auswahl button::after { content: "→"; position: absolute; right: 18px; top: 50%; transform: translateY(-50%); font-size: 1.3rem; color: var(--tuerkis); }
+.auswahl button strong { font-size: 1.12rem; font-weight: 750; letter-spacing: -.01em; }
+.auswahl button span { font-size: .93rem; opacity: .8; }
+
+/* ---------- Fragen ---------- */
+.antworten { display: flex; flex-direction: column; gap: 10px; margin: 18px 0; }
+.antworten button { position: relative; text-align: left; padding: 14px 44px 14px 16px; background: var(--weiss); color: var(--schwarz); border: 2px solid var(--grau-linie); border-radius: var(--rund); font-weight: 500; }
+.antworten button:hover { background: var(--weiss); border-color: var(--schwarz); }
+.antworten button[aria-pressed="true"] { border-color: var(--tuerkis); background: var(--tuerkis-hell); font-weight: 700; }
+.antworten button[aria-pressed="true"]::after { content: "✓"; position: absolute; right: 16px; top: 50%; transform: translateY(-50%); font-weight: 800; color: var(--tuerkis-dunkel); }
+
+/* ---------- Die drei Vorschläge ---------- */
+.vorschlag { border: 1px solid var(--grau-linie); border-radius: var(--rund); padding: 18px; margin-bottom: 16px; box-shadow: var(--schatten); }
+.vorschlag:first-child { border: 2px solid var(--schwarz); }
+.vorschlag:first-child::before { content: "Passt am besten"; display: inline-block; margin-bottom: 10px; padding: 2px 12px; border-radius: 99px; background: var(--tuerkis); color: var(--schwarz); font-size: .78rem; font-weight: 750; }
+.vorschlag h2 { font-size: 1.25rem; }
+.vorschlag ul { margin: 6px 0 12px; padding-left: 1.2em; font-size: .95rem; }
+.vorschlag li { margin-bottom: 3px; }
+.vorschlag .daten { background: var(--grau-flaeche); border-radius: var(--rund-klein); padding: 10px 12px; }
+.vorschlag button { width: 100%; }
+
+/* ---------- Vertiefung und Mentor einrichten ---------- */
+fieldset { border: 1px solid var(--grau-linie); border-radius: var(--rund); padding: 14px 16px 16px; margin: 0 0 14px; }
+legend { font-weight: 750; padding: 0 6px; }
+fieldset label { display: flex; gap: 10px; align-items: flex-start; font-weight: 400; font-size: 1rem; margin: 6px 0 0; padding: 8px 10px; border-radius: var(--rund-klein); cursor: pointer; }
+fieldset label:hover { background: var(--grau-flaeche); }
+fieldset label:has(input:checked) { background: var(--tuerkis-hell); }
+#vertiefung-warten { background: var(--tuerkis-hell); border-radius: var(--rund-klein); padding: 10px 12px; font-weight: 650; }
+
+/* ---------- Heute ---------- */
+.aufgabe { padding: 22px 20px; margin-top: 0; }
+.aufgabe h1 { font-size: 1.5rem; }
+#heute-schritte { list-style: none; counter-reset: schritt; padding: 0; margin: 16px 0; }
+#heute-schritte li { counter-increment: schritt; position: relative; padding: 3px 0 3px 42px; margin-bottom: 12px; min-height: 30px; }
+#heute-schritte li::before { content: counter(schritt); position: absolute; left: 0; top: 1px; width: 30px; height: 30px; border-radius: 50%; background: var(--schwarz); color: var(--weiss); font-size: .9rem; font-weight: 750; display: grid; place-items: center; }
+#heute-fertig { font-weight: 650; border-top: 1px solid var(--grau-linie); padding-top: 14px; }
+#heute-hinweis { margin-bottom: 16px; }
+#heute-persoenlich { margin: 0 0 10px; }
+#heute-geschafft { background: var(--schwarz); color: var(--weiss); padding: 20px; border-radius: var(--rund); }
+#heute-geschafft strong { font-size: 1.25rem; letter-spacing: -.01em; }
+#heute-geschafft p { color: #C9CDD6; }
+#heute-geschafft button.zweit { background: transparent; color: var(--weiss); border-color: #3A3E4A; }
+#heute-geschafft button.zweit:hover { border-color: var(--tuerkis); }
+
+/* ---------- Der ganze Plan ---------- */
+.etappe { margin-top: 30px; padding: 14px 16px; background: var(--schwarz); color: var(--weiss); border-radius: var(--rund); }
+.etappe h2 { margin-bottom: 2px; }
+.etappe p { margin: 0; font-size: .93rem; color: #C9CDD6; }
+.tag { border-bottom: 1px solid var(--grau-linie); padding: 14px 4px; }
+.tag ol { margin: 6px 0 8px; padding-left: 1.3em; font-size: .97rem; }
+.tag .daten { font-size: .9rem; margin: 0 0 4px; }
+.tag.erledigt h3 { color: var(--grau-text); font-weight: 500; }
+.tag.erledigt h3::before { content: "✓ "; color: var(--tuerkis-dunkel); font-weight: 800; }
+.tag.erledigt ol, .tag.erledigt .daten, .tag.erledigt .hinweis { display: none; }
+.tag.naechster { border: 2px solid var(--tuerkis); border-radius: var(--rund); padding: 14px; margin: 10px 0; background: var(--weiss); }
+#knopf-plan-neu { margin-top: 24px; }
+
+/* ---------- Gespräch mit dem Mentor ---------- */
+.chat { display: flex; flex-direction: column; gap: 10px; margin: 18px 0; }
+.blase { max-width: 88%; padding: 11px 15px; border-radius: 18px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.blase.mentor { align-self: flex-start; background: var(--grau-flaeche); border-bottom-left-radius: 5px; }
+.blase.ich { align-self: flex-end; background: var(--schwarz); color: var(--weiss); border-bottom-right-radius: 5px; }
+.blase.leise { color: var(--grau-text); font-style: italic; }
+details { margin-top: 26px; border-top: 1px solid var(--grau-linie); padding-top: 14px; }
+summary { cursor: pointer; font-weight: 650; margin-bottom: 12px; border-radius: 6px; }
+
+/* ---------- Handy: das Menü sitzt unten am Daumen ---------- */
+@media (max-width: 640px) {
+  main { padding-bottom: 104px; }
+  h1 { font-size: 1.5rem; }
+  .held h1 { font-size: 1.65rem; }
+  #konto-email { display: none; }
+  nav {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 6;
+    gap: 0; padding: 6px 8px calc(6px + env(safe-area-inset-bottom));
+    background: var(--weiss); border-top: 1px solid var(--grau-linie); border-radius: 0;
+  }
+  nav button, nav button.zweit { flex: 1; padding: 10px 4px; min-height: 46px; border-radius: var(--rund-klein); }
+  nav button[aria-current="page"] { background: var(--schwarz); color: var(--weiss); }
+  .reihe button { flex: 1 1 auto; }
+}
+
+/* Wer Bewegungen am Gerät abgeschaltet hat, bekommt keine. */
+@media (prefers-reduced-motion: reduce) {
+  button { transition: none; }
+  button:active { transform: none; }
+}

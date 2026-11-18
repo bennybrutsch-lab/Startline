@@ -68,6 +68,12 @@ Noch zu prüfen von einem Menschen:
 
 Noch nicht mit der echten KI ausprobiert. Geprüft ist der ganze Ablauf mit einer nachgebauten Antwort der Schnittstelle. Wie gut die Pläne wirklich sind, zeigt sich erst mit Schlüssel.
 
+## Erledigt: Design
+
+- Aussehen in Weiß, Schwarz und Türkis mit dem Logo, für alle Ansichten.
+- Am Handy sitzt das Menü unten, am Rechner oben.
+- Farben und Rundungen stehen als Variablen oben in `public/stil.css`.
+
 ## Als Nächstes
 
 - Mit echtem Schlüssel für drei bis fünf verschiedene Wege einen Plan schreiben lassen und lesen: Sind die Aufgaben klein genug, bauen die Tage aufeinander auf, stehen die rechtlichen Hinweise an sinnvollen Tagen?
@@ -82,4 +88,4 @@ Noch nicht mit der echten KI ausprobiert. Geprüft ist der ganze Ablauf mit eine
 
 ## Später, nicht jetzt
 
-Design in Weiß, Schwarz und Türkis mit dem Logo, Bezahlung, Englisch, Altersprüfung, Impressum und Datenschutz, Begrenzung der Anmeldeversuche, „Ich hänge fest“-Knopf, Wochenrückblick.
+Bezahlung, Englisch, Altersprüfung, Impressum und Datenschutz, Begrenzung der Anmeldeversuche, „Ich hänge fest“-Knopf, Wochenrückblick.

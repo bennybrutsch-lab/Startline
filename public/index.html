@@ -4,18 +4,20 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Startline</title>
+  <meta name="theme-color" content="#0B0C10">
+  <link rel="icon" href="/symbol.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/stil.css">
 </head>
 <body>
   <header>
-    <strong>STARTLINE</strong>
+    <span class="logo"><img src="/zeichen.svg" alt="" width="30" height="30"><span>Startline</span></span>
     <nav id="menue" hidden aria-label="Bereiche">
       <button id="menue-start" type="button" class="zweit">Start</button>
       <button id="menue-heute" type="button" class="zweit" hidden>Heute</button>
       <button id="menue-plan" type="button" class="zweit">Plan</button>
       <button id="menue-mentor" type="button" class="zweit">Mentor</button>
     </nav>
-    <span id="konto" hidden><span id="konto-email"></span> <button id="abmelden" type="button">Abmelden</button></span>
+    <span id="konto" hidden><span id="konto-email"></span> <button id="abmelden" type="button" class="zweit klein-knopf">Abmelden</button></span>
   </header>
 
   <main>
@@ -23,9 +25,17 @@
 
     <!-- Anmelden oder registrieren -->
     <section id="ansicht-anmelden" hidden>
-      <h1>Du willst loslegen, weißt aber nicht womit? Fang hier an.</h1>
-      <p>Finde heraus, welcher Weg zu dir passt, und bekomm einen Plan mit einer Aufgabe für jeden Tag.</p>
-      <form id="formular-konto">
+      <div class="held">
+        <img src="/zeichen-hell.svg" alt="" width="56" height="56">
+        <h1>Du willst loslegen, weißt aber nicht womit? <span class="akzent-text">Fang hier an.</span></h1>
+        <p>Finde heraus, welcher Weg zu dir passt, und bekomm einen Plan mit einer Aufgabe für jeden Tag.</p>
+        <ul class="schritte-kurz">
+          <li><strong>26</strong> kurze Fragen</li>
+          <li><strong>3</strong> Wege zur Wahl</li>
+          <li><strong>30</strong> Tage Plan</li>
+        </ul>
+      </div>
+      <form id="formular-konto" class="karte">
         <label for="email">E-Mail</label>
         <input id="email" type="email" autocomplete="email" required>
         <label for="passwort">Passwort (mindestens 8 Zeichen)</label>
@@ -70,7 +80,7 @@
       </ol>
       <p>Es gibt keine falschen Antworten. Du kannst jederzeit aufhören und später weitermachen, deine Antworten bleiben gespeichert.</p>
       <div class="reihe">
-        <button id="knopf-los" type="button">Los geht's</button>
+        <button id="knopf-los" type="button" class="akzent">Los geht's</button>
         <button id="knopf-einleitung-zurueck" type="button" class="zweit">Zurück zur Übersicht</button>
       </div>
     </section>
@@ -117,7 +127,7 @@
         <p id="vertiefung-fehler" class="fehler" role="alert" hidden></p>
         <p id="vertiefung-warten" role="status" hidden></p>
         <div class="reihe">
-          <button id="knopf-plan-erstellen" type="submit">Plan erstellen</button>
+          <button id="knopf-plan-erstellen" type="submit" class="akzent">Plan erstellen</button>
           <button id="knopf-anderer-weg" type="button" class="zweit">Anderen Weg wählen</button>
         </div>
       </form>
@@ -137,7 +147,7 @@
         </div>
       </div>
 
-      <div id="heute-aufgabe">
+      <div id="heute-aufgabe" class="karte aufgabe">
         <p id="heute-persoenlich" class="marke" hidden>Für dich angepasst</p>
         <h1 id="heute-titel"></h1>
         <p id="heute-dauer" class="daten"></p>
@@ -145,7 +155,7 @@
         <p id="heute-fertig"></p>
         <p id="heute-hinweis" class="hinweis" hidden></p>
         <p id="heute-fehler" class="fehler" role="alert" hidden></p>
-        <button id="knopf-erledigt" type="button">Erledigt</button>
+        <button id="knopf-erledigt" type="button" class="akzent gross">Erledigt</button>
       </div>
     </section>
 

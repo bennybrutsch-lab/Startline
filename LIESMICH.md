@@ -5,13 +5,13 @@ Eine Web-App für junge Leute, die etwas Eigenes aufbauen wollen und nicht wisse
 
 Stand: MVP komplett. Nach dem Anmelden kommt eine kurze Einführung, dann die Startseite mit den Bereichen Heute, Plan und Mentor. Es funktionieren Konto, die 26 Fragen, die drei Vorschläge aus 26 Wegen, die Wahl eines Weges, die Vertiefungsfragen, der persönliche Plan, die Aufgabe von heute mit Abhaken und das Gespräch mit dem Mentor.
 Der Weg „Websites mit KI für Läden“ hat einen handgeschriebenen Plan. Für die anderen 25 Wege schreibt die KI den Plan für jede Person einzeln. Dafür braucht die App den Schlüssel für Claude. Ohne Schlüssel tragen diese Wege die Marke „Plan kommt bald“.
-Das Aussehen ist bewusst schlicht, das Design kommt später.
+Das Aussehen ist in Weiß, Schwarz und Türkis gehalten, mit dem Logo aus `marke/`. Am Handy sitzt das Menü unten.
 
 ## Was wo liegt
 
 | Ordner oder Datei | Inhalt |
 |---|---|
-| `public/` | Was der Browser zeigt: Seite, Aussehen, Programm im Browser |
+| `public/` | Was der Browser zeigt: Seite (`index.html`), Aussehen (`stil.css`), Programm im Browser (`app.js`), Logo |
 | `src/worker.js` | Der Server. Beantwortet alle Adressen, die mit `/api/` beginnen |
 | `src/konto.js` | Registrieren, Anmelden, Passwörter sicher speichern |
 | `src/punkte.js` | Rechnet aus den Antworten das Profil der Person und daraus die drei Vorschläge aus, ohne KI |
@@ -40,6 +40,11 @@ Fragen, Wege und Plan stehen in `daten/`. Wer dort Texte oder Werte ändert, mus
 Die Nummern der Fragen bleiben fest, auch wenn Fragen umsortiert werden. Gespeicherte Antworten und die Regeln in `src/plan.js` beziehen sich darauf. Deshalb stehen die zwei neuen Fragen mit den Nummern 25 und 26 mitten in ihren Abschnitten.
 
 Jeder Steckbrief in `daten/wege.json` enthält Beschreibung, einen ehrlichen Satz, rechtliche Hinweise, drei Vertiefungsfragen und vier Etappen mit Ziel und je drei Meilensteinen. Die rechtlichen Hinweise sind eine erste Orientierung und keine Rechtsberatung. Vor einem öffentlichen Start sollte sie jemand prüfen, der sich auskennt.
+
+## Aussehen ändern
+
+Alle Farben, Rundungen und Schatten stehen ganz oben in `public/stil.css` als Variablen, zum Beispiel `--tuerkis` und `--schwarz`. Wer dort einen Wert ändert, ändert ihn in der ganzen App.
+Die Logo-Dateien in `public/` sind Kopien aus `marke/`. Ändert sich das Logo, beide Stellen anpassen.
 
 ## Lokal starten
 
@@ -138,5 +143,5 @@ npm run deploy
 
 ## Noch nicht enthalten
 
-Bezahlung, Altersprüfung, Englisch, Design.
+Bezahlung, Altersprüfung, Englisch.
 Vor einem öffentlichen Start fehlen außerdem Impressum, Datenschutzerklärung und eine Begrenzung der Anmeldeversuche.
